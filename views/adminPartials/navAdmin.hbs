@@ -1,0 +1,75 @@
+
+<div class="sidebar-content" data-simplebar style="height: calc(100% - 60px);">
+    <div class="sidebar-brand">
+        <a href="/admin">
+            <img src="../assets/images/logo-dark.png" height="24" class="logo-light-mode" alt="">
+            <img src="../assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
+        </a>
+    </div>
+    
+    <ul class="sidebar-menu pt-3">
+        <li><a href="/admin"><i class="uil uil-dashboard me-2 d-inline-block"></i>Dashboard</a></li>
+        <li><a href="/AdminAppointmentList"><i class="uil uil-stethoscope me-2 d-inline-block"></i>Appointment</a></li>
+        <li><a href="/adminAddDepertment"><i class="uil uil-stethoscope me-2 d-inline-block"></i>Department Settings</a></li>
+
+        <li class="sidebar-dropdown">
+            <a href="javascript:void(0)"><i class="uil uil-user me-2 d-inline-block"></i>Doctors</a>
+            <div class="sidebar-submenu">
+                <ul>
+                    <li><a href="/adminDoctorList">All Doctors List</a></li>
+                    <li><a href="/adminAddDoctor">Add Doctor</a></li>
+                </ul>
+            </div>
+        </li>
+
+        <li class="sidebar-dropdown">
+            <a href="javascript:void(0)"><i class="uil uil-wheelchair me-2 d-inline-block"></i>Patients</a>
+            <div class="sidebar-submenu">
+                <ul>
+                    <li><a href="/adminAllPatientList">All Patients List</a></li>
+                    <li><a href="/adminAddpatient">Add Patients</a></li>
+                    {{!-- <li><a href="/adminPatientPeofile">Profile</a></li> --}}
+                </ul>
+            </div>
+        </li>
+
+        <li class="sidebar-dropdown">
+            <a href="javascript:void(0)"><i class="uil uil-shopping-cart me-2 d-inline-block"></i>Pharmacy</a>
+            <div class="sidebar-submenu">
+                <ul>
+                    <li><a href="/adminShop">Shop</a></li>
+                    <li><a href="/adminShopDetail">Shop Detail</a></li>
+                    <li><a href="/adminShopCart">Shopcart</a></li>
+                    <li><a href="/adminCheckOut">Checkout</a></li>
+                </ul>
+            </div>
+        </li>
+
+        <li class="sidebar-dropdown">
+            <a href="javascript:void(0)"><i class="uil uil-file me-2 d-inline-block"></i>Pages</a>
+            <div class="sidebar-submenu">
+                <ul>
+                    <li><a href="/adminFsq">FAQs</a></li>
+                    <li><a href="/adminInvoiceList">Invoice List</a></li>
+                    {{!-- <li><a href="/adminInvoice/:email">Invoice</a></li> --}}
+                    <li><a href="/adminTermConditions">Terms & Conditions</a></li>
+                    <li><a href="/adminprivacyPolicy">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </li>
+
+        {{!-- <li><a href="components.html"><i class="uil uil-cube me-2 d-inline-block"></i>Components</a></li>
+
+        <li><a href="../landing/index-two.html" target="_blank"><i class="uil uil-window me-2 d-inline-block"></i>Landing page</a></li> --}}
+    </ul>
+    <!-- sidebar-menu  -->
+</div>
+<!-- sidebar-content  -->
+<ul class="sidebar-footer list-unstyled mb-0">
+    <li class="list-inline-item mb-0 ms-1">
+        <a href="#" class="btn btn-icon btn-pills btn-soft-primary">
+            <i class="uil uil-comment icons"></i>
+        </a>
+    </li>
+</ul>
+

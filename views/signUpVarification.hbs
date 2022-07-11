@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   {{>head}}
+
+</head>
+
+<body>
+    <!-- Loader -->
+    {{!-- <div id="preloader">
+        <div id="status">
+            <div class="spinner">
+                <div class="double-bounce1"></div>
+                <div class="double-bounce2"></div>
+            </div>
+        </div>
+    </div> --}}
+    <!-- Loader -->
+    
+    <div class="back-to-home rounded d-none d-sm-block">
+    </div>
+
+    <!-- Hero Start -->
+    <section class="bg-home d-flex bg-light align-items-center" style="background: url('../assets/images/bg/bg-lines-one.png') center;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-5 col-md-8">
+                    
+                    <div class="card login-page bg-white shadow mt-4 rounded border-0">
+                         <div id="form-response-data">
+
+                            </div>
+                        <div class="card-body">
+                            <h4 class="text-center">Account Verification </h4>  
+                            <form  action="/api/signupvarification" method="post"class="login-form mt-4" id="verify">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <p class="text-muted">Please enter your email address and verify your Account .</p>
+                                        <div class="mb-3">
+                                            <label class="form-label">Email address <span class="text-danger">*</span></label>
+                                            <input type="email" class="form-control" placeholder="Enter Your Email Address" name="email" required="">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="d-grid">
+                                            <input type="hidden" type="text" name="_id" value="{{id}}">
+                                            <button class="btn btn-primary">Send</button>
+                                        </div>
+                                    </div>
+                                    <div class="mx-auto">
+                                        {{!-- <p class="mb-0 mt-3"><small class="text-dark me-2">Remember your password ?</small> <a href="/SignUp" class="text-dark h6 mb-0">Sign Up</a></p> --}}
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div><!---->
+                </div> <!--end col-->
+            </div><!--end row-->
+        </div> <!--end container-->
+    </section><!--end section-->
+    <!-- Hero End -->
+    
+    <!-- javascript -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+   {{>javascript}}
+    <script>
+         $(document).ready(function () {
+             //Common form request
+
+//update status
+    $("#verify").submit(function (e) {
+            
+        e.preventDefault();
+        var fromData = $(this).serialize();
+        
+         $.ajax({
+            type: 'POST',
+            url:$(this).attr('action'),
+            data:fromData,
+            success: function (response) {
+            console.log(response)
+            if(response.status == 200){ 
+                setTimeout(() => {
+            if(response.datas == 1){
+            swal({
+            title: "Good job!",
+            text: response.message,
+            type: "success"
+            }).then(function() {
+                window.location.href = '/SignIn';
+            });
+            }
+            },2000);
+            
+            }else{
+                $("#form-response-data").html('<div  class="alert alert-success" role="alert">'+response.message+'</div>');   
+            }
+            }
+         })
+        })
+            
+            });
+
+        </script>
+    
+</body>
+
+</html>

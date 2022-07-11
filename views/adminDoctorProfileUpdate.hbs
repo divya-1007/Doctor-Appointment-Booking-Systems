@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {{>head}}
+
+</head>
+
+<body>
+    <!-- Loader -->
+    {{!-- <div id="preloader">
+            <div id="status">
+                <div class="spinner">
+                    <div class="double-bounce1"></div>
+                    <div class="double-bounce2"></div>
+                </div>
+            </div>
+        </div> --}}
+    <!-- Loader -->
+
+    <div class="page-wrapper doctris-theme toggled">
+        <nav id="sidebar" class="sidebar-wrapper">
+            {{>navAdmin}}
+        </nav>
+        <!-- sidebar-wrapper  -->
+
+        <!-- Start Page Content -->
+        <main class="page-content bg-light">
+            {{>sideBarAdmin data = user}}
+
+            <div class="container-fluid">
+                <div class="layout-specing">
+                    <div class="d-md-flex justify-content-between">
+                        <h5 class="mb-0">Doctor Profile & Settings</h5>
+                        <div id="form-response">
+                            
+                        </div>
+                        <nav aria-label="breadcrumb" class="d-inline-block mt-4 mt-sm-0">
+                            <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
+                                <li class="breadcrumb-item"><a href="/admin">Doctris</a></li>
+                                <li class="breadcrumb-item"><a href="/adminDoctorList">Doctor</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Profile</li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                    <div class="card bg-white rounded shadow overflow-hidden mt-4 border-0">
+                        <div class="p-5 bg-primary bg-gradient"></div>
+                        <div class="avatar-profile d-flex margin-nagative mt-n5 position-relative ps-3">
+                            <img src="/{{responseData.profilePicture}}"
+                                class="rounded-circle shadow-md avatar avatar-medium" alt="image">
+                            <div class="mt-4 ms-3 pt-3">
+                                <h5 class="mt-3 mb-1">{{responseData.firstName}} {{responseData.lastName}}</h5>
+                                <p class="text-muted mb-0">{{responseData.departmentName:}}</p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 mt-4">
+                                <div class="card border-0 rounded-0 p-4">
+                                    <ul class="nav nav-pills nav-justified flex-column flex-sm-row rounded shadow overflow-hidden bg-light"
+                                        id="pills-tab" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link rounded-0 active" id="overview-tab" data-bs-toggle="pill"
+                                                href="#pills-overview" role="tab" aria-controls="pills-overview"
+                                                aria-selected="false">
+                                                <div class="text-center pt-1 pb-1">
+                                                    <h4 class="title fw-normal mb-0">Overview</h4>
+                                                </div>
+                                            </a>
+                                            <!--end nav link-->
+                                        </li>
+                                        <!--end nav item-->
+
+                                        <li class="nav-item">
+                                            <a class="nav-link rounded-0" id="experience-tab" data-bs-toggle="pill"
+                                                href="#pills-experience" role="tab" aria-controls="pills-experience"
+                                                aria-selected="false">
+                                                <div class="text-center pt-1 pb-1">
+                                                    <h4 class="title fw-normal mb-0">Experience</h4>
+                                                </div>
+                                            </a>
+                                            <!--end nav link-->
+                                        </li>
+                                        <!--end nav item-->
+
+                                        <li class="nav-item">
+                                            <a class="nav-link rounded-0" id="review-tab" data-bs-toggle="pill"
+                                                href="#pills-review" role="tab" aria-controls="pills-review"
+                                                aria-selected="false">
+                                                <div class="text-center pt-1 pb-1">
+                                                    <h4 class="title fw-normal mb-0">Reviews</h4>
+                                                </div>
+                                            </a>
+                                            <!--end nav link-->
+                                        </li>
+                                        <!--end nav item-->
+
+                                        <li class="nav-item">
+                                            <a class="nav-link rounded-0" id="timetable-tab" data-bs-toggle="pill"
+                                                href="#pills-timetable" role="tab" aria-controls="pills-timetable"
+                                                aria-selected="false">
+                                                <div class="text-center pt-1 pb-1">
+                                                    <h4 class="title fw-normal mb-0">Time Table</h4>
+                                                </div>
+                                            </a>
+                                            <!--end nav link-->
+                                        </li>
+                                        <!--end nav item-->
+
+                                        <li class="nav-item">
+                                            <a class="nav-link rounded-0" id="settings-tab" data-bs-toggle="pill"
+                                                href="#pills-settings" role="tab" aria-controls="pills-settings"
+                                                aria-selected="false">
+                                                <div class="text-center pt-1 pb-1">
+                                                    <h4 class="title fw-normal mb-0">Settings</h4>
+                                                </div>
+                                            </a>
+                                            <!--end nav link-->
+                                        </li>
+                                        <!--end nav item-->
+                                    </ul>
+                                    <!--end nav pills-->
+
+                                    <div class="tab-content mt-2" id="pills-tabContent">
+                                        <div class="tab-pane fade show active" id="pills-overview" role="tabpanel"
+                                            aria-labelledby="overview-tab">
+                                            <p class="text-muted">{{responseData.bio}}</p>
+
+                                            <h6 class="mb-0">Specialties: </h6>
+
+                                            <ul class="list-unstyled mt-4">
+                                                <li class="mt-1"><i class="uil uil-arrow-right text-primary"></i>
+                                                    {{responseData.specialties}}</li>
+                                                    {{!-- <li class="mt-1"><i class="uil uil-arrow-right text-primary"></i>
+                                                    Pregnancy care</li>
+                                                <li class="mt-1"><i class="uil uil-arrow-right text-primary"></i>
+                                                    Surgical procedures</li>
+                                                <li class="mt-1"><i class="uil uil-arrow-right text-primary"></i>
+                                                    Specialty care</li>
+                                                <li class="mt-1"><i class="uil uil-arrow-right text-primary"></i>
+                                                    Conclusion</li> --}}
+                                            </ul>
+                                            <!--end row-->
+                                        </div>
+                                        <!--end teb pane-->
+
+                                        <div class="tab-pane fade" id="pills-experience" role="tabpanel"
+                                            aria-labelledby="experience-tab">
+                                            <h6 class="mb-0">Professional Experience:</h6>
+
+                                            <div class="row">
+                                                <div class="col-12 mt-4">
+                                                    <div class="col-md-12">
+                                                        <div class="slider-range-four tiny-timeline">
+                                                            {{#each tempArray}}
+                                                            <div class="tiny-slide text-center">
+                                                                <div
+                                                                    class="card border-0 p-4 item-box mb-2 shadow rounded">
+                                                                    <p class="text-muted mb-0">{{this.Date}}</p>
+                                                                    <h6 class="mt-1">{{this.ProfessionalExperience}}</h6>
+                                                                    <p class="text-muted mb-0">{{this.HospitalExperienceName}}</p>
+                                                                </div>
+                                                            </div>
+                                                             {{/each}}
+                                                           
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--end col-->
+                                            </div>
+                                            <!--end row-->
+                                        </div>
+                                        <!--end teb pane-->
+
+                                        <div class="tab-pane fade" id="pills-review" role="tabpanel"
+                                            aria-labelledby="review-tab">
+                                            <div class="row justify-content-center ">
+                                            <div class="row justify-content-center" >
+                                                <div class="col-lg-8 text-center">
+                                                    <div class="client-review-slider">
+                                                            {{#each patientReview}}
+                                                        <div class="tiny-slide text-center">
+                                                            {{#each ../patientData}}
+                                                            <img src="/{{profilePicture}}" class="avatar avatar-md-sm rounded-circle shadow"
+                                                                alt="" />
+                                                            <h6 class="text-primary">{{this.firstName}} {{this.lastName}}</h6>
+                                                            {{/each}}
+                                                            {{!-- <img src="../assets/images/client/img.png" class="img-fluid avatar avatar-small rounded-circle mx-auto shadow my-3" alt=""> --}}
+                                                            <p class="text-muted h6 fw-normal fst-italic">{{this.reaction}}</p>
+                                                            <ul class="list-unstyled mb-0">
+                                                                {{#ifElse this.review '==' '5'}}
+                                                                {{else ifElse (this.review '==' '4')}}
+                                                                {{else ifElse (this.review '==' '3')}}
+                                                                {{else ifElse (this.review '==' '2')}}
+                                                                {{else}} 
+                                                                {{/ifElse}}
+                                                            </ul>
+                                                           
+                                                        </div><!--end customer testi-->
+                                                         {{/each}}
+                                                        <!--end customer testi-->
+                                                    </div>
+                                                    <!--end carousel-->
+                                                </div>
+                                                <!--end col-->
+                                            </div>
+                                            <!--end row-->
+
+                                            <div class="row justify-content-center">
+                                                <div class="col-lg-2 col-md-2 col-6 text-center py-4">
+                                                    <img src="../assets/images/client/amazon.png"
+                                                        class="avatar avatar-client" alt="">
+                                                </div>
+                                                <!--end col-->
+
+                                                <div class="col-lg-2 col-md-2 col-6 text-center py-4">
+                                                    <img src="../assets/images/client/google.png"
+                                                        class="avatar avatar-client" alt="">
+                                                </div>
+                                                <!--end col-->
+
+                                                <div class="col-lg-2 col-md-2 col-6 text-center py-4">
+                                                    <img src="../assets/images/client/lenovo.png"
+                                                        class="avatar avatar-client" alt="">
+                                                </div>
+                                                <!--end col-->
+
+                                                <div class="col-lg-2 col-md-2 col-6 text-center py-4">
+                                                    <img src="../assets/images/client/paypal.png"
+                                                        class="avatar avatar-client" alt="">
+                                                </div>
+                                                <!--end col-->
+
+                                                <div class="col-lg-2 col-md-2 col-6 text-center py-4">
+                                                    <img src="../assets/images/client/shopify.png"
+                                                        class="avatar avatar-client" alt="">
+                                                </div>
+                                                <!--end col-->
+
+                                                <div class="col-lg-2 col-md-2 col-6 text-center py-4">
+                                                    <img src="../assets/images/client/spotify.png"
+                                                        class="avatar avatar-client" alt="">
+                                                </div>
+                                                <!--end col-->
+                                            </div>
+                                            <!--end row-->
+                                        </div>
+                                        </div>
+                                        <!--end teb pane-->
+
+                                        <div class="tab-pane fade" id="pills-timetable" role="tabpanel"
+                                            aria-labelledby="timetable-tab">
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-12">
+                                                    <div class="card border-0 p-3 rounded shadow">
+                                                         <ul class="list-unstyled mb-0">
+                                                             <p>Time Mention Please 10:30am -8:30pm Formate </p>
+                                                            <form method="POST" id="change-password" action="/api/admin-date-time">
+                                                                <input type="hidden" name="token" value="{{token}}">
+                                                                <div class="row">
+                                                                    <!--end col-->
+                                                             <div id="form-response">
+                            
+                                                                         </div>
+                                                                    <div class="col-lg-12">
+                                                                        <div class="mb-3">
+                                                                            <label class="form-label">Monday <span class="text-danger">*</span></label>
+                                                                            <input type="text" name="Monday"  placeholder="{{responseData.Monday}}"> <br>
+                                                                            <label class="form-label">Tuesday <span class="text-danger">*</span></label>
+                                                                            <input type="text" name="Tuesday" placeholder="{{responseData.Tuesday}}"><br>
+                                                                             <label class="form-label">Wednesday<span class="text-danger">*</span></label>
+                                                                            <input type="text" name="Wednesday"  placeholder="{{responseData.Wednesday}}"><br>
+                                                                             <label class="form-label">Thursday<span class="text-danger">*</span></label>
+                                                                            <input type="text" name="Thursday"  placeholder="{{responseData.Thursday}}"><br>
+                                                                             <label class="form-label">Friday<span class="text-danger">*</span></label>
+                                                                            <input type="text" name="Friday" placeholder="{{responseData.Friday}}"><br>
+                                                                             <label class="form-label">Saturday<span class="text-danger">*</span></label>
+                                                                            <input type="text" name="Saturday"  placeholder="{{responseData.Saturday}}"><br>
+                                                                             <label class="form-label">Sunday<span class="text-danger">*</span></label>
+                                                                            <input type="text" name="Sunday"  placeholder="{{responseData.Sunday}}"><br>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!--end col-->
+
+                                                                    <div class="col-lg-12 text-end">
+                                                                    <input type="hidden" type="text" name="_id" value="{{responseData._id}}">
+                                                                        <button type="submit" class="btn btn-primary">Accept</button>
+                                                                    </div>
+                                                                    
+
+                                                                    <!--end col-->
+                                                                </div>
+                                                                <!--end row-->
+                                                        </form> 
+                                                       
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <!--end col-->
+
+                                                <div class="col-lg-4 col-md-6 mt-4 mt-lg-0 pt-2 pt-lg-0">
+                                                    <div class="card border-0 text-center features feature-primary">
+                                                        <div class="icon text-center mx-auto rounded-md">
+                                                            <i class="uil uil-phone h3 mb-0"></i>
+                                                        </div>
+
+                                                        <div class="card-body p-0 mt-4">
+                                                            <h5 class="title fw-bold">Phone</h5>
+                                                            <p class="text-muted">Great doctor if you need your family
+                                                                member to get effective immediate assistance</p>
+                                                            <a href="tel:+152534-468-854" class="link">{{responseData.contactNumber}}
+                                                                </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--end col-->
+
+                                                <div class="col-lg-4 col-md-6 mt-4 mt-lg-0 pt-2 pt-lg-0">
+                                                    <div class="card border-0 text-center features feature-primary">
+                                                        <div class="icon text-center mx-auto rounded-md">
+                                                            <i class="uil uil-envelope h3 mb-0"></i>
+                                                        </div>
+
+                                                        <div class="card-body p-0 mt-4">
+                                                            <h5 class="title fw-bold">Email</h5>
+                                                            <p class="text-muted">Great doctor if you need your family
+                                                                member to get effective immediate assistance</p>
+                                                            <a href="mailto:contact@example.com"
+                                                                class="link">{{responseData.email}}</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--end col-->
+                                            </div>
+                                            <!--end row-->
+                                        </div>
+                                        <!--end teb pane-->
+
+                                        <div class="tab-pane fade" id="pills-settings" role="tabpanel"
+                                            aria-labelledby="settings-tab">
+                                            <h5 class="mb-1">Settings</h5>
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="rounded shadow mt-4">
+                                                        <div class="p-4 border-bottom">
+                                                            <div id="form-response">
+                                                            </div>
+                                                            <h6 class="mb-0">Personal Information :</h6>
+                                                        </div>
+
+                                                        <div class="p-4">
+                                                            <div class="row align-items-center">
+                                                                <div class="col-lg-2 col-md-4">
+                                                                    <img src="/{{responseData.profilePicture}}"
+                                                                        class="avatar avatar-md-md rounded-pill shadow mx-auto d-block"
+                                                                        alt="">
+                                                                </div>
+                                                                <!--end col-->
+
+                                                                <div
+                                                                    class="col-lg-5 col-md-8 text-center text-md-start mt-4 mt-sm-0">
+                                                                    <h6 class="">Upload your picture</h6>
+                                                                    <p class="text-muted mb-0">For best results, use an
+                                                                        image at least 256px by 256px in either .jpg or
+                                                                        .png format</p>
+                                                                </div>
+                                                                <!--end col-->
+
+                                                                <div
+                                                                    class="col-lg-5 col-md-12 text-lg-end text-center mt-4 mt-lg-0">
+                                                                    <a href="#" class="btn btn-primary">Upload</a>
+                                                                    <a href="#"
+                                                                        class="btn btn-soft-primary ms-2">Remove</a>
+                                                                </div>
+                                                                <!--end col-->
+                                                            </div>
+                                                            <!--end row-->
+
+                                                            <form method="POST" name="ajax_form"
+                                                                action="/api/admin-doctor-update"
+                                                                enctype="multipart/form-data" class="mt-4">
+                                                                <input type="hidden" name="token" value="{{token}}">
+                                                                <div class="row">
+
+                                                                    <div class="col-md-6">
+                                                                        <div class="mb-3">
+                                                                            <label class="form-label">profile</label>
+                                                                            <input type="file" id="myFile"
+                                                                                name="profilePicture">
+                                                                        </div>
+                                                                    </div>
+                                                                    <!--end col-->
+
+                                                                    <div class="col-lg-6">
+                                                                        <div class="mb-3">
+                                                                            <label class="form-label">First Name<span class="text-danger">*</label></label>
+                                                                            <input name="firstName" id="name"
+                                                                                type="text" class="form-control"
+                                                                                placeholder="First Name : {{responseData.firstName}}"  required=""/>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!--end col-->
+
+                                                                    <div class="col-lg-6">
+                                                                        <div class="mb-3">
+                                                                            <label class="form-label">Last Name<span class="text-danger">*</label></label>
+                                                                            <input name="lastName" id="name2"
+                                                                                type="text" class="form-control"
+                                                                                placeholder="Last Name :{{responseData.lastName}}"  required=""/>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!--end col-->
+
+                                                                    <div class="col-lg-6">
+                                                                        <div class="mb-3">
+                                                                            <label class="form-label">Phone No<span class="text-danger">*</label></label>
+                                                                            <input name="contactNumber" id="number"
+                                                                                type="text" class="form-control"
+                                                                                placeholder="Phone no. : {{responseData.contactNumber}}"  required=""/>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!--end col-->
+                                                                    <div class="col-md-6">
+                                                                        <div class="mb-3">
+                                                                            <label class="form-label">Departments<span class="text-danger">*</label></label>
+                                                                            <select name="departmentId" class="form-control doctor-name select2input"  required="">
+                                                                                <option value="">Select</option>
+                                                                                {{#each departments}}
+                                                                                <option value="{{this._id}}#{{this.departmentName}}">
+                                                                                    {{this.departmentName}}</option>
+                                                                                {{/each}}
+                                                                            </select>
+                                                                    
+                                                                        </div>
+                                                                    </div>
+                                                                    <!--end col-->
+                                                                    
+                                                                    <div class="col-md-6">
+                                                                        <div class="mb-3">
+                                                                            <label class="form-label">Qualification<span class="text-danger">*</label></label>
+                                                                            <input name="qualification" type="text" class="form-control" placeholder="Qualification : {{responseData.qualification}}"  required="">
+                                                                        </div>
+                                                                    </div>
+                                                                    <!--end col-->
+                                                                    <div class="col-md-6">
+                                                                        <div class="mb-3">
+                                                                            <label class="form-label">Specialties<span class="text-danger">*</label></label>
+                                                                            <input name="specialties" type="text" class="form-control" required="" placeholder="Specialties : {{responseData.specialties}}">
+                                                                        </div>
+                                                                    </div>
+                                                                    <!--end col-->
+
+                                                                    <div class="col-md-6">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Gender<span class="text-danger">*</label></label>
+                                                                        <select class="form-control gender-name select2input" required="">
+                                                                        <option value="EY">Male</option>
+                                                                        <option value="GY">Female</option>
+                                                                        <option value="GY">Chiled</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    </div>
+                                                                    <!--end col-->
+
+                                                                    <div class="col-md-6" id="entry-templa">
+                                                                        <div class="mb-3">
+                                                                        <label class="form-label"> Country<span class="text-danger">*</label><br>
+                                                                            <select  name="country" class="form-control doctor-name select2input" onchange="getDoctorData(this.value)" required="">
+                                                                                <option value="">Select</option>
+                                                                                {{#each countryData}}
+                                                                                {{#each this.country}}
+                                                                                <option value="{{this.isoCode}}#{{this.name}}">{{this.name}}</option>
+                                                                                {{/each}}
+                                                                            {{/each}}
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="col-md-6">
+                                                                        <div class="mb-3">
+                                                                            <label class="form-label">State <span class="text-danger">*</label>
+                                                                            <select name="state" class="form-control doctor-name select2input state "  required="">
+                                                                                <option value="">Select</option>
+                                                                            </select>
+                                                                            </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="mb-3">
+                                                                            <label class="form-label">City<span class="text-danger">*</label>
+                                                                            <input name="city"  type="text" class="form-control" placeholder="City : {{responseData.city}}"required="">
+                                                                        </div>                                                                               
+                                                                    </div><!--end col-->
+
+                                                                    <div class="col-md-6">
+                                                                        <div class="mb-3">
+                                                                            <label class="form-label">Address<span class="text-danger">*</label>
+                                                                            <input name="address"  type="text" class="form-control" placeholder="Address : {{responseData.address}}"required="">
+                                                                        </div>                                                                               
+                                                                    </div><!--end col-->
+
+                                                                    <div class="col-md-6">
+                                                                        <div class="mb-3">
+                                                                            <label class="form-label">Pin Code<span class="text-danger">*</label>
+                                                                            <input name="pincode"  type="text" class="form-control" placeholder="Pin Code : {{responseData.pincode}}" required="">
+                                                                        </div>                                                                               
+                                                                    </div><!--end col-->
+
+                                                                    <div class="col-md-6">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Instagram</label>
+                                                                        <div class="input-group flex-nowrap">
+                                                                        <span class="input-group-text bg-white border border-end-0 text-dark" id="insta-id"><i
+                                                                            data-feather="instagram" class="fea icon-sm"></i></span>
+                                                                        <input name="instagram" type="text" class="form-control" placeholder="Username : {{responseData.instagram}}" aria-label="Username"
+                                                                            aria-describedby="insta-id" />
+                                                                        </div>
+                                                                    </div>
+                                                                    </div>
+                                                                    <!--end col-->
+
+                                                                    <div class="col-md-6">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Facebook</label>
+                                                                        <div class="input-group flex-nowrap">
+                                                                        <span class="input-group-text bg-white border border-end-0 text-dark" id="fb-id"><i
+                                                                            data-feather="facebook" class="fea icon-sm"></i></span>
+                                                                        <input name="facebook" type="text" class="form-control" placeholder="Username" aria-label="Username : {{responseData.facebook}}"
+                                                                            aria-describedby="fb-id" />
+                                                                        </div>
+                                                                    </div>
+                                                                    </div>
+                                                                    <!--end col-->
+
+                                                                    <div class="col-md-6">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Linkedin</label>
+                                                                        <div class="input-group flex-nowrap">
+                                                                        <span class="input-group-text bg-white border border-end-0 text-dark" id="linke-pro"><i
+                                                                            data-feather="linkedin" class="fea icon-sm"></i></span>
+                                                                        <input name="linkedin" type="text" class="form-control" placeholder="Username" aria-label="Username : {{responseData.linkedin}}"
+                                                                            aria-describedby="linke-pro" />
+                                                                        </div>
+                                                                    </div>
+                                                                    </div>
+                                                                    <!--end col-->
+
+                                                                    <div class="col-md-6">
+                                                                    <div class="mb-3">
+                                                                        <label class="form-label">Twitter</label>
+                                                                        <div class="input-group flex-nowrap">
+                                                                        <span class="input-group-text bg-white border border-end-0 text-dark" id="twitter-id"><i
+                                                                            data-feather="twitter" class="fea icon-sm"></i></span>
+                                                                        <input name="twitter" type="text" class="form-control" placeholder="Username" aria-label="Username : {{responseData.twitter}}"
+                                                                            aria-describedby="twitter-id" />
+                                                                        </div>
+                                                                    </div>
+                                                                    </div>
+
+
+                                                                       <table class="form-table" id="customFields">
+                                                                        <tr valign="top">
+                                                                            <th scope="row"><label for="ProfessionalExperience">Professional Experience </label></th>
+                                                                            <td>
+                                                                            <input type="text" class="code" id="ProfessionalExperience" name="ProfessionalExperience[]" value="" placeholder="Professional Experience : {{responseData.ProfessionalExperience}}" /> &nbsp; <br>
+                                                                            <input type="text" class="code" id="HospitalExperienceName" name="HospitalExperienceName[]" value="" placeholder="Hospital Experience  Name : {{responseData.HospitalExperienceName}} " /> &nbsp;<br>
+                                                                            <input type="date" class="code" id="ExperienceDate" name="ExperienceDate[]" value="" placeholder="2022-02-25 Type From Data : {{responseData.ExperienceDate}}"/> &nbsp;<br>
+                                                                            <input type="date" class="code" id="ExperienceTODate" name="ExperienceTODate[]" value="" placeholder="2022-02-25 Type To Data : {{responseData.ExperienceTODate}}"/> &nbsp;
+                                                                                <a href="javascript:void(0);" id="addCF">Add</a>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+
+                                                                    <div class="col-md-12">
+                                                                        <div class="mb-3">
+                                                                            <label class="form-label">Your Bio
+                                                                                Here</label>
+                                                                            <textarea name="bio" id="comments" rows="4"
+                                                                                class="form-control"
+                                                                                placeholder="Bio : {{responseData.bio}}"></textarea>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!--end row-->
+
+                                                                <div class="row">
+                                                                    <div class="col-sm-12">
+                                                                        <input type="hidden" type="text" name="_id"
+                                                                            value="{{id}}">
+                                                                        <input type="submit" id="submit" name="send"
+                                                                            class="btn btn-primary"
+                                                                            value="Save changes">
+                                                                    </div>
+                                                                    <!--end col-->
+                                                                </div>
+                                                                <!--end row-->
+                                                            </form>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="rounded shadow mt-4">
+                                                        <div class="p-4 border-bottom">
+                                                            <h6 class="mb-0">Account Notifications :</h6>
+                                                        </div>
+
+                                                        <div class="p-4">
+                                                            <form action="/api/admin-patient-password-change"
+                                                                method="POST" id="change-password-form" class="mt-4">
+                                                                <input type="hidden" name="token" value="{{token}}">
+                                                                <div class="row">
+                                                                    <div class="col-lg-12">
+                                                                        <div class="mb-3">
+                                                                            <label class="form-label">Old password
+                                                                                <span class="text-danger">*</label></label>
+                                                                            <input type="password" name="password"
+                                                                                class="form-control"
+                                                                                placeholder="Old password"
+                                                                                required="" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <!--end col-->
+
+                                                                    <div class="col-lg-12">
+                                                                        <div class="mb-3">
+                                                                            <label class="form-label">New password
+                                                                                <span class="text-danger">*</label></label>
+                                                                            <input type="password" name="newpassword"
+                                                                                class="form-control"
+                                                                                placeholder="New password"
+                                                                                required="" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <!--end col-->
+
+                                                                    <div class="col-lg-12">
+                                                                        <div class="mb-3">
+                                                                            <label class="form-label">Re-type New
+                                                                                password <span class="text-danger">*</label></label>
+                                                                            <input type="password"
+                                                                                name="confirmpassword"
+                                                                                class="form-control"
+                                                                                placeholder="Re-type New password"
+                                                                                required="" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <!--end col-->
+
+                                                                    <div class="col-lg-12 mt-2 mb-0">
+                                                                        <input type="hidden" type="text" name="_id"
+                                                                            value="{{id}}">
+                                                                        <input type="submit" id="submit" name="send"
+                                                                            class="btn btn-primary"
+                                                                            value="Save changes">
+                                                                    </div>
+                                                                    <!--end col-->
+                                                                </div>
+                                                                <!--end row-->
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--end col-->
+
+                                                <div class="col-lg-6">
+
+                                                    <div class="rounded shadow mt-4">
+                                                        <div class="p-4 border-bottom">
+                                                            <h6 class="mb-0">General Notifications :</h6>
+                                                        </div>
+
+                                                        <div class="p-4">
+                                                            <div class="p-4 border-bottom">
+                                                                <h5 class="mb-0 text-danger">Delete Account :</h5>
+                                                            </div>
+
+                                                            <div class="p-4">
+                                                                <h6 class="mb-0 fw-normal">Do you want to delete the
+                                                                    account? Please press below "Delete" button</h6>
+                                                                <div class="mt-4">
+                                                                    <form id="delete-account-data" action='/api/admin-patient-account-delete/' method="POST">
+                                                                        <input type="hidden" name="token" value="{{token}}">
+                                                                        <input type="hidden" name="_id" value="{{id}}">
+                                                                        <button type="submit" class="btn btn-danger">Delete
+                                                                            Account</button>
+                                                                    </form>
+                                                                </div>
+                                                                <!--end col-->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--end col-->
+                                            </div>
+                                            <!--end row-->
+                                        </div>
+                                        <!--end teb pane-->
+                                    </div>
+                                    <!--end tab content-->
+                                </div>
+                            </div>
+                            <!--end col-->
+                        </div>
+                        <!--end row-->
+                    </div>
+                </div>
+            </div>
+            <!--end container-->
+
+            <!-- Footer Start -->
+            <footer class="bg-white shadow py-3">
+                {{>footerAdmin}}
+            </footer>
+            <!--end footer-->
+            <!-- End -->
+        </main>
+        <!--End page-content" -->
+    </div>
+    <!-- page-wrapper -->
+
+    <!-- Offcanvas Start -->
+    <div class="offcanvas offcanvas-end bg-white shadow" tabindex="-1" id="offcanvasRight"
+        aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header p-4 border-bottom">
+            <h5 id="offcanvasRightLabel" class="mb-0">
+                <img src="../assets/images/logo-dark.png" height="24" class="light-version" alt="">
+                <img src="../assets/images/logo-light.png" height="24" class="dark-version" alt="">
+            </h5>
+            <button type="button" class="btn-close d-flex align-items-center text-dark" data-bs-dismiss="offcanvas"
+                aria-label="Close"><i class="uil uil-times fs-4"></i></button>
+        </div>
+        <div class="offcanvas-body p-4 px-md-5">
+            <div class="row">
+                <div class="col-12">
+                    <!-- Style switcher -->
+                    <div id="style-switcher">
+                        <div>
+                            <ul class="text-center list-unstyled mb-0">
+                                <li class="d-grid"><a href="javascript:void(0)" class="rtl-version t-rtl-light"
+                                        onclick="setTheme('style-rtl')"><img
+                                            src="../assets/images/layouts/light-dash-rtl.png"
+                                            class="img-fluid rounded-md shadow-md d-block" alt=""><span
+                                            class="text-muted mt-2 d-block">RTL Version</span></a></li>
+                                <li class="d-grid"><a href="javascript:void(0)" class="ltr-version t-ltr-light"
+                                        onclick="setTheme('style')"><img src="../assets/images/layouts/light-dash.png"
+                                            class="img-fluid rounded-md shadow-md d-block" alt=""><span
+                                            class="text-muted mt-2 d-block">LTR Version</span></a></li>
+                                <li class="d-grid"><a href="javascript:void(0)" class="dark-rtl-version t-rtl-dark"
+                                        onclick="setTheme('style-dark-rtl')"><img
+                                            src="../assets/images/layouts/dark-dash-rtl.png"
+                                            class="img-fluid rounded-md shadow-md d-block" alt=""><span
+                                            class="text-muted mt-2 d-block">RTL Version</span></a></li>
+                                <li class="d-grid"><a href="javascript:void(0)" class="dark-ltr-version t-ltr-dark"
+                                        onclick="setTheme('style-dark')"><img
+                                            src="../assets/images/layouts/dark-dash.png"
+                                            class="img-fluid rounded-md shadow-md d-block" alt=""><span
+                                            class="text-muted mt-2 d-block">LTR Version</span></a></li>
+                                <li class="d-grid"><a href="javascript:void(0)" class="dark-version t-dark mt-4"
+                                        onclick="setTheme('style-dark')"><img
+                                            src="../assets/images/layouts/dark-dash.png"
+                                            class="img-fluid rounded-md shadow-md d-block" alt=""><span
+                                            class="text-muted mt-2 d-block">Dark Version</span></a></li>
+                                <li class="d-grid"><a href="javascript:void(0)" class="light-version t-light mt-4"
+                                        onclick="setTheme('style')"><img src="../assets/images/layouts/light-dash.png"
+                                            class="img-fluid rounded-md shadow-md d-block" alt=""><span
+                                            class="text-muted mt-2 d-block">Light Version</span></a></li>
+                                <li class="d-grid"><a href="../landing/index.html" target="_blank" class="mt-4"><img
+                                            src="../assets/images/layouts/landing-light.png"
+                                            class="img-fluid rounded-md shadow-md d-block" alt=""><span
+                                            class="text-muted mt-2 d-block">Landing Demos</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- end Style switcher -->
+                </div>
+                <!--end col-->
+            </div>
+            <!--end row-->
+        </div>
+
+        <div class="offcanvas-footer p-4 border-top text-center">
+            <ul class="list-unstyled social-icon mb-0">
+                <li class="list-inline-item mb-0"><a href="https://1.envato.market/doctris" target="_blank"
+                        class="rounded"><i class="uil uil-shopping-cart align-middle" title="Buy Now"></i></a></li>
+                <li class="list-inline-item mb-0"><a href="https://dribbble.com/shreethemes" target="_blank"
+                        class="rounded"><i class="uil uil-dribbble align-middle" title="dribbble"></i></a></li>
+                <li class="list-inline-item mb-0"><a href="https://www.facebook.com/shreethemes" target="_blank"
+                        class="rounded"><i class="uil uil-facebook-f align-middle" title="facebook"></i></a></li>
+                <li class="list-inline-item mb-0"><a href="https://www.instagram.com/shreethemes/" target="_blank"
+                        class="rounded"><i class="uil uil-instagram align-middle" title="instagram"></i></a></li>
+                <li class="list-inline-item mb-0"><a href="https://twitter.com/shreethemes" target="_blank"
+                        class="rounded"><i class="uil uil-twitter align-middle" title="twitter"></i></a></li>
+                <li class="list-inline-item mb-0"><a href="mailto:support@shreethemes.in" class="rounded"><i
+                            class="uil uil-envelope align-middle" title="email"></i></a></li>
+                <li class="list-inline-item mb-0"><a href="https://shreethemes.in" target="_blank" class="rounded"><i
+                            class="uil uil-globe align-middle" title="website"></i></a></li>
+            </ul>
+            <!--end icon-->
+        </div>
+    </div>
+    <!-- Offcanvas End -->
+
+    <!-- javascript -->
+     {{>javascript}}
+
+ <script>
+         $(document).ready(function () {
+//Change password form request
+        $("#change-password").submit(function (e) {
+        e.preventDefault();
+        var fromData = $(this).serialize();
+           var token =  $(this).find("input[name=token]").val(); 
+         $.ajax({
+                type: 'POST',
+               url:$(this).attr('action'),
+                data:fromData,
+                headers:{ Authorization: 'Bearer '+ token},
+                success: function (response) {
+                    if(response.status==200){
+                    swal({
+                    title: "Success...!",
+                    text: response.message,
+                    icon: "success",
+                    button: "Ok ...!",
+                    });
+                  }else{
+                      swal(
+                      'Oops...',
+                      response.message,
+                      'error'
+                      );
+                  }
+                }
+           });
+         });
+         
+    $("#delete-account-data").submit(function (e) {
+         e.preventDefault();
+         var fromData = $(this).serialize();
+         var token = $(this).find("input[name=token]").val();
+         var id = $(this).find("input[name=_id]").val();
+         $.ajax({
+           type: $(this).attr('method'),
+           url: $(this).attr('action'),
+           data: fromData,
+           headers: { Authorization: 'Bearer ' + token },
+           success: function (response) {
+              if(response.status==200){
+                swal({
+                title: "Success....✔️",
+                text: response.message,
+                icon: "success",
+                button: "Ok..!",
+                }).then(function() {
+                  window.location.href = '/admin'
+                });
+            }else{
+                swal(
+                'Oops...',
+                response.message,
+                'error'
+                );
+            }
+           }
+         });
+       });
+
+
+      $("#addCF").click(function(){
+		$("#customFields").append('<tr valign="top"><th scope="row"><label for="ProfessionalExperience">Professional Experience</label></th><td><input type="text" class="code" id="ProfessionalExperience" name="ProfessionalExperience[]" value="" placeholder="ProfessionalExperience" /> &nbsp;<br> <input type="text" class="code" id="HospitalExperienceName" name="HospitalExperienceName[]" value="" placeholder="Hospital Experience Name" /> &nbsp;<br><input type="text" class="code" id="ExperienceDate" name="ExperienceDate[]" value=""  placeholder="2022-02-25 Type From Date"/> &nbsp;<br><input type="text" class="code" id="ExperienceTODate" name="ExperienceTODate[]" value="" placeholder="2022-02-25 Type TO Date" /> &nbsp; <a href="javascript:void(0);" class="remCF">Remove</a></td></tr>');
+		 console.log("HLLO")
+        $(".remCF").on('click',function(){
+			$(this).parent().parent().remove();
+
+		});
+	   });
+
+
+            });
+ function getDoctorData(did) {
+            $.ajax({
+                type: "GET",
+                url: '/api/statelist/' + did,
+                success: function (response) {
+                    var list = '';
+                    if (response.length > 0) {
+                        list += '<option value="">Select</option>';
+                        $.each(response, function (index, value) {
+                        let stateData = value.state
+                        var doctor_id_name =  stateData.name 
+                        $(".state").append(list += '<option  value="' + doctor_id_name + '">' + stateData.name + " " +  '</option >');
+                           
+                        });
+                    } else {
+                        list += '<option value="">State not Found!</option>';
+                    }
+                    $(".state").html(list);
+                }
+            });
+            } 
+
+var source = $("#entry-templa").html();
+var template = Handlebars.compile(source);
+var output = template(country);
+$("body").append(output); 
+
+
+        </script>
+</body>
+
+</html>

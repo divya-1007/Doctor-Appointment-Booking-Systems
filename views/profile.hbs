@@ -1,0 +1,459 @@
+
+<!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+       {{>head}}
+    </head>
+
+    <body>
+        <!-- Loader -->
+        {{!-- <div id="preloader">
+            <div id="status">
+                <div class="spinner">
+                    <div class="double-bounce1"></div>
+                    <div class="double-bounce2"></div>
+                </div>
+            </div>
+        </div> --}}
+        <!-- Loader -->
+        
+        <!-- Navbar STart -->
+        <header id="topnav" class="defaultscroll sticky">
+            {{>navbar  data = user}}
+        </header><!--end header-->
+        <!-- Navbar End -->
+              
+            <section class="bg-dashboard">
+            <div class="container-fluid">
+                <div class="row">
+                     {{>sidebar data = DoctorData}}
+                      <div class="col-xl-9 col-lg-8 col-md-12">
+                        <h5 class="mb-0">Doctor Profile</h5>
+                            <div class="col-xl-12 col-lg-7 col-md-7 col-12 mt-4 pt-2">
+                                <div class="card p-4 rounded shadow border-0">
+                                  <div class="row">
+                                    <div class="col-12">
+                                        {{!-- <div class="card border-0 rounded shadow"> --}}
+                                            <div class="row">
+                                                <div class="col-xl-4 col-lg-4 col-md-5 position-relative">
+                                                    <img src="{{DoctorData.profilePicture}}" class="img-fluid dr-profile-img" alt="">
+                                                </div>
+
+                                                <div class="col-xl-8 col-lg-8 col-md-7">
+                                                    <div class="p-lg-5 p-4">
+                                                        {{!-- <small class="text-muted">25th December, 2020 - 5:00PM</small> --}}
+
+                                                        <h4 class="my-3">Good Morning ! <br> <span class="text-primary h2">{{DoctorData.firstName}} {{DoctorData.lastName}}</span></h4>
+                                                        <p class="para-desc text-muted">Great doctor if you need your family member to get effective immediate assistance, emergency treatment or a simple consultation.</p>
+                                                    
+                                                        {{!-- <h6 class="mb-0">You have <span class="text-primary">18 patients</span> remaining today!</h6> --}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {{!-- </div> --}}
+                                    </div><!--end col-->
+                                </div><!--end row-->
+                                </div>
+                            </div><!--end col-->
+                            <div class="row">
+                            <div class="col-12 mt-4 pt-2">
+                                <div class="card border-0 shadow rounded p-4">
+                                    <ul class="nav nav-pills nav-justified flex-column flex-sm-row rounded shadow overflow-hidden bg-light" id="pills-tab" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link rounded-0 active" id="overview-tab" data-bs-toggle="pill" href="#pills-overview" role="tab" aria-controls="pills-overview" aria-selected="false">
+                                                <div class="text-center pt-1 pb-1">
+                                                    <h4 class="title fw-normal mb-0">Overview</h4>
+                                                </div>
+                                            </a><!--end nav link-->
+                                        </li><!--end nav item-->
+                                        
+                                        <li class="nav-item">
+                                            <a class="nav-link rounded-0" id="experience-tab" data-bs-toggle="pill" href="#pills-experience" role="tab" aria-controls="pills-experience" aria-selected="false">
+                                                <div class="text-center pt-1 pb-1">
+                                                    <h4 class="title fw-normal mb-0">Experience</h4>
+                                                </div>
+                                            </a><!--end nav link-->
+                                        </li><!--end nav item-->
+                                        
+                                        <li class="nav-item">
+                                            <a class="nav-link rounded-0" id="review-tab" data-bs-toggle="pill" href="#pills-review" role="tab" aria-controls="pills-review" aria-selected="false">
+                                                <div class="text-center pt-1 pb-1">
+                                                    <h4 class="title fw-normal mb-0">Reviews</h4>
+                                                </div>
+                                            </a><!--end nav link-->
+                                        </li><!--end nav item-->
+                                        
+                                        <li class="nav-item">
+                                            <a class="nav-link rounded-0" id="location-tab" data-bs-toggle="pill" href="#pills-location" role="tab" aria-controls="pills-location" aria-selected="false">
+                                                <div class="text-center pt-1 pb-1">
+                                                    <h4 class="title fw-normal mb-0">Location</h4>
+                                                </div>
+                                            </a><!--end nav link-->
+                                        </li><!--end nav item-->
+                                        
+                                        <li class="nav-item">
+                                            <a class="nav-link rounded-0" id="timetable-tab" data-bs-toggle="pill" href="#pills-timetable" role="tab" aria-controls="pills-timetable" aria-selected="false">
+                                                <div class="text-center pt-1 pb-1">
+                                                    <h4 class="title fw-normal mb-0">Time Table</h4>
+                                                </div>
+                                            </a><!--end nav link-->
+                                        </li><!--end nav item-->
+                                    </ul><!--end nav pills-->
+
+                                    <div class="tab-content mt-2" id="pills-tabContent">
+                                        <div class="tab-pane fade show active" id="pills-overview" role="tabpanel" aria-labelledby="overview-tab">
+                                            <h5 class="mb-1">{{DoctorData.firstName}} {{DoctorData.lastName}}</h5>
+                                            <a href="#" class="text-primary">{{DoctorData.departmentName}}</a>, &nbsp;
+                                            <a href="#" class="text-primary">{{DoctorData.qualification}}</a>
+                                            <p class="text-muted mt-4">{{DoctorData.bio}}</p>
+                                        
+                                            <h6>Specialties: </h6>
+
+                                            <ul class="list-unstyled mt-4">
+                                                <li class="mt-1"><i class="uil uil-arrow-right text-primary"></i>{{DoctorData.specialties}}</li>
+                                                {{!-- <li class="mt-1"><i class="uil uil-arrow-right text-primary"></i> Pregnancy care</li>
+                                                <li class="mt-1"><i class="uil uil-arrow-right text-primary"></i> Surgical procedures</li>
+                                                <li class="mt-1"><i class="uil uil-arrow-right text-primary"></i> Specialty care</li>
+                                                <li class="mt-1"><i class="uil uil-arrow-right text-primary"></i> Conclusion</li> --}}
+                                            </ul>
+                                        </div><!--end teb pane-->
+                                        
+                                        <div class="tab-pane fade" id="pills-experience" role="tabpanel" aria-labelledby="experience-tab">
+                                            {{!-- <h5 class="mb-1">Experience:</h5>
+
+                                            <p class="text-muted mt-4">The most well-known dummy text is the 'Lorem Ipsum', which is said to have originated in the 16th century. Lorem Ipsum is composed in a pseudo-Latin language which more or less corresponds to 'proper' Latin. It contains a series of real Latin words. This ancient dummy text is also incomprehensible, but it imitates the rhythm of most European languages in Latin script. The advantage of its Latin origin and the relative meaninglessness of Lorum Ipsum is that the text does not attract attention to itself or distract the viewer's attention from the layout.</p> --}}
+                                        
+                                            <h6>Professional Experience:</h6>
+
+                                            <div class="row">
+                                                <div class="col-12 mt-4">
+                                                    <div class="col-md-12">
+                                                        <div class="slider-range-four tiny-timeline">
+                                                           {{#each tempArray}}
+                                                            <div class="tiny-slide text-center">
+                                                                <div class="card border-0 p-4 item-box mb-2 shadow rounded">
+                                                                    <p class="text-muted mb-0">{{this.Date}}</p>
+                                                                    <h6 class="mt-1">{{this.ProfessionalExperience}}</h6>
+                                                                    <p class="text-muted mb-0">{{this.HospitalExperienceName}}</p>
+                                                                </div>
+                                                            </div>
+                                                          {{/each}}
+                                                            {{!-- <div class="tiny-slide text-center">
+                                                                <div class="card border-0 p-4 item-box mb-2 shadow rounded">
+                                                                    <p class="text-muted mb-0">2014 - 2016</p>
+                                                                    <h6 class="mt-1">Gynecology Test</h6>
+                                                                    <p class="text-muted mb-0">X.Y.Z Hospital (NZ)</p>
+                                                                </div>
+                                                            </div>
+                                
+                                                            <div class="tiny-slide text-center">
+                                                                <div class="card border-0 p-4 item-box mb-2 shadow rounded">
+                                                                    <p class="text-muted mb-0">2016 - 2019</p>
+                                                                    <h6 class="mt-1">Master Of Medicine</h6>
+                                                                    <p class="text-muted mb-0">X.Y.Z Hospital (NZ)</p>
+                                                                </div>
+                                                            </div>
+                                
+                                                            <div class="tiny-slide text-center">
+                                                                <div class="card border-0 p-4 item-box mb-2 shadow rounded">
+                                                                    <p class="text-muted mb-0">2019 - 2020</p>
+                                                                    <h6 class="mt-1">Orthopedics</h6>
+                                                                    <p class="text-muted mb-0">X.Y.Z Hospital (NZ)</p>
+                                                                </div>
+                                                            </div>
+                                
+                                                            <div class="tiny-slide text-center">
+                                                                <div class="card border-0 p-4 item-box mb-2 shadow rounded">
+                                                                    <p class="text-muted mb-0">2020 to continue..</p>
+                                                                    <h6 class="mt-1">Gynecologist (Final)</h6>
+                                                                    <p class="text-muted mb-0">X.Y.Z Hospital (NZ)</p>
+                                                                </div>
+                                                            </div> --}}
+                                                        </div>
+                                                    </div>
+                                                </div><!--end col-->
+                                            </div><!--end row-->
+                                        </div><!--end teb pane-->
+            
+                                        <div class="tab-pane fade" id="pills-review" role="tabpanel" aria-labelledby="review-tab" id="entry-template">
+                                            <div class="row justify-content-center">
+                                                <div class="col-lg-8 mt-4 pt-2 text-center">
+                                                    <div class="client-review-slider">
+                                                    
+                                                        {{#each patientReview}}
+                                                        <div class="tiny-slide text-center">
+                                                            {{#each ../patientData1}}
+                                                            <img src="{{profilePicture}}" class="avatar avatar-md-sm rounded-circle shadow"
+                                                                alt="" />
+                                                            <h6 class="text-primary">{{this.firstName}} {{this.lastName}}</h6>
+                                                            {{/each}}
+                                                            <p class="text-muted h6 fw-normal fst-italic">{{this.reaction}}</p>
+                                                            <ul class="list-unstyled mb-0">
+                                                                {{#ifElse this.review '==' '5'}}
+                                                                {{else ifElse (this.review '==' '4')}}
+                                                                {{else ifElse (this.review '==' '3')}}
+                                                                {{else ifElse (this.review '==' '2')}}
+                                                                {{else}} 
+                                                                {{/ifElse}}
+                                                            </ul>
+                                                           
+                                                        </div><!--end customer testi-->
+                                                         {{/each}}
+                                                    </div><!--end carousel-->
+                                                </div><!--end col-->
+                                            </div><!--end row-->
+
+                                            <div class="row justify-content-center">
+                                                <div class="col-lg-2 col-md-2 col-6 text-center py-4">
+                                                    <img src="../assets/images/client/amazon.png" class="avatar avatar-client" alt="">
+                                                </div><!--end col-->
+                            
+                                                <div class="col-lg-2 col-md-2 col-6 text-center py-4">
+                                                    <img src="../assets/images/client/google.png" class="avatar avatar-client" alt="">
+                                                </div><!--end col-->
+                                                
+                                                <div class="col-lg-2 col-md-2 col-6 text-center py-4">
+                                                    <img src="../assets/images/client/lenovo.png" class="avatar avatar-client" alt="">
+                                                </div><!--end col-->
+                                                
+                                                <div class="col-lg-2 col-md-2 col-6 text-center py-4">
+                                                    <img src="../assets/images/client/paypal.png" class="avatar avatar-client" alt="">
+                                                </div><!--end col-->
+                                                
+                                                <div class="col-lg-2 col-md-2 col-6 text-center py-4">
+                                                    <img src="../assets/images/client/shopify.png" class="avatar avatar-client" alt="">
+                                                </div><!--end col-->
+                                                
+                                                <div class="col-lg-2 col-md-2 col-6 text-center py-4">
+                                                    <img src="../assets/images/client/spotify.png" class="avatar avatar-client" alt="">
+                                                </div><!--end col-->
+                                            </div><!--end row-->
+                                        </div><!--end teb pane-->
+            
+                                        <div class="tab-pane fade" id="pills-location" role="tabpanel" aria-labelledby="location-tab">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="card map border-0">
+                                                        <div class="card-body p-0">
+                                                          <iframe src="{{DoctorData.location}}" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                                            {{!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d39206.002432144705!2d-95.4973981212445!3d29.709510002925988!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8640c16de81f3ca5%3A0xf43e0b60ae539ac9!2sGerald+D.+Hines+Waterwall+Park!5e0!3m2!1sen!2sin!4v1566305861440!5m2!1sen!2sin" style="border:0" class="rounded" allowfullscreen></iframe> --}}
+                                                        </div>
+                                                    </div>
+                                                </div><!--end col-->
+                                            </div><!--end row-->
+                                        </div><!--end teb pane-->
+            
+                                        <div class="tab-pane fade" id="pills-timetable" role="tabpanel" aria-labelledby="timetable-tab">
+                                            <div class="row">
+                                               
+                                                <div class="col-lg-4 col-md-12">
+                                                    <div class="card border-0 p-3 rounded shadow">
+                                                        <p>Time Mention Please 10:30am -8:30pm Formate</p>
+                                                        <ul class="list-unstyled mb-0">
+                                                             <div id="form-response">
+
+                                                               </div>
+                                                            <form method="POST" id="change-password-form" action="/api/date-time">
+                                                                <input type="hidden" name="token" value="{{token}}">
+                                                                <div class="row">
+                                                                    <!--end col-->
+                                                            
+                                                                    <div class="col-lg-12">
+                                                                        <div class="mb-3">
+                                                                            <label class="form-label">Monday <span class="text-danger">*</span></label>
+                                                                            <input type="text" name="Monday"  placeholder="{{DoctorData.Monday}}"> <br>
+                                                                            <label class="form-label">Tuesday <span class="text-danger">*</span></label>
+                                                                            <input type="text" name="Tuesday" placeholder="{{DoctorData.Tuesday}}"><br>
+                                                                             <label class="form-label">Wednesday<span class="text-danger">*</span></label>
+                                                                            <input type="text" name="Wednesday"  placeholder="{{DoctorData.Wednesday}}"><br>
+                                                                             <label class="form-label">Thursday<span class="text-danger">*</span></label>
+                                                                            <input type="text" name="Thursday"  placeholder="{{DoctorData.Thursday}}"><br>
+                                                                             <label class="form-label">Friday<span class="text-danger">*</span></label>
+                                                                            <input type="text" name="Friday" placeholder="{{DoctorData.Friday}}"><br>
+                                                                             <label class="form-label">Saturday<span class="text-danger">*</span></label>
+                                                                            <input type="text" name="Saturday"  placeholder="{{DoctorData.Saturday}}"><br>
+                                                                             <label class="form-label">Sunday<span class="text-danger">*</span></label>
+                                                                            <input type="text" name="Sunday"  placeholder="{{DoctorData.Sunday}}"><br>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!--end col-->
+
+                                                                    <div class="col-lg-12 text-end">
+                                                                    <input type="hidden" type="text" name="_id" value="{{user._id}}">
+                                                                        <button type="submit" class="btn btn-primary">Accept</button>
+                                                                    </div>
+                                                                    
+
+                                                                    <!--end col-->
+                                                                </div>
+                                                                <!--end row-->
+                                                        </form> 
+                                                       
+                                                        </ul>
+                                                    </div>
+                                                </div><!--end col-->
+
+                                                <div class="col-lg-4 col-md-6 mt-4 mt-lg-0 pt-2 pt-lg-0">
+                                                    <div class="card border-0 text-center features feature-primary">
+                                                        <div class="icon text-center mx-auto rounded-md">
+                                                            <span class="mb-0"><i class="uil uil-phone h3"></i></span>
+                                                        </div>
+                            
+                                                        <div class="card-body p-0 mt-4">
+                                                            <h5 class="title fw-bold">Phone</h5>
+                                                            <p class="text-muted">Great doctor if you need your family member to get effective immediate assistance</p>
+                                                            <a href="tel:+152534-468-854" class="link">+{{user.contactNumber}}</a>
+                                                        </div>
+                                                    </div>
+                                                </div><!--end col-->
+                            
+                                                <div class="col-lg-4 col-md-6 mt-4 mt-lg-0 pt-2 pt-lg-0">
+                                                    <div class="card border-0 text-center features feature-primary">
+                                                        <div class="icon text-center mx-auto rounded-md">
+                                                            <span class="mb-0"><i class="uil uil-envelope h3"></i></span>
+                                                        </div>
+                            
+                                                        <div class="card-body p-0 mt-4">
+                                                            <h5 class="title fw-bold">Email</h5>
+                                                            <p class="text-muted">Great doctor if you need your family member to get effective immediate assistance</p>
+                                                            <a href="mailto:contact@example.com" class="link">{{user.email}}</a>
+                                                        </div>
+                                                    </div>
+                                                </div><!--end col-->
+                                            </div><!--end row-->
+                                        </div><!--end teb pane-->
+                                    </div><!--end tab content-->
+                                </div>
+                            </div><!--end col-->
+                        </div><!--end row-->
+                    </div><!--end col-->
+                </div><!--end row-->
+            </div><!--end container-->
+        </section><!--end section-->
+        <!-- End Hero -->
+
+        <!-- Footer Start -->
+      <footer class="bg-footer">
+         {{>footer}}
+        </footer>
+        <!-- End -->
+
+        <!-- Back to top -->
+        <a href="#" onclick="topFunction()" id="back-to-top" class="btn btn-icon btn-pills btn-primary back-to-top"><i data-feather="arrow-up" class="icons"></i></a>
+        <!-- Back to top -->
+
+        <!-- Offcanvas Start -->
+        {{!-- <div class="offcanvas bg-white offcanvas-top" tabindex="-1" id="offcanvasTop">
+            <div class="offcanvas-body d-flex align-items-center align-items-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="text-center">
+                                <h4>Search now.....</h4>
+                                <div class="subcribe-form mt-4">
+                                    <form>
+                                        <div class="mb-0">
+                                            <input type="text" id="help" name="name" class="border bg-white rounded-pill" required="" placeholder="Search">
+                                            <button type="submit" class="btn btn-pills btn-primary">Search</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div><!--end col-->
+                    </div><!--end row-->
+                </div><!--end container-->
+            </div>
+        </div> --}}
+        <!-- Offcanvas End -->
+
+        <!-- Offcanvas Start -->
+        <div class="offcanvas offcanvas-end bg-white shadow" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+            <div class="offcanvas-header p-4 border-bottom">
+                <h5 id="offcanvasRightLabel" class="mb-0">
+                    <img src="../assets/images/logo-dark.png" height="24" class="light-version" alt="">
+                    <img src="../assets/images/logo-light.png" height="24" class="dark-version" alt="">
+                </h5>
+                <button type="button" class="btn-close d-flex align-items-center text-dark" data-bs-dismiss="offcanvas" aria-label="Close"><i class="uil uil-times fs-4"></i></button>
+            </div>
+            <div class="offcanvas-body p-4 px-md-5">
+                <div class="row">
+                    <div class="col-12">
+                        <!-- Style switcher -->
+                        <div id="style-switcher">
+                            <div>
+                                <ul class="text-center list-unstyled mb-0">
+                                    <li class="d-grid"><a href="javascript:void(0)" class="rtl-version t-rtl-light" onclick="setTheme('style-rtl')"><img src="../assets/images/layouts/landing-light-rtl.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">RTL Version</span></a></li>
+                                    <li class="d-grid"><a href="javascript:void(0)" class="ltr-version t-ltr-light" onclick="setTheme('style')"><img src="../assets/images/layouts/landing-light.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">LTR Version</span></a></li>
+                                    <li class="d-grid"><a href="javascript:void(0)" class="dark-rtl-version t-rtl-dark" onclick="setTheme('style-dark-rtl')"><img src="../assets/images/layouts/landing-dark-rtl.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">RTL Version</span></a></li>
+                                    <li class="d-grid"><a href="javascript:void(0)" class="dark-ltr-version t-ltr-dark" onclick="setTheme('style-dark')"><img src="../assets/images/layouts/landing-dark.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">LTR Version</span></a></li>
+                                    <li class="d-grid"><a href="javascript:void(0)" class="dark-version t-dark mt-4" onclick="setTheme('style-dark')"><img src="../assets/images/layouts/landing-dark.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Dark Version</span></a></li>
+                                    <li class="d-grid"><a href="javascript:void(0)" class="light-version t-light mt-4" onclick="setTheme('style')"><img src="../assets/images/layouts/landing-light.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Light Version</span></a></li>
+                                    <li class="d-grid"><a href="../admin/index.html" target="_blank" class="mt-4"><img src="../assets/images/layouts/light-dash.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Admin Dashboard</span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- end Style switcher -->
+                    </div><!--end col-->
+                </div><!--end row-->
+            </div>
+
+            <div class="offcanvas-footer p-4 border-top text-center">
+                <ul class="list-unstyled social-icon mb-0">
+                    <li class="list-inline-item mb-0"><a href="https://1.envato.market/doctris" target="_blank" class="rounded"><i class="uil uil-shopping-cart align-middle" title="Buy Now"></i></a></li>
+                    <li class="list-inline-item mb-0"><a href="https://dribbble.com/shreethemes" target="_blank" class="rounded"><i class="uil uil-dribbble align-middle" title="dribbble"></i></a></li>
+                    <li class="list-inline-item mb-0"><a href="https://www.facebook.com/shreethemes" target="_blank" class="rounded"><i class="uil uil-facebook-f align-middle" title="facebook"></i></a></li>
+                    <li class="list-inline-item mb-0"><a href="https://www.instagram.com/shreethemes/" target="_blank" class="rounded"><i class="uil uil-instagram align-middle" title="instagram"></i></a></li>
+                    <li class="list-inline-item mb-0"><a href="https://twitter.com/shreethemes" target="_blank" class="rounded"><i class="uil uil-twitter align-middle" title="twitter"></i></a></li>
+                    <li class="list-inline-item mb-0"><a href="mailto:support@shreethemes.in" class="rounded"><i class="uil uil-envelope align-middle" title="email"></i></a></li>
+                    <li class="list-inline-item mb-0"><a href="https://shreethemes.in" target="_blank" class="rounded"><i class="uil uil-globe align-middle" title="website"></i></a></li>
+                </ul><!--end icon-->
+            </div>
+        </div>
+        <!-- Offcanvas End -->
+        
+        <!-- javascript -->
+       {{>javascript}}
+         <script>
+         $(document).ready(function () {
+//Change password form request
+        $("#change-password-form").submit(function (e) {
+        e.preventDefault();
+        var fromData = $(this).serialize();
+           var token =  $(this).find("input[name=token]").val(); 
+         $.ajax({
+                type: 'POST',
+               url:$(this).attr('action'),
+                data:fromData,
+                headers:{ Authorization: 'Bearer '+ token},
+                success: function (response) {
+                     if(response.status==200){
+                        swal({
+                        title: "Good job!",
+                        text: response.message,
+                        icon: "success",
+                        button: "Aww yiss!",
+                        });
+                      }else{
+                          swal(
+                          'Oops...',
+                          response.message,
+                          'error'
+                          );
+                      }
+                }
+           });
+         });
+            });
+            
+
+            var source = $("#entry-template").html();
+var template = Handlebars.compile(source);
+var output = template(datas);
+$("body").append(output);
+        
+        </script>
+    </body>
+
+</html>
+

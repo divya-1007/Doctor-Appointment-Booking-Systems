@@ -1,0 +1,289 @@
+//
+// menu.scss
+//
+
+/*********************************/
+/*     Menu-DARK                 */
+/*===============================*/
+//
+// menu.scss
+//
+
+#topnav {
+    .logo {
+        color: $dark !important;
+        .l-dark,
+        .logo-light-mode {
+            display: none !important;
+        }
+        .l-light,
+        .logo-dark-mode {
+            display: inline-block !important;
+        }
+    }
+    .has-submenu {
+        &.active {
+            a {
+                color: $white;
+            }
+        }
+    }
+    .has-submenu {
+        .submenu {
+            .submenu-arrow {
+                border-color: $dark;
+            }
+        }
+    }
+    .navbar-toggle {
+        span {
+            background-color: $dark;
+        }
+    }
+    
+    .navigation-menu {
+        > li {
+            > a {
+                color: rgba($dark, 0.8);
+            }
+        }
+        .has-submenu {
+            .menu-arrow {
+                border-color: rgba($dark, 0.8);
+            }
+        }
+    }
+    
+    &.scroll {
+        background-color: $white;
+        box-shadow: $shadow;
+        .navigation-menu {
+            > li {
+                > a {
+                    color: $dark;
+                }
+                
+                > .menu-arrow {
+                    border-color: $dark;
+                }
+            } 
+        }
+    }
+    
+    &.nav-sticky{
+        background: $white;
+        box-shadow: $shadow;
+        .navigation-menu {
+            &.nav-light {
+                > li {
+                    > a {
+                        color: $dark;
+                    }
+                } 
+                .has-submenu {
+                    .menu-arrow {
+                        border-color: $dark; 
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 992px) {
+    #topnav {
+        .navigation-menu {
+            > .has-submenu {
+                > .submenu {
+                    > .has-submenu {
+                        > .submenu {
+                            &::before{
+                                box-shadow: 1px 1px 0px 0px rgba($dark, 0.15);
+                                border-color: transparent $white $white transparent;
+                            }
+                        }
+                    } 
+                }
+            } 
+            > li {
+                .submenu {
+                    background-color: $white;
+                    box-shadow: $shadow;
+                    li {
+                        a {
+                            color: $dark !important;
+                        }
+                    }
+                }
+            }
+            
+            &.nav-light {
+                > li {
+                    > a {
+                        color: rgba($dark, 0.5);
+                    }   
+                    &.active {
+                        > a {
+                            color: $dark !important;
+                        }      
+                    }           
+                    &:hover {
+                        > .menu-arrow {
+                            border-color: $dark !important;
+                        }
+                        > a {
+                            color: $dark !important;
+                        }
+                    }
+                } 
+                .has-submenu {
+                    .menu-arrow {
+                        border-color: rgba($dark, 0.5);
+                    }
+                    &.active {
+                        .menu-arrow{
+                            border-color: $dark !important;
+                        }
+                    }
+                }
+            }
+
+        }  
+    }
+}
+  
+@media (max-width: 991px) {
+    #topnav {
+        background-color: $white;
+        box-shadow: $shadow;
+        .navigation-menu {
+            > li {
+                .submenu {
+                    li {
+                        a {
+                            color: $dark !important;
+                        }
+                    }
+                    &.megamenu {
+                        > li {
+                            > ul {
+                                > li {
+                                    > span {
+                                        color: $muted;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                > a {
+                    color: $dark;
+                }
+            }
+        }
+        .menu-extras .menu-item {
+            border-color: $muted;
+        }
+    }
+
+    #navigation {
+        border-top: 1px solid darken($light,2%);
+        border-bottom: 1px solid darken($light,2%);
+        background-color: $white;
+    }
+}
+
+//Sidebar-nav 
+.sidebar-nav{
+    > .navbar-item {
+        .navbar-link {
+            color: $dark !important;
+        }
+    }
+}
+
+//Admin 
+
+//
+//_menu.scss
+//
+
+.page-wrapper {
+    &.doctris-theme {
+        .sidebar-wrapper {
+            box-shadow: $shadow;
+            background-color: $white;
+            .sidebar-header,
+            .sidebar-menu {
+                border-top: 1px solid $gray-800;
+            }
+            .sidebar-header .user-info .user-role,
+            .sidebar-header .user-info .user-status,
+            .sidebar-brand > a,
+            .sidebar-menu li a {
+                color: $dark;
+            }
+            .sidebar-brand {
+                .logo-dark-mode {
+                    display: inline-block;
+                }
+                .logo-light-mode {
+                    display: none;
+                }
+            }
+        }
+    }
+    .sidebar-wrapper {
+        .sidebar-menu {
+            
+            li {
+                a {
+                    i {
+                        background-color: $gray-800;
+                    }
+                }
+            }
+
+            .sidebar-dropdown {
+                > a:after {
+                    color: $dark; 
+                }
+                
+                .sidebar-submenu {
+                    ul {
+                        li {
+                            a {
+                                &:before {
+                                    color: $dark; 
+                                }
+                            }
+                        }
+                    }
+                }
+            }    
+        }
+    }
+
+    .page-content {
+        .top-header {
+            .header-bar {
+                background: $white;
+                box-shadow: $shadow;
+                .logo-icon {
+                    .big {
+                        .logo-dark-mode {
+                            display: inline-block;
+                        }
+                        .logo-light-mode {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.sidebar-footer {
+    box-shadow: $shadow;
+}

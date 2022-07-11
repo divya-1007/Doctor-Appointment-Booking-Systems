@@ -1,0 +1,68 @@
+/* Template Name: Doctris - Doctor Appointment Booking System
+   Author: Shreethemes
+   Website: https://shreethemes.in/
+   Mail: support@shreethemes.in
+   Version: 1.2.0
+   Updated: July 2021
+   File Description: Main Css file of the template
+*/
+/*********************************/
+/*         INDEX                 */
+/*================================
+ *     01.  Variables            *
+ *     02.  Bootstrap Custom     *
+ *     03.  Components           *
+ *     04.  General              *
+ *     05.  Helper               *
+ *     06.  Menu                 *
+ *     07.  Home / Landing       *
+ *     08.  Features / Services  *
+ *     09.  CTA                  *
+ *     10.  Chat                 *
+ *     11.  Team                 *
+ *     12.  Testi                *
+ *     13.  Blog                 *
+ *     14.  Calendar             *
+ *     15.  Shop                 *
+ *     16.  Contact              *
+ *     17.  Simple Bar           *
+ *     18.  Footer               *
+ ================================*
+
+ *********************************
+ *         RTL SCSS              *
+ *********************************
+ *     01.  Bootstrap Custom RTL *
+ *     02.  Components RTL       *
+ *     03.  General RTL          *
+ *     04.  Helper RTL           *
+ *     05.  Menu RTL             *
+ *     06.  Common RTL           *
+ ================================*/
+
+@import "variables";
+@import "bootstrap-custom";
+@import "components";
+@import "general";
+@import "helper";
+@import "menu";
+@import "home";
+@import "features";
+@import "cta";
+@import "chat";
+@import "team";
+@import "testi";
+@import "blog";
+@import "calendar";
+@import "shop";
+@import "contact";
+@import "simplebar";
+@import "footer";
+
+// RTL Version
+@import "rtl/bootstrap-custom-rtl";
+@import "rtl/components-rtl";
+@import "rtl/general-rtl";
+@import "rtl/helper-rtl";
+@import "rtl/menu-rtl";
+@import "rtl/common-rtl";

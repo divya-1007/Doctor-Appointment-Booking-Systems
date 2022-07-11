@@ -1,0 +1,437 @@
+<html lang="en">
+
+<head>
+  {{>head}}
+</head>
+
+<body>
+  <!-- Loader -->
+  {{!-- <div id="preloader">
+      <div id="status">
+        <div class="spinner">
+          <div class="double-bounce1"></div>
+          <div class="double-bounce2"></div>
+        </div>
+      </div>
+    </div> --}}
+  <!-- Loader -->
+
+  <div class="page-wrapper doctris-theme toggled">
+    <nav id="sidebar" class="sidebar-wrapper">
+      {{>navAdmin}}
+    </nav>
+    <!-- sidebar-wrapper  -->
+
+    <!-- Start Page Content -->
+    <main class="page-content bg-light">
+        {{>sideBarAdmin data = user}}
+    
+
+      <div class="container-fluid">
+        <div class="layout-specing">
+          <div class="row">
+            <div class="col-xl-9 col-lg-6 col-md-4">
+              <h5 class="mb-0">All Patient List</h5>
+              <nav aria-label="breadcrumb" class="d-inline-block mt-2">
+                <ul class="breadcrumb breadcrumb-muted bg-transparent rounded mb-0 p-0">
+                  <li class="breadcrumb-item"><a href="/admin">Doctris</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">All Patient List</li>
+                </ul>
+              </nav>
+            </div>
+            <!--end col-->
+
+            <div class="col-xl-3 col-lg-6 col-md-8 mt-4 mt-md-0">
+              <div class="justify-content-md-end">
+                <form>
+                  <div class="row justify-content-between align-items-center">
+                    <div class="col-sm-12 col-md-5">
+                      {{!-- <div class="mb-0 position-relative">
+                        <select class="form-control time-during select2input">
+                          <option value="EY">Today</option>
+                          <option value="GY">Tomorrow</option>
+                          <option value="PS">Yesterday</option>
+                        </select>
+                      </div> --}}
+                    </div>
+                    <!--end col-->
+
+                    <div class="col-sm-12 col-md-7 mt-4 mt-sm-0">
+                      <div class="d-grid">
+                       <div class="mb-0 position-relative">
+                        {{!-- <select class="form-control time-during select2input">
+                          <option value="EY">Today</option>
+                          <option value="GY">Tomorrow</option>
+                          <option value="PS">Yesterday</option>
+                        </select> --}}
+                      </div>
+                      </div>
+                    </div>
+                    <!--end col-->
+                  </div>
+                  <!--end row-->
+                </form>
+                <!--end form-->
+              </div>
+            </div>
+            <!--end col-->
+          </div>
+          <!--end row-->
+
+          <div class="row">
+            <div class="col-12 mt-4">
+              <div class="table-responsive bg-white shadow rounded">
+                <table class="table mb-0 table-center">
+                  <thead>
+                    <tr>
+                      <th class="border-bottom p-3" style="min-width: 50px;">#</th>
+                      <th class="border-bottom p-3" style="min-width: 180px;">Name</th>
+                      <th class="border-bottom p-3" style="min-width: 150px;">Email</th>
+                      <th class="border-bottom p-3">Age</th>
+                      <th class="border-bottom p-3">Gender</th>
+                      <th class="border-bottom p-3" style="min-width: 150px;" >Date</th>
+                      <th class="border-bottom p-3" >Address</th>
+                      <th class="border-bottom p-3">Phone No.</th>
+                      <th class="border-bottom p-3">Department</th>
+                      <th class="border-bottom p-3" style="min-width: 150px;">Doctor Name</th>
+                      <th class="border-bottom p-3" style="min-width: 150px;">Appointment Status</th>
+                      <th class="border-bottom p-3">Appointment Book </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{#each details }}
+                    <tr class="btn-outline-primary">
+                      <th class="p-3">{{@index}}</th>
+                      <td class="p-3">
+                        <a href="/adminPatientPeofile/{{this._id}}" class="text-dark">
+                          <div class="d-flex align-items-center">
+                            <img src="{{this.profilePicture}}" class="avatar avatar-md-sm rounded-circle shadow"
+                              alt="" />
+                            <span class="ms-2">{{this.firstName}} {{this.lastName}}</span>
+                          </div>
+                        </a>
+                      </td>
+                      <td class="p-3">{{this.email}}</td>
+                      <td class="p-3">{{this.age}}</td>
+                      <td class="p-3">{{this.gender}}</td>
+                      <td class="p-3">{{this.date}}</td>
+                      <td class="p-3">{{this.address}}</td>
+                      <td class="p-3">{{this.contactNumber}}</td>
+                      <td value="{{this._id}}" class="p-3">{{this.departmentName}}</td>
+                      <td class="p-3">{{this.fullNameDoctor}}</td>
+                      {{!-- <td class="p-3"> --}}
+                      {{#eq this.status '==' '1'}}
+                      {{else eq (this.status '==' '-1')}}
+                      {{else}}
+                      {{/eq}}
+                      </td>
+                       <td class="p-3">
+                        <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#appointmentform-{{this._id}}">Appointment Book</a>
+                      </td>
+                    </tr>
+                    <div class="modal fade"  id="appointmentform-{{this._id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                      <div class="modal-content">
+                        <div id="form-response">
+                          </div>
+                        <div class="modal-header border-bottom p-3">
+                          <h5 class="modal-title" id="exampleModalLabel">Clinic Appointment Book</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body p-3 pt-4">
+                          <form action="/api/adminAppoiment" method="post" class="change-password-Data">
+                            <div class="row">
+                              <div class="col-lg-12">
+                                <div class="mb-3">
+                                  <label class="form-label">Patient Name <span class="text-danger">*</span></label>
+                                  <input name="patientName" id="name2" type="text" class="form-control" placeholder="Patient Name :">
+                                </div>
+                              </div>
+                              <!--end col-->
+                  
+                              <div class="col-md-6">
+                                <div class="mb-3">
+                                  <label class="form-label">Departments</label>
+                                  <select name="departmentId" class="form-control doctor-name select2input" onchange="getDoctorData(this.value)">
+                                    <option value="">Select</option>
+                                    {{#each ../departments}}
+                                    <option value="{{this._id}}#{{this.departmentName}}">{{this.departmentName}}</option>
+                                    {{/each}}
+                                  </select>
+                                </div>
+                              </div>
+                              <!--end col-->
+                  
+                              <div class="col-md-6">
+                                <div class="mb-3">
+                                  <label class="form-label">Doctor</label>
+                                  <select name="doctorId" class="form-control doctor-name select2input doctorId">
+                                    <option value="">Select</option>
+
+                                  </select>
+                  
+                                </div>
+                              </div>
+                              <!--end col-->
+                  
+                              <div class="col-md-6">
+                                <div class="mb-3">
+                                  <label class="form-label">Your Address <span class="text-danger">*</span></label>
+                                  <input name="address" id="address" type="text" class="form-control" placeholder="Your Address :">
+                                </div>
+                              </div>
+                              <!--end col-->
+
+                              <div class="col-md-6">
+                                <div class="mb-3">
+                                  <label class="form-label">Your Email <span class="text-danger">*</span></label>
+                                  <input name="email" id="email2" type="email" class="form-control" placeholder="Your email :">
+                                </div>
+                              </div>
+                              <!--end col-->
+                  
+                              <div class="col-md-6">
+                                <div class="mb-3">
+                                  <label class="form-label">Your Phone <span class="text-danger">*</span></label>
+                                  <input name="contactNumber" id="phone2" type="tel" class="form-control" placeholder="Your Phone :">
+                                </div>
+                              </div>
+                              <!--end col-->
+                  
+                              <div class="col-md-6">
+                                <div class="mb-3">
+                                  <label class="form-label">Age<span class="text-danger">*</span></label>
+                                  <input name="age" id="email" type class="form-control" placeholder=" Your Age :">
+                                </div>
+                              </div>
+                              <!--end col-->
+                  
+                              <div class="col-md-6">
+                                  <div class="mb-3">
+                                      <label class="form-label">Gender <span class="text-danger">*</span></label>
+                                        <select name="gender" class="form-control doctor-name select2input" required="">
+                                          <option value="">Select</option>
+                                          <option  value="Male">Male</option >
+                                          <option  value="Female">Female</option>
+                                          <option  value="Children">Children</option>
+                                      </select>
+                                  </div>
+                              </div>
+                              <!--end col-->
+                              
+                              <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label class="form-label"> Date <span class="text-danger">*</label>
+                                    <input name="date" type="text" class="flatpickr flatpickr-input form-control" id="checkin-date" required="">
+                                    </div>
+                            </div>
+                            <!--end col-->
+                              <div class="col-lg-12">
+                                <div class="mb-3">
+                                  <label class="form-label">Comments <span class="text-danger">*</span></label>
+                                  <textarea name="Comment" id="comments2" rows="4" class="form-control"
+                                    placeholder="Your Message :"></textarea>
+                                </div>
+                              </div>
+                              <!--end col-->
+                  
+                               <div class="col-lg-12">
+                                <div class="d-grid">
+                                  <input type="hidden" name="patientId" value="{{this._id}}">
+                                  <button type="submit" class="btn btn-primary">Book An Appointment</button>
+                                </div>
+                              </div>
+                              <!--end col-->
+                            </div>
+                            <!--end row-->
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                   {{/each}}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <!--end row-->
+
+          <div class="row text-center">
+            <!-- PAGINATION START -->
+            <div class="col-12 mt-4">
+              <div class="d-md-flex align-items-center text-center justify-content-between">
+                <span class="text-muted me-3">Showing 1 - 10 out of 50</span>
+                <ul class="pagination justify-content-center mb-0 mt-3 mt-sm-0">
+                  <li class="page-item"><a class="page-link" href="javascript:void(0)" aria-label="Previous">Prev</a>
+                  </li>
+                  <li class="page-item active"><a class="page-link" href="javascript:void(0)">1</a></li>
+                  <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
+                  <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
+                  <li class="page-item"><a class="page-link" href="javascript:void(0)" aria-label="Next">Next</a></li>
+                </ul>
+              </div>
+            </div>
+            <!--end col-->
+            <!-- PAGINATION END -->
+          </div>
+          <!--end row-->
+        </div>
+      </div>
+      <!--end container-->
+
+      <!-- Footer Start -->
+      <footer class="bg-white shadow py-3">
+        {{>footerAdmin}}
+      </footer>
+      <!--end footer-->
+      <!-- End -->
+    </main>
+    <!--End page-content" -->
+  </div>
+  <!-- page-wrapper -->
+
+  <!-- Offcanvas Start -->
+  <div class="offcanvas offcanvas-end bg-white shadow" tabindex="-1" id="offcanvasRight"
+    aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header p-4 border-bottom">
+      <h5 id="offcanvasRightLabel" class="mb-0">
+        <img src="../assets/images/logo-dark.png" height="24" class="light-version" alt="" />
+        <img src="../assets/images/logo-light.png" height="24" class="dark-version" alt="" />
+      </h5>
+      <button type="button" class="btn-close d-flex align-items-center text-dark" data-bs-dismiss="offcanvas"
+        aria-label="Close"><i class="uil uil-times fs-4"></i></button>
+    </div>
+    <div class="offcanvas-body p-4 px-md-5">
+      <div class="row">
+        <div class="col-12">
+          <!-- Style switcher -->
+          <div id="style-switcher">
+            <div>
+              <ul class="text-center list-unstyled mb-0">
+                <li class="d-grid"><a href="javascript:void(0)" class="rtl-version t-rtl-light"
+                    onclick="setTheme('style-rtl')"><img src="../assets/images/layouts/light-dash-rtl.png"
+                      class="img-fluid rounded-md shadow-md d-block" alt="" /><span class="text-muted mt-2 d-block">RTL
+                      Version</span></a></li>
+                <li class="d-grid"><a href="javascript:void(0)" class="ltr-version t-ltr-light"
+                    onclick="setTheme('style')"><img src="../assets/images/layouts/light-dash.png"
+                      class="img-fluid rounded-md shadow-md d-block" alt="" /><span class="text-muted mt-2 d-block">LTR
+                      Version</span></a></li>
+                <li class="d-grid"><a href="javascript:void(0)" class="dark-rtl-version t-rtl-dark"
+                    onclick="setTheme('style-dark-rtl')"><img src="../assets/images/layouts/dark-dash-rtl.png"
+                      class="img-fluid rounded-md shadow-md d-block" alt="" /><span class="text-muted mt-2 d-block">RTL
+                      Version</span></a></li>
+                <li class="d-grid"><a href="javascript:void(0)" class="dark-ltr-version t-ltr-dark"
+                    onclick="setTheme('style-dark')"><img src="../assets/images/layouts/dark-dash.png"
+                      class="img-fluid rounded-md shadow-md d-block" alt="" /><span class="text-muted mt-2 d-block">LTR
+                      Version</span></a></li>
+                <li class="d-grid"><a href="javascript:void(0)" class="dark-version t-dark mt-4"
+                    onclick="setTheme('style-dark')"><img src="../assets/images/layouts/dark-dash.png"
+                      class="img-fluid rounded-md shadow-md d-block" alt="" /><span class="text-muted mt-2 d-block">Dark
+                      Version</span></a></li>
+                <li class="d-grid"><a href="javascript:void(0)" class="light-version t-light mt-4"
+                    onclick="setTheme('style')"><img src="../assets/images/layouts/light-dash.png"
+                      class="img-fluid rounded-md shadow-md d-block" alt="" /><span
+                      class="text-muted mt-2 d-block">Light Version</span></a></li>
+                <li class="d-grid"><a href="../landing/index.html" target="_blank" class="mt-4"><img
+                      src="../assets/images/layouts/landing-light.png" class="img-fluid rounded-md shadow-md d-block"
+                      alt="" /><span class="text-muted mt-2 d-block">Landing Demos</span></a></li>
+              </ul>
+            </div>
+          </div>
+          <!-- end Style switcher -->
+        </div>
+        <!--end col-->
+      </div>
+      <!--end row-->
+    </div>
+
+    <div class="offcanvas-footer p-4 border-top text-center">
+      <ul class="list-unstyled social-icon mb-0">
+        <li class="list-inline-item mb-0"><a href="https://1.envato.market/doctris" target="_blank" class="rounded"><i
+              class="uil uil-shopping-cart align-middle" title="Buy Now"></i></a></li>
+        <li class="list-inline-item mb-0"><a href="https://dribbble.com/shreethemes" target="_blank" class="rounded"><i
+              class="uil uil-dribbble align-middle" title="dribbble"></i></a></li>
+        <li class="list-inline-item mb-0"><a href="https://www.facebook.com/shreethemes" target="_blank"
+            class="rounded"><i class="uil uil-facebook-f align-middle" title="facebook"></i></a></li>
+        <li class="list-inline-item mb-0"><a href="https://www.instagram.com/shreethemes/" target="_blank"
+            class="rounded"><i class="uil uil-instagram align-middle" title="instagram"></i></a></li>
+        <li class="list-inline-item mb-0"><a href="https://twitter.com/shreethemes" target="_blank" class="rounded"><i
+              class="uil uil-twitter align-middle" title="twitter"></i></a></li>
+        <li class="list-inline-item mb-0"><a href="mailto:support@shreethemes.in" class="rounded"><i
+              class="uil uil-envelope align-middle" title="email"></i></a></li>
+        <li class="list-inline-item mb-0"><a href="https://shreethemes.in" target="_blank" class="rounded"><i
+              class="uil uil-globe align-middle" title="website"></i></a></li>
+      </ul>
+      <!--end icon-->
+    </div>
+  </div>
+  <!-- Offcanvas End -->
+
+  <!-- Modal start -->
+  <!-- Add New Appointment Start -->
+ 
+  <!-- Add New Appointment End -->
+
+  <!-- javascript -->
+  {{>javascript}}
+  <script>
+      
+    
+    function getDoctorData(did) {
+      $.ajax({
+        type: "GET",
+        url: '/api/doctorlist/' + did,
+        success: function (response) {
+          var list = '';
+          if (response[0].length > 0) {
+            list += '<option value="">Select</option>';
+            $.each(response, function (index, value) {
+              console.log(JSON.stringify(value))
+              for (let j = 0; j < value.length; j++) {
+                console.log(value[j].firstName)
+                var doctor_id_name = value[j]._id + '#' + value[j].firstName + ' ' + value[j].lastName;
+                $(".doctorId").append(list += '<option  value="' + doctor_id_name + '">' + value[j].firstName + " " + value[j].lastName + '</option >');
+
+              }
+            });
+          } else {
+            list += '<option value="">No Doctor Found!</option>';
+          }
+          $(".doctorId").html(list);
+        }
+      });
+    }
+
+  $(document).ready(function () {
+        $(".change-password-Data").submit(function (e) {
+        e.preventDefault();
+        var fromData = $(this).serialize();
+         $.ajax({
+                type: 'POST',
+               url:$(this).attr('action'),
+                data:fromData,
+                success: function (response) {
+                   if(response.status==200){
+                        swal({
+                        title: "Success...!!",
+                        text: response.message,
+                        icon: "success",
+                        button: "Ok..!",
+                        });
+                      }else{
+                          swal(
+                          'Oops...',
+                          response.message,
+                          'error'
+                          );
+                      }
+                }
+           });
+         });
+      })
+  </script>
+
+</body>
+
+</html>

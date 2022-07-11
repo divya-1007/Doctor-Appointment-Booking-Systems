@@ -1,0 +1,443 @@
+<html lang="en">
+
+<head>
+  {{>head}}
+</head>
+
+<body>
+  <!-- Loader -->
+  {{!-- <div id="preloader">
+      <div id="status">
+        <div class="spinner">
+          <div class="double-bounce1"></div>
+          <div class="double-bounce2"></div>
+        </div>
+      </div>
+    </div> --}}
+  <!-- Loader -->
+
+  <div class="page-wrapper doctris-theme toggled">
+    <nav id="sidebar" class="sidebar-wrapper">
+      {{>navAdmin}}
+    </nav>
+    <!-- sidebar-wrapper  -->
+
+    <!-- Start Page Content -->
+    <main class="page-content bg-light">
+      {{>sideBarAdmin data = user}}
+
+      <div class="container-fluid">
+        <div class="layout-specing">
+          <h5 class="mb-0">Dashboard</h5>
+
+          <div class="row">
+            <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
+              <div class="card features feature-primary rounded border-0 shadow p-4">
+                <div class="d-flex align-items-center">
+                  <div class="icon text-center rounded-md">
+                    <i class="uil uil-bed h3 mb-0"></i>
+                  </div>
+                  <div class="flex-1 ms-2">
+                    <h5 class="mb-0">{{userDatas}}</h5>
+                    <p class="text-muted mb-0">Patients</p>
+                    </div>
+                    </div>
+                    </div>
+            </div>
+            <!--end col-->
+
+            <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
+              <div class="card features feature-primary rounded border-0 shadow p-4">
+                <div class="d-flex align-items-center">
+                  <div class="icon text-center rounded-md">
+                    <i class="uil uil-user d-inline-block h3 mb-0"></i>
+                    </div>
+                  <div class="flex-1 ms-2  me-2 ">
+                    <h5 class="mb-0">{{doctorData}}</h5>
+                    <p class="text-muted mb-0">Doctors</p>
+                    </div>
+                    </div>
+                    </div>
+            </div>
+            <!--end col-->
+
+            <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
+              <div class="card features feature-primary rounded border-0 shadow p-4">
+                <div class="d-flex align-items-center">
+                  <div class="icon text-center rounded-md">
+                    <i class="uil uil-social-distancing h3 mb-0"></i>
+                  </div>
+                  <div class="flex-1 ms-2">
+                    <h5 class="mb-0">112</h5>
+                    <p class="text-muted mb-0">Staff Members</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--end col-->
+
+            <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
+              <div class="card features feature-primary rounded border-0 shadow p-4">
+                <div class="d-flex align-items-center">
+                  <div class="icon text-center rounded-md">
+                    <i class="uil uil-ambulance h3 mb-0"></i>
+                  </div>
+                  <div class="flex-1 ms-2">
+                    <h5 class="mb-0">16</h5>
+                    <p class="text-muted mb-0">Vehicles</p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <!--end col-->
+
+            <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
+              <div class="card features feature-primary rounded border-0 shadow p-4">
+                <div class="d-flex align-items-center">
+                  <div class="icon text-center rounded-md">
+                    <i class="uil uil-medkit h3 mb-0"></i>
+                  </div>
+                  <div class="flex-1 ms-2">
+                    <h5 class="mb-0">{{Appointmentscount}}</h5>
+                    <p class="text-muted mb-0">Appointments</p>
+                    </div>
+                    </div>
+                    </div>
+            </div>
+            <!--end col-->
+
+            <div class="col-xl-2 col-lg-4 col-md-4 mt-4">
+              <div class="card features feature-primary rounded border-0 shadow p-4">
+                <div class="d-flex align-items-center">
+                  <div class="icon text-center rounded-md">
+                    <i class="uil uil-medical-drip h3 mb-0"></i>
+                  </div>
+                  <div class="flex-1 ms-2">
+                    <h5 class="mb-0">10</h5>
+                    <p class="text-muted mb-0">Operations</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--end col-->
+            </div>
+            <!--end row-->
+
+          <div class="row">
+            <div class="col-xl-8 col-lg-7 mt-4">
+              <div class="card shadow border-0 p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h6 class="align-items-center mb-0">Patients visit by Gender</h6>
+                  <div class="mb-0 position-relative">
+                  <form >
+                    <select class="form-select form-control" name="year" id="yearchart" onchange="this.form.submit()">
+                      <option value="">Select</option>
+                      <option value="2022">2022</option>
+                      <option value="2021">2021</option>
+                      <option value="2020">2020</option>
+                      <option value="2019">2019</option>
+                    </select>
+               </form>
+                  </div>
+                  </div>
+                  <div id="dashboard"  data-url="/api/admin-appoiment-gender"  class="apex-chart" ></div>
+                  </div>
+            </div>
+            <!--end col-->
+
+            <div class="col-xl-4 col-lg-5 mt-4">
+              <div class="card shadow border-0 p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h6 class="align-items-center mb-0">Patients by Department</h6>
+
+                  <div class="mb-0 position-relative">
+                    <select class="form-select form-control" id="dailychart">
+                      <option selected>Today</option>
+                      <option value="2019">Yesterday</option>
+                    </select>
+                  </div>
+                  </div>
+                  <div id="department" class="apex-chart"></div>
+                  </div>
+            </div>
+            <!--end col-->
+            </div>
+            <!--end row-->
+
+          <div class="row" id="entry-template">
+            <div class="col-xl-6 col-lg-6 mt-4">
+              <div class="card border-0 shadow rounded">
+                <div class="d-flex justify-content-between align-items-center p-4 border-bottom">
+                  <h6 class="mb-0"><i class="uil uil-calender text-primary me-1 h5"></i>
+                    Latest Appointment</h6>
+                  <h6 class="text-muted mb-0">{{PatientDatacount}} Patients</h6>
+                  </div>
+                   <ul class="list-unstyled mb-0 p-4" >
+                  {{#each LatestAppointment }}
+                  <li>
+                    <div class="d-flex align-items-center justify-content-between">
+                      <div class="d-inline-flex">
+                        {{#each this.Patient}}
+                           <img src="{{profilePicture}}" class="avatar avatar-md-sm rounded-circle shadow"
+                              alt="" />
+                          {{/each}}
+                        <div class="ms-3">
+                          <h6 class="text-dark mb-0 d-block">{{this.patientName}}</h6>
+                          <small class="text-muted">{{this.date}} {{ this.time}}</small>
+                          </div>
+                          </div>
+                          <div>
+                        <a href="#" class="btn btn-icon btn-pills btn-soft-success"><i class="uil uil-check icons"></i></a>
+                        <a href="#" class="btn btn-icon btn-pills btn-soft-danger"><i class="uil uil-times icons"></i></a>
+                        </div>
+                        </div>
+                        </li>
+                  {{/each}}
+                  </ul>
+                  </div>
+               </div>
+            <!--end col-->
+
+            <div class="col-xl-6 col-lg-12 mt-4">
+              <div class="card border-0 shadow rounded">
+                <div class="p-4 border-bottom">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <h6 class="mb-0"><i class="uil uil-user text-primary me-1 h5"></i>
+                      Patients Reviews</h6>
+
+                    <div class="mb-0 position-relative">
+                      <select class="form-select form-control" id="dailypatient">
+                        <option selected>New</option>
+                        <option value="2019">Old</option>
+                      </select>
+                      </div>
+                      </div>
+                      </div>
+                <ul class="list-unstyled mb-0 p-4" data-simplebar style="height: 355px;">
+                  
+                  {{#each patientData}}
+                    {{#each this.DoctorData}}
+                  <li class="d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center">
+                        <img src="/{{this.profilePicture}}" class="avatar avatar-md-sm rounded-circle shadow"
+                            alt="" />
+                      <div class="flex-1 ms-3">
+                        <span class="d-block h6 mb-0">{{this.fullName}} </span>
+                        <small class="text-muted">{{this.departmentName}}</small>
+
+                        <ul class="list-unstyled mb-0">
+                           ({{../this.DoctorReviewcount}})   
+                          <li class="list-inline-item mdi mdi-star text-warning"></li>
+                          <li class="list-inline-item mdi mdi-star text-warning"></li>
+                          </ul>
+                        </div>
+                        </div>
+                        {{#each ../../PatientLength}}
+                        <p class="text-muted mb-0">{{this.PatientLength}} Patients</p>
+                        {{/each}}
+                      </li>
+                      {{/each}}
+                      {{/each}}
+                     
+
+                  {{!-- <li class="d-flex align-items-center justify-content-between mt-4">
+                     <div class="d-flex align-items-center">
+                      <img src="../assets/images/doctors/02.jpg" class="avatar avatar-small rounded-circle border shadow" alt="" />
+                      <div class="flex-1 ms-3">
+                        <span class="d-block h6 mb-0">Dr. Cristino Murphy</span>
+                        <small class="text-muted">Gynecology</small>
+
+                        <ul class="list-unstyled mb-0">
+                          <li class="list-inline-item text-muted">(75)</li>
+                          <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
+                          <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
+                          <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
+                          <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
+                          <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
+                          </ul>
+                          </div>
+                          </div>
+
+                    <p class="text-muted mb-0">350 Patients</p>
+                    </li> --}}
+
+                  {{!-- <li class="d-flex align-items-center justify-content-between mt-4">
+                    <div class="d-flex align-items-center">
+                      <img src="../assets/images/doctors/03.jpg" class="avatar avatar-small rounded-circle border shadow" alt="" />
+                      <div class="flex-1 ms-3">
+                        <span class="d-block h6 mb-0">Dr. Alia Reddy</span>
+                        <small class="text-muted">Psychotherapy</small>
+
+                        <ul class="list-unstyled mb-0">
+                          <li class="list-inline-item text-muted">(48)</li>
+                          <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
+                          <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
+                          <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
+                          <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
+                          <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
+                          </ul>
+                          </div>
+                          </div>
+
+                    <p class="text-muted mb-0">450 Patients</p>
+                    </li>
+
+                  <li class="d-flex align-items-center justify-content-between mt-4">
+                    <div class="d-flex align-items-center">
+                      <img src="../assets/images/doctors/04.jpg" class="avatar avatar-small rounded-circle border shadow" alt="" />
+                      <div class="flex-1 ms-3">
+                        <span class="d-block h6 mb-0">Dr. Toni Kover</span>
+                        <small class="text-muted">Dentist</small>
+
+                        <ul class="list-unstyled mb-0">
+                          <li class="list-inline-item text-muted">(68)</li>
+                          <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
+                          <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
+                          <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
+                          <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
+                          <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
+                          </ul>
+                          </div>
+                          </div>
+
+                    <p class="text-muted mb-0">484 Patients</p>
+                    </li>
+
+                  <li class="d-flex align-items-center justify-content-between mt-4">
+                    <div class="d-flex align-items-center">
+                      <img src="../assets/images/doctors/05.jpg" class="avatar avatar-small rounded-circle border shadow" alt="" />
+                      <div class="flex-1 ms-3">
+                        <span class="d-block h6 mb-0">Dr. Jennifer Ballance</span>
+                        <small class="text-muted">Cardiology</small>
+
+                        <ul class="list-unstyled mb-0">
+                          <li class="list-inline-item text-muted">(55)</li>
+                          <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
+                          <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
+                          <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
+                          <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
+                          <li class="list-inline-item"><i class="mdi mdi-star text-warning"></i></li>
+                          </ul>
+                          </div>
+                          </div>
+
+                    <p class="text-muted mb-0">476 Patients</p>
+                    </li> --}}
+                    </ul>
+                    </div>
+            </div>
+            <!--end col-->
+            </div>
+            <!--end row-->
+            </div>
+            </div>
+            <!--end container-->
+
+      <!-- Footer Start -->
+      <footer class="bg-white shadow py-3">
+        {{>footerAdmin}}
+      </footer>
+      <!--end footer-->
+      <!-- End -->
+      </main>
+      <!--End page-content" -->
+      </div>
+      <!-- page-wrapper -->
+
+  <!-- Offcanvas Start -->
+  <div class="offcanvas offcanvas-end bg-white shadow" tabindex="-1" id="offcanvasRight"
+    aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header p-4 border-bottom">
+      <h5 id="offcanvasRightLabel" class="mb-0">
+        <img src="../assets/images/logo-dark.png" height="24" class="light-version" alt="" />
+        <img src="../assets/images/logo-light.png" height="24" class="dark-version" alt="" />
+        </h5>
+      <button type="button" class="btn-close d-flex align-items-center text-dark" data-bs-dismiss="offcanvas"
+        aria-label="Close"><i class="uil uil-times fs-4"></i></button>
+      </div>
+      <div class="offcanvas-body p-4 px-md-5">
+        <div class="row">
+          <div class="col-12">
+            <!-- Style switcher -->
+            <div id="style-switcher">
+              <div>
+                <ul class="text-center list-unstyled mb-0">
+                <li class="d-grid"><a href="javascript:void(0)" class="rtl-version t-rtl-light" onclick="setTheme('style-rtl')"><img
+                      src="../assets/images/layouts/light-dash-rtl.png" class="img-fluid rounded-md shadow-md d-block" alt="" /><span
+                      class="text-muted mt-2 d-block">RTL
+                      Version</span></a></li>
+                <li class="d-grid"><a href="javascript:void(0)" class="ltr-version t-ltr-light" onclick="setTheme('style')"><img
+                      src="../assets/images/layouts/light-dash.png" class="img-fluid rounded-md shadow-md d-block" alt="" /><span
+                      class="text-muted mt-2 d-block">LTR
+                      Version</span></a></li>
+                <li class="d-grid"><a href="javascript:void(0)" class="dark-rtl-version t-rtl-dark"
+                    onclick="setTheme('style-dark-rtl')"><img src="../assets/images/layouts/dark-dash-rtl.png"
+                      class="img-fluid rounded-md shadow-md d-block" alt="" /><span class="text-muted mt-2 d-block">RTL
+                      Version</span></a></li>
+                <li class="d-grid"><a href="javascript:void(0)" class="dark-ltr-version t-ltr-dark"
+                    onclick="setTheme('style-dark')"><img src="../assets/images/layouts/dark-dash.png"
+                      class="img-fluid rounded-md shadow-md d-block" alt="" /><span class="text-muted mt-2 d-block">LTR
+                      Version</span></a></li>
+                <li class="d-grid"><a href="javascript:void(0)" class="dark-version t-dark mt-4" onclick="setTheme('style-dark')"><img
+                      src="../assets/images/layouts/dark-dash.png" class="img-fluid rounded-md shadow-md d-block" alt="" /><span
+                      class="text-muted mt-2 d-block">Dark
+                      Version</span></a></li>
+                <li class="d-grid"><a href="javascript:void(0)" class="light-version t-light mt-4" onclick="setTheme('style')"><img
+                      src="../assets/images/layouts/light-dash.png" class="img-fluid rounded-md shadow-md d-block" alt="" /><span
+                      class="text-muted mt-2 d-block">Light Version</span></a></li>
+                <li class="d-grid"><a href="../landing/index.html" target="_blank" class="mt-4"><img
+                      src="../assets/images/layouts/landing-light.png" class="img-fluid rounded-md shadow-md d-block" alt="" /><span
+                      class="text-muted mt-2 d-block">Landing Demos</span></a></li>
+                </ul>
+                </div>
+                </div>
+                <!-- end Style switcher -->
+        </div>
+        <!--end col-->
+        </div>
+        <!--end row-->
+        </div>
+
+    <div class="offcanvas-footer p-4 border-top text-center">
+      <ul class="list-unstyled social-icon mb-0">
+        <li class="list-inline-item mb-0"><a href="https://1.envato.market/doctris" target="_blank" class="rounded"><i
+              class="uil uil-shopping-cart align-middle" title="Buy Now"></i></a></li>
+        <li class="list-inline-item mb-0"><a href="https://dribbble.com/shreethemes" target="_blank" class="rounded"><i
+              class="uil uil-dribbble align-middle" title="dribbble"></i></a></li>
+        <li class="list-inline-item mb-0"><a href="https://www.facebook.com/shreethemes" target="_blank" class="rounded"><i
+              class="uil uil-facebook-f align-middle" title="facebook"></i></a></li>
+        <li class="list-inline-item mb-0"><a href="https://www.instagram.com/shreethemes/" target="_blank" class="rounded"><i
+              class="uil uil-instagram align-middle" title="instagram"></i></a></li>
+        <li class="list-inline-item mb-0"><a href="https://twitter.com/shreethemes" target="_blank" class="rounded"><i
+              class="uil uil-twitter align-middle" title="twitter"></i></a></li>
+        <li class="list-inline-item mb-0"><a href="mailto:support@shreethemes.in" class="rounded"><i
+              class="uil uil-envelope align-middle" title="email"></i></a></li>
+        <li class="list-inline-item mb-0"><a href="https://shreethemes.in" target="_blank" class="rounded"><i
+              class="uil uil-globe align-middle" title="website"></i></a></li>
+        </ul>
+        <!--end icon-->
+        </div>
+        </div>
+        <!-- Offcanvas End -->
+
+  <!-- javascript -->
+  {{>javascriptAdmin}}
+   <script src="../assets/js/jquery.min.js"></script>
+<script src="../assets/js/apexcharts.min.js"></script>
+<script src="../assets/js/columnchart.init.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js">
+    window.Glog = function (msg) {
+      console.log(msg);
+    };
+var source = $("#entry-template").html();
+var template = Handlebars.compile(source);
+var output = template(datas);
+$("body").append(output);
+
+
+  </script>
+  
+  </body>
+
+</html>

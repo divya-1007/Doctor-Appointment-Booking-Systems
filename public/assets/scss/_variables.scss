@@ -1,0 +1,78 @@
+//
+// variables.scss
+//
+
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+// Color
+$white:                     #ffffff;
+
+$primary:                   #396cf0;
+$secondary:                 #5a6d90;
+$success:                   #53c797;
+$warning:                   #f1b561;
+$info:                      #64c2f1;
+$danger:                    #f0735a;
+$dark:                      #343a40;
+$black:                     #161c2d;
+$muted:                     #8492a6;
+$light:                     #f8f9fc;
+
+// Gray
+$gray-100:                  #f8f9fa;
+$gray-200:                  #e9ecef;
+$gray-300:                  #dee2e6;
+$gray-400:                  #ced4da;
+$gray-500:                  #adb5bd;
+$gray-600:                  #6c757d;
+$gray-700:                  #495057;
+
+// Overlay
+$overlay:                   rgba($dark, 0.75);
+$gradident-overlay:         rgba($primary, 0.6);
+$bg-overlay-white:          rgba($white, 0.5);
+
+//Body Background
+$shadow:                    0 0 3px rgba($dark,.15);
+$shadow-md:                 0 5px 13px rgba($dark, .2);
+$shadow-lg:                 0 10px 25px rgba($dark, 0.15);
+$footer:                    lighten($black, 6%);
+
+// Base font
+$font-size-base:            15px;
+
+$font-family-base:          'Inter', sans-serif;
+$font-family-secondary:     'Inter', sans-serif;
+
+//Color Picker/Switcher
+$purple:                    #6600cd;
+
+$colors: (
+    "primary": $primary,
+    "secondary": $secondary,
+    "success": $success,
+    "warning": $warning,
+    "info": $info,
+    "danger": $danger,
+    "dark": $dark,
+    "muted": $muted,
+    "light": $light,
+    "footer": $footer
+);
+
+$heading-font-sizes: (
+    "h1": 42px,
+    "h2": 36px,
+    "h3": 30px,
+    "h4": 24px,
+    "h5": 18px,
+    "h6": 15px,
+);
+
+$display-font-sizes: (
+    "display-1": 80px,
+    "display-2": 72px,
+    "display-3": 64px,
+    "display-4": 56px,
+);

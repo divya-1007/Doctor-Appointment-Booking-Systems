@@ -1,0 +1,136 @@
+ <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    <!-- SLIDER -->
+    <script src="../assets/js/tiny-slider.js "></script>
+    <script src="../assets/js/tiny-slider-init.js "></script>
+    <!-- Counter -->
+     <!-- Contact -->
+   <script src="../assets/js/contact.js"></script>
+   <script src="../assets/js/counter.init.js "></script>
+    <!-- Chart -->
+    <script src="../assets/js/apexcharts.min.js"></script>
+    <script src="../assets/js/areachart.init.js"></script>
+    <!-- Icons -->
+    <script src="../assets/js/feather.min.js"></script>
+    <!-- Main Js -->
+    <script src="../assets/js/app.js"></script>
+    <script src="../assets/js/jquery.min.js"></script>
+    <!-- simplebar -->
+    <script src="../assets/js/simplebar.min.js"></script>
+   <!-- Select2 -->
+   <script src="../assets/js/select2.min.js"></script>
+   <script src="../assets/js/select2.init.js"></script>
+   <!-- Datepicker -->
+   <script src="../assets/js/flatpickr.min.js"></script>
+   <script src="../assets/js/flatpickr.init.js"></script>
+   <!-- Datepicker -->
+   <script src="../assets/js/jquery.timepicker.min.js"></script> 
+   <script src="../assets/js/timepicker.init.js"></script>
+ <!-- Datepicker -->
+  <script src="../assets/js/flatpickr.min.js"></script>
+  <script src="../assets/js/flatpickr.init.js"></script>
+  <!-- Datepicker -->
+  <script src="../assets/js/jquery.timepicker.min.js"></script> 
+  <script src="../assets/js/timepicker.init.js"></script> 
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>  
+  <script src="../assets/js/dataTables.min.js"></script>
+  <script src="../assets/js/dataTables.bootstrap4.min.js"></script>
+  <!-- Calendar -->
+  
+<script>
+     $(document).ready(function () {
+             //Common form request
+            $("form[name=ajax_form]").submit(function (e) {
+                var formData = new FormData(this);
+            var token =  $(this).find("input[name=token]").val();
+            e.preventDefault();
+            $.ajax({
+                    type: 'POST',
+                    url:$(this).attr('action'),
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    headers:{ Authorization: 'Bearer '+ token},
+                    success: function (response) {
+                      if(response.status==200){
+                        swal({
+                        title: "Success......✔️",
+                        text: response.message,
+                        icon: "success",
+                        button: "Ok..!",
+                        });
+                        //location.reload();
+                      }else{
+                          swal(
+                          'Oops...',
+                          response.message,
+                          'error'
+                          );
+                      }
+                    }
+                });
+            });
+//Change password form request
+        $("#change-password-form").submit(function (e) {
+        e.preventDefault();
+        var fromData = $(this).serialize();
+        var token =  $(this).find("input[name=token]").val(); 
+         $.ajax({
+                type: 'POST',
+               url:$(this).attr('action'),
+                data:fromData,
+                headers:{ Authorization: 'Bearer '+ token},
+                success: function (response) {
+                  if(response.status==200){
+                    swal({
+                    title: "Success......✔️",
+                    text: response.message,
+                    icon: "success",
+                    button: "Ok...!",
+                    });
+                  }else{
+                      swal(
+                      'Oops...',
+                      response.message,
+                      'error'
+                      );
+                  }
+                }
+           });
+         });
+
+         //delete-account form request
+       $("#delete-account").submit(function (e) {
+         e.preventDefault();
+         var fromData = $(this).serialize();
+         var token = $(this).find("input[name=token]").val();
+         var id = $(this).find("input[name=_id]").val();
+         $.ajax({
+           type: $(this).attr('method'),
+           url: $(this).attr('action'),
+           data: fromData,
+           headers: { Authorization: 'Bearer ' + token },
+           success: function (response) {
+              if(response.status==200){
+                swal({
+                title: "Success....✔️",
+                text: response.message,
+                icon: "success",
+                button: "Ok..!",
+                }).then(function() {
+                  window.location.href = '/SignIn'
+                });
+            }else{
+                swal(
+                'Oops...',
+                response.message,
+                'error'
+                );
+            }
+           }
+         });
+       });
+     });
+    
+        </script>
+        

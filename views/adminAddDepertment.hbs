@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {{>head}}
+</head>
+
+<body>
+    <!-- Loader -->
+    {{!-- <div id="preloader">
+            <div id="status">
+                <div class="spinner">
+                    <div class="double-bounce1"></div>
+                    <div class="double-bounce2"></div>
+                </div>
+            </div>
+        </div> --}}
+    <!-- Loader -->
+
+    <div class="page-wrapper doctris-theme toggled">
+        <nav id="sidebar" class="sidebar-wrapper">
+            {{>navAdmin}}
+        </nav>
+        <!-- sidebar-wrapper  -->
+
+        <!-- Start Page Content -->
+        <main class="page-content bg-light">
+            {{>sideBarAdmin data = user}}
+
+            <div class="container-fluid">
+                <div class="layout-specing">
+                    <div class="d-md-flex justify-content-between">
+                        <h5 class="mb-0">Add New Depertment</h5>
+                        <div id="form-response">
+                            
+                        </div>
+                        <nav aria-label="breadcrumb" class="d-inline-block mt-4 mt-sm-0">
+                            <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
+                                <li class="breadcrumb-item"><a href="/admin">Doctris</a></li>
+                                <li class="breadcrumb-item"><a href="/adminDoctorList">Patients</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Add Patient</li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12 mt-4">
+                            <div class="card border-0 p-4 rounded shadow">
+                                <form action="/api/department" method="post" class="mt-4" id="Department"  enctype="multipart/form-data">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Depertment Name<span class="text-danger">*</label>
+                                                <input name="departmentName" id="name" type="text" class="form-control"
+                                                    placeholder="Depertment Name :" required="">
+                                            </div>
+                                        </div>
+                                        <!--end col-->
+
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Depertment Description<span class="text-danger">*</label>
+                                                    <input name="texData" id="name2" type="text"
+                                                        class="form-control" placeholder="Update Depertment Name :" required="">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Depertment Icon</label>
+                                                <input type="file" id="myFile"
+                                                    name="icon">
+                                            </div>
+                                          </div>
+
+                                    </div>
+                                    <!--end row-->
+                                    <button "#form-response" type="submit" class="btn btn-primary">Add
+                                        Depertment</button>
+                                </form>
+                            </div>
+
+                            <div class="col-lg-12 mt-4">
+                                <h5 class="mb-0"> Depertment Update</h5>
+                                <div class="card border-0 p-4 rounded shadow">
+                                    <form action="/api/departmentEdit" method="post" id="UpdateDepartment" class="mt-4"  enctype="multipart/form-data">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Departments <span class="text-danger">*</span></label>
+                                                <select  name="departmentId" class="form-control doctor-name select2input" required="">
+                                                    <option value="">Select</option>
+                                                    {{#each departments}}
+                                                    <option value="{{this._id}}#{{this.departmentName}}">{{this.departmentName}}</option>
+                                                {{/each}}
+                                                </select>
+                                                
+                                            </div>
+                                        </div><!--end col-->
+
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Depertment Name<span class="text-danger">*</label>
+                                                    <input name="departmentName" id="name2" type="text"
+                                                        class="form-control" placeholder="Update Depertment Name :" required="">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Depertment Icon</label>
+                                                <input type="file" id="myFile"
+                                                    name="icon">
+                                            </div>
+                                          </div>
+
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Depertment Description<span class="text-danger">*</label>
+                                                    <input name="texData" id="name2" type="text"
+                                                        class="form-control" placeholder="Update Depertment Name :" required="">
+                                                </div>
+                                            </div>
+                                            <!--end col-->
+
+                                        </div>
+                                        <!--end row-->
+                                        <button "#form-response" type="submit" class="btn btn-primary">Depertment
+                                            Update</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-lg-12 mt-4">
+                                <div class="card border-0 p-4 rounded shadow">
+                                    <form action='/api/department-delete' method="post" id="DeleteDepartment" class="mt-4">
+                                    <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Departments <span class="text-danger">*</span></label>
+                                                <select  name="departmentId" class="form-control doctor-name select2input" required="">
+                                                    <option value="">Select</option>
+                                                    {{#each departments}}
+                                                    <option value="{{this._id}}#{{this.departmentName}}">{{this.departmentName}}</option>
+                                                {{/each}}
+                                                </select>
+                                            </div>
+                                        </div><!--end col-->
+                                        <button "#form-response" type="submit" class="btn btn-danger">Delete
+                                            Account</button>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--end col-->
+                        <hr>
+                        <h5 class="mb-0">Departments List</h5>
+                        {{#each departments}}
+                        
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-12">
+                            <div class="card features feature-primary border-0">
+                                <div class="icon text-center rounded-md">
+                                <img src="{{this.icon}}" class="avatar avatar-md-sm rounded-circle shadow"
+                                alt="" />
+                                </div>
+                                <div class="card-body p-0 mt-3">
+                                    <a href="#" class="title text-dark h5">{{this.departmentName}}</a>
+                                    <p class="text-muted mt-3">{{this.texData}}</p>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                         
+                        {{/each}}
+                    </div>
+                    <!--end row-->
+                    
+                </div>
+            </div>
+            <!--end container-->
+
+            <!-- Footer Start -->
+            <footer class="bg-white shadow py-3">
+                {{>footerAdmin}}
+            </footer>
+            <!--end footer-->
+            <!-- End -->
+        </main>
+        <!--End page-content" -->
+    </div>
+    <!-- page-wrapper -->
+
+    <!-- Offcanvas Start -->
+    <div class="offcanvas offcanvas-end bg-white shadow" tabindex="-1" id="offcanvasRight"
+        aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header p-4 border-bottom">
+            <h5 id="offcanvasRightLabel" class="mb-0">
+                <img src="../assets/images/logo-dark.png" height="24" class="light-version" alt="">
+                <img src="../assets/images/logo-light.png" height="24" class="dark-version" alt="">
+            </h5>
+            <button type="button" class="btn-close d-flex align-items-center text-dark" data-bs-dismiss="offcanvas"
+                aria-label="Close"><i class="uil uil-times fs-4"></i></button>
+        </div>
+        <div class="offcanvas-body p-4 px-md-5">
+            <div class="row">
+                <div class="col-12">
+                    <!-- Style switcher -->
+                    <div id="style-switcher">
+                        <div>
+                            <ul class="text-center list-unstyled mb-0">
+                                <li class="d-grid"><a href="javascript:void(0)" class="rtl-version t-rtl-light"
+                                        onclick="setTheme('style-rtl')"><img
+                                            src="../assets/images/layouts/light-dash-rtl.png"
+                                            class="img-fluid rounded-md shadow-md d-block" alt=""><span
+                                            class="text-muted mt-2 d-block">RTL Version</span></a></li>
+                                <li class="d-grid"><a href="javascript:void(0)" class="ltr-version t-ltr-light"
+                                        onclick="setTheme('style')"><img src="../assets/images/layouts/light-dash.png"
+                                            class="img-fluid rounded-md shadow-md d-block" alt=""><span
+                                            class="text-muted mt-2 d-block">LTR Version</span></a></li>
+                                <li class="d-grid"><a href="javascript:void(0)" class="dark-rtl-version t-rtl-dark"
+                                        onclick="setTheme('style-dark-rtl')"><img
+                                            src="../assets/images/layouts/dark-dash-rtl.png"
+                                            class="img-fluid rounded-md shadow-md d-block" alt=""><span
+                                            class="text-muted mt-2 d-block">RTL Version</span></a></li>
+                                <li class="d-grid"><a href="javascript:void(0)" class="dark-ltr-version t-ltr-dark"
+                                        onclick="setTheme('style-dark')"><img
+                                            src="../assets/images/layouts/dark-dash.png"
+                                            class="img-fluid rounded-md shadow-md d-block" alt=""><span
+                                            class="text-muted mt-2 d-block">LTR Version</span></a></li>
+                                <li class="d-grid"><a href="javascript:void(0)" class="dark-version t-dark mt-4"
+                                        onclick="setTheme('style-dark')"><img
+                                            src="../assets/images/layouts/dark-dash.png"
+                                            class="img-fluid rounded-md shadow-md d-block" alt=""><span
+                                            class="text-muted mt-2 d-block">Dark Version</span></a></li>
+                                <li class="d-grid"><a href="javascript:void(0)" class="light-version t-light mt-4"
+                                        onclick="setTheme('style')"><img src="../assets/images/layouts/light-dash.png"
+                                            class="img-fluid rounded-md shadow-md d-block" alt=""><span
+                                            class="text-muted mt-2 d-block">Light Version</span></a></li>
+                                <li class="d-grid"><a href="../landing/index.html" target="_blank" class="mt-4"><img
+                                            src="../assets/images/layouts/landing-light.png"
+                                            class="img-fluid rounded-md shadow-md d-block" alt=""><span
+                                            class="text-muted mt-2 d-block">Landing Demos</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- end Style switcher -->
+                </div>
+                <!--end col-->
+            </div>
+            <!--end row-->
+        </div>
+
+        <div class="offcanvas-footer p-4 border-top text-center">
+            <ul class="list-unstyled social-icon mb-0">
+                <li class="list-inline-item mb-0"><a href="https://1.envato.market/doctris" target="_blank"
+                        class="rounded"><i class="uil uil-shopping-cart align-middle" title="Buy Now"></i></a></li>
+                <li class="list-inline-item mb-0"><a href="https://dribbble.com/shreethemes" target="_blank"
+                        class="rounded"><i class="uil uil-dribbble align-middle" title="dribbble"></i></a></li>
+                <li class="list-inline-item mb-0"><a href="https://www.facebook.com/shreethemes" target="_blank"
+                        class="rounded"><i class="uil uil-facebook-f align-middle" title="facebook"></i></a></li>
+                <li class="list-inline-item mb-0"><a href="https://www.instagram.com/shreethemes/" target="_blank"
+                        class="rounded"><i class="uil uil-instagram align-middle" title="instagram"></i></a></li>
+                <li class="list-inline-item mb-0"><a href="https://twitter.com/shreethemes" target="_blank"
+                        class="rounded"><i class="uil uil-twitter align-middle" title="twitter"></i></a></li>
+                <li class="list-inline-item mb-0"><a href="mailto:support@shreethemes.in" class="rounded"><i
+                            class="uil uil-envelope align-middle" title="email"></i></a></li>
+                <li class="list-inline-item mb-0"><a href="https://shreethemes.in" target="_blank" class="rounded"><i
+                            class="uil uil-globe align-middle" title="website"></i></a></li>
+            </ul>
+            <!--end icon-->
+        </div>
+    </div>
+    <!-- Offcanvas End -->
+    <!-- Modal end -->
+
+    <!-- javascript -->
+    <script src="../assets/js/jquery.min.js"></script>
+    <script src="../assets/js/bootstrap.bundle.min.js"></script>
+    <!-- simplebar -->
+    <script src="../assets/js/simplebar.min.js"></script>
+    <!-- Select2 -->
+    <script src="../assets/js/select2.min.js"></script>
+    <script src="../assets/js/select2.init.js"></script>
+    <!-- Datepicker -->
+    <script src="../assets/js/flatpickr.min.js"></script>
+    <script src="../assets/js/flatpickr.init.js"></script>
+    <!-- Icons -->
+    <script src="../assets/js/feather.min.js"></script>
+    <!-- Main Js -->
+    <script src="../assets/js/app.js"></script>
+ <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script>
+         $(document).ready(function () {
+             //Common form request
+
+
+         $("#Department").submit(function (e) {
+        e.preventDefault();
+         var formData = new FormData(this);
+         $.ajax({
+            type: 'POST',
+            url:$(this).attr('action'),
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+             if(response.status ==200){   
+            setTimeout(() => {
+            swal("Good job!", ''+response.message+'', "success");
+            }, 1000);
+            }else{
+            swal('Oops...',
+                response.message,
+                'error'
+                );
+            }
+            }
+         })
+        })
+
+//Update Depertment
+         $("#UpdateDepartment").submit(function (e) {
+        e.preventDefault();
+        var formData = new FormData(this);
+         $.ajax({
+            type: 'POST',
+            url:$(this).attr('action'),
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+             if(response.status ==200){   
+            setTimeout(() => {
+            swal("Success ...!", ''+response.message+'', "success");
+            }, 1000);
+            }else{
+            swal('Oops...',
+                response.message,
+                'error'
+                );
+            }
+            }
+         })
+        })
+
+//Delete
+    $("#DeleteDepartment").submit(function (e) {
+        e.preventDefault();
+        var fromData = $(this).serialize();
+         $.ajax({
+            type: 'POST',
+            url:$(this).attr('action'),
+             data:fromData,
+            success: function (response) {
+             if(response.status ==200){   
+            setTimeout(() => {
+            swal("Good job!", ''+response.message+'', "success");
+            }, 1000);
+            }else{
+            swal("Good job!", ''+response.message+'', "success");
+            }
+            }
+         })
+        })
+         })
+        </script>
+</body>
+</html>
+ {{!-- Homeopathy --}}

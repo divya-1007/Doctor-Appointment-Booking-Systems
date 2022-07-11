@@ -1,0 +1,505 @@
+
+<!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+     {{>head}}
+    </head>
+
+    <body>
+        <!-- Loader -->
+        {{!-- <div id="preloader">
+            <div id="status">
+                <div class="spinner">
+                    <div class="double-bounce1"></div>
+                    <div class="double-bounce2"></div>
+                </div>
+            </div>
+        </div> --}}
+        <!-- Loader -->
+        
+        <!-- Navbar STart -->
+        <header id="topnav" class="defaultscroll sticky">
+          {{>navbar  data = user}}
+        </header><!--end header-->
+        <!-- Navbar End -->
+
+        <!-- Start -->
+        <section class="bg-dashboard">
+            <div class="container-fluid">
+                <div class="row">
+                     {{>sidebar data = UserData}}
+                      <div class="col-xl-9 col-lg-8 col-md-12">
+                        <div class="row">
+                         <div class="col-xl-8 col-lg-8 col-md-7 mt-4 pt-2 mt-sm-0 pt-sm-0">
+                        <h5 class="mb-0 pb-2">Schedule Timing</h5>
+                        <div class="rounded shadow mt-4">
+                            <div id="form-response">
+
+                            </div>
+                            
+                            <div class="p-4 border-bottom">
+                                <h5 class="mb-0">Personal Information :</h5>
+                            </div>
+
+                            <div class="p-4 border-bottom">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-2 col-md-4">
+                                        
+                                    <img src="{{UserData.profilePicture}}" class="avatar avatar-md-md rounded-pill shadow mx-auto d-block" alt="">
+                                    </div><!--end col-->
+
+                                    <div class="col-lg-5 col-md-8 text-center text-md-start mt-4 mt-sm-0">
+                                        <h5 class="">Upload your picture</h5>
+                                        <p class="text-muted mb-0">For best results, use an image at least 256px by 256px in either .jpg or .png format</p>
+                                    </div><!--end col-->
+
+                                    <div class="col-lg-5 col-md-12 text-lg-end text-center mt-4 mt-lg-0">                                        
+                                        <a href="#" class="btn btn-primary">Upload</a>
+                                        <a href="#" class="btn btn-soft-primary ms-2">Remove</a>
+                                    </div><!--end col-->
+                                </div><!--end row-->
+                            </div>
+                            
+                            <div class="p-4">
+                                <form method="POST" name="ajax_form" action="/api/user-update" enctype="multipart/form-data" >
+                                <input type="hidden" name="token" value="{{token}}">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label  class="form-label">profile</label>
+                                                 <input type="file" id="myFile" name="profilePicture" >
+                                            </div>
+                                        </div><!--end col-->
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">First Name <span class="text-danger">*</span></label>
+                                                <input name="firstName" id="name" type="text" class="form-control" placeholder="First Name: {{UserData.firstName}}" required="">
+                                            </div>
+                                        </div><!--end col-->
+
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Last Name <span class="text-danger">*</span></label>
+                                                <input name="lastName" id="name2" type="text" class="form-control" placeholder="Last Name : {{UserData.lastName}}" required="">
+                                            </div>
+                                        </div><!--end col-->
+                                        
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Phone no.</label>
+                                                <input name="contactNumber"  type="contactNumber" class="form-control" placeholder="Phone no.: {{UserData.contactNumber}}" required="">
+                                            </div>                                                                               
+                                        </div><!--end col-->
+
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Departments <span class="text-danger">*</span></label>
+                                                <select  name="departmentId" class="form-control doctor-name select2input" required="">
+                                                    <option value="">Select</option>
+                                                    {{#each departments}}
+                                                    <option value="{{this._id}}#{{this.departmentName}}">{{this.departmentName}}</option>
+                                                {{/each}}
+                                                </select>
+                                                
+                                            </div>
+                                        </div><!--end col-->
+                                            
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Qualification <span class="text-danger">*</span></label>
+                                                <input name="qualification" type="text" class="form-control" placeholder="Qualification: {{UserData.qualification}}" required="">
+                                            </div>                                                                               
+                                        </div><!--end col-->
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Specialties.</label>
+                                                <input name="specialties"  type="text" class="form-control" placeholder="Specialties: {{UserData.specialties}}">
+                                            </div>                                                                               
+                                        </div><!--end col-->
+
+                                        <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Gender<span class="text-danger">*</span></label>
+                                            <select class="form-control gender-name select2input" required="">
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                            </select>
+                                        </div>
+                                        </div>
+                                        <!--end col-->
+                                        <div class="col-md-6" id="entry-template">
+                                            <div class="mb-3">
+                                               <label class="form-label"> Country<span class="text-danger">*</label><br>
+                                                <select  name="country" class="form-control doctor-name select2input" onchange="getDoctorData(this.value)" required="">
+                                                    <option value="">Select</option>
+                                                    {{#each countryData}}
+                                                    {{#each this.country}}
+                                                    <option value="{{this.isoCode}}#{{this.name}}">{{this.name}}</option>
+                                                    {{/each}}
+                                                {{/each}}
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">State <span class="text-danger">*</label>
+                                                <select name="state" class="form-control doctor-name select2input state "  required="" placeholder="{{UserData.state}}">
+                                                    <option value="">Select</option>
+                                                </select>
+                                                </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">City<span class="text-danger">*</label>
+                                                <input name="city"  type="text" class="form-control" placeholder="City: {{UserData.city}}"required="">
+                                            </div>                                                                               
+                                        </div><!--end col-->
+
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Address<span class="text-danger">*</label>
+                                                <input name="address"  type="text" class="form-control" placeholder="Address : {{UserData.address}}"required="">
+                                            </div>                                                                               
+                                        </div><!--end col-->
+
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Pin Code<span class="text-danger">*</label>
+                                                <input name="pincode"  type="text" class="form-control" placeholder="Pin Code : {{UserData.pincode}}"required="">
+                                            </div>                                                                               
+                                        </div><!--end col-->
+
+                                        <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Instagram</label>
+                                            <div class="input-group flex-nowrap">
+                                            <span class="input-group-text bg-white border border-end-0 text-dark" id="insta-id"><i
+                                                data-feather="instagram" class="fea icon-sm"></i></span>
+                                            <input name="instagram" type="text" class="form-control" placeholder="Username: {{UserData.instagram}}" aria-label="Username"
+                                                aria-describedby="insta-id" />
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <!--end col-->
+
+                                        <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Facebook</label>
+                                            <div class="input-group flex-nowrap">
+                                            <span class="input-group-text bg-white border border-end-0 text-dark" id="fb-id"><i
+                                                data-feather="facebook" class="fea icon-sm"></i></span>
+                                            <input name="facebook" type="text" class="form-control" placeholder="Username: {{UserData.facebook}}" aria-label="Username"
+                                                aria-describedby="fb-id" />
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <!--end col-->
+
+                                        <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Linkedin</label>
+                                            <div class="input-group flex-nowrap">
+                                            <span class="input-group-text bg-white border border-end-0 text-dark" id="linke-pro"><i
+                                                data-feather="linkedin" class="fea icon-sm"></i></span>
+                                            <input name="linkedin" type="text" class="form-control" placeholder="Username: {{UserData.linkedin}}" aria-label="Username"
+                                                aria-describedby="linke-pro" />
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <!--end col-->
+
+                                        <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Twitter</label>
+                                            <div class="input-group flex-nowrap">
+                                            <span class="input-group-text bg-white border border-end-0 text-dark" id="twitter-id"><i
+                                                data-feather="twitter" class="fea icon-sm"></i></span>
+                                            <input name="twitter" type="text" class="form-control" placeholder="Username: {{UserData.twitter}}" aria-label="Username"
+                                                aria-describedby="twitter-id" />
+                                            </div>
+                                        </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Location Link</label>
+                                                <input name="location"  type="text" class="form-control" placeholder="location: {{UserData.location}}">
+                                            </div>                                                                               
+                                        </div><!--end col-->
+
+                                        <table class="form-table" id="customFields">
+                                         <tr valign="top">
+                                            <th scope="row"><label for="ProfessionalExperience">Professional Experience </label></th>
+                                            <td>
+                                                <input type="text" class="code" id="ProfessionalExperience" name="ProfessionalExperience[]" value="" placeholder="Professional Experience: {{UserData.ProfessionalExperience}}" required="" /> &nbsp; <br>
+                                               <input type="text" class="code" id="HospitalExperienceName" name="HospitalExperienceName[]" value="" placeholder="Hospital Experience  Name: {{UserData.HospitalExperienceName}} " required="" /> &nbsp;<br>
+                                               <input type="date" class="code" id="ExperienceDate" name="ExperienceDate[]" value="" placeholder="From Data: {{UserData.ExperienceDate}}" required=""/> &nbsp;<br>
+                                               <input type="date" class="code" id="ExperienceTODate" name="ExperienceTODate[]" value="" placeholder="To Data: {{UserData.ExperienceTODate}}" required=""/> &nbsp;
+                                                  <a href="javascript:void(0);" id="addCF">Add</a>
+                                            </td>
+                                          </tr>
+                                       </table>
+
+                                        <div class="col-md-12">
+                                            <div class="mb-3">
+                                                <label class="form-label">Your Bio Here</label>
+                                                <textarea name="bio" id="comments" rows="4" class="form-control" placeholder="Bio :{{UserData.bio}}"></textarea>
+                                            </div>
+                                        </div>
+                                    </div><!--end row-->
+                                    
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <input type="submit" id="submit" name="send" class="btn btn-primary" value="Save changes">
+                                        </div><!--end col-->
+                                    </div><!--end row-->
+                                </form><!--end form--> 
+                            </div>
+                        </div>
+                      
+
+                        <div class="rounded shadow mt-4">
+                            <div class="p-4 border-bottom">
+                                <h5 class="mb-0">Change Password :</h5>
+                            </div>
+
+                            <div class="p-4">
+                                <form action="/api/change-password" method="POST" id="change-password-form">
+                                <input type="hidden" name="token" value="{{token}}">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="mb-3">
+                                                <label class="form-label">Old password <span class="text-danger">*</label>
+                                                <input type="password" name="password" class="form-control" placeholder="Old password" required="">
+                                            </div>
+                                        </div><!--end col-->
+    
+                                        <div class="col-lg-12">
+                                            <div class="mb-3">
+                                                <label class="form-label">New password <span class="text-danger">*</label>
+                                                <input type="password" name="newpassword" class="form-control" placeholder="New password" required="">
+                                                <div id="form-response">
+
+                                             </div>
+                                            </div>
+                                        </div><!--end col-->
+    
+                                        <div class="col-lg-12">
+                                            <div class="mb-3">
+                                                <label class="form-label">Re-type New password<span class="text-danger">*</label>
+                                                <input type="password" name="confirmpassword" class="form-control" placeholder="Re-type New password" required="">
+                                            </div>
+                                        </div><!--end col-->
+    
+                                        <div class="row">
+                                        <div class="col-sm-12">
+                                            <input type="submit" id="submit" name="send" class="btn btn-primary" value="Save changes">
+                                        </div><!--end col-->
+                                    </div><!--end row-->
+                                    </div><!--end row-->
+                                </form>
+                            </div>
+                        </div>
+
+                        
+
+                        {{!-- <div class="rounded shadow mt-4">
+                            <div class="p-4 border-bottom">
+                                <h5 class="mb-0">Marketing Notifications :</h5>
+                            </div>
+
+                            <div class="p-4">
+                                <div class="d-flex justify-content-between pb-4">
+                                    <h6 class="mb-0 fw-normal">There is a sale or promotion</h6>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="customSwitch5" checked>
+                                        <label class="form-check-label" for="customSwitch5"></label>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between py-4 border-top">
+                                    <h6 class="mb-0 fw-normal">Company news</h6>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="customSwitch6">
+                                        <label class="form-check-label" for="customSwitch6"></label>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between py-4 border-top">
+                                    <h6 class="mb-0 fw-normal">Weekly jobs</h6>
+                                    <div class="form-check"> 
+                                        <input type="checkbox" class="form-check-input" id="customSwitch7">
+                                        <label class="form-check-label" for="customSwitch7"></label>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between py-4 border-top">
+                                    <h6 class="mb-0 fw-normal">Unsubscribe News</h6>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="customSwitch8" checked>
+                                        <label class="form-check-label" for="customSwitch8"></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> --}}
+
+                        <div class="rounded shadow mt-4">
+                            <div class="p-4 border-bottom">
+                                <h5 class="mb-0 text-danger">Delete Account :</h5>
+                            </div>
+
+                            <div class="p-4">
+                                <h6 class="mb-0 fw-normal">Do you want to delete the account? Please press below "Delete" button</h6>
+                                <div class="mt-4">
+                                    <form  id="delete-account" action='/api/delete-account/{{user._id}}' method="Get">
+                                    <input type="hidden" name="token" value="{{token}}">
+                                     <input type="hidden" type="text" name="_id" value="{{user._id}}">
+                                    <button  type="submit" class="btn btn-danger">Delete Account</button>
+                                    </form>
+                                    
+                                </div><!--end col-->
+                            </div>
+                        </div>
+                    </div><!--end col-->
+                        </div><!--end row-->
+                    </div><!--end col-->
+                </div><!--end row-->
+            </div><!--end container-->
+        </section><!--end section-->
+
+
+
+
+       
+        <!-- End -->
+
+        <!-- Footer Start -->
+        <footer class="bg-footer py-4">
+           {{>footer}}
+        </footer><!--end footer-->
+        <!-- End -->
+
+        <!-- Back to top -->
+        <a href="#" onclick="topFunction()" id="back-to-top" class="btn btn-icon btn-pills btn-primary back-to-top"><i data-feather="arrow-up" class="icons"></i></a>
+        <!-- Back to top -->
+
+        <!-- Offcanvas Start -->
+        <div class="offcanvas bg-white offcanvas-top" tabindex="-1" id="offcanvasTop">
+            <div class="offcanvas-body d-flex align-items-center align-items-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="text-center">
+                                <h4>Search now.....</h4>
+                                <div class="subcribe-form mt-4">
+                                    <form>
+                                        <div class="mb-0">
+                                            <input type="text" id="help" name="name" class="border bg-white rounded-pill" required="" placeholder="Search">
+                                            <button type="submit" class="btn btn-pills btn-primary">Search</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div><!--end col-->
+                    </div><!--end row-->
+                </div><!--end container-->
+            </div>
+        </div>
+        <!-- Offcanvas End -->
+
+        <!-- Offcanvas Start -->
+        <div class="offcanvas offcanvas-end bg-white shadow" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+            <div class="offcanvas-header p-4 border-bottom">
+                <h5 id="offcanvasRightLabel" class="mb-0">
+                    <img src="../assets/images/logo-dark.png" height="24" class="light-version" alt="">
+                    <img src="../assets/images/logo-light.png" height="24" class="dark-version" alt="">
+                </h5>
+                <button type="button" class="btn-close d-flex align-items-center text-dark" data-bs-dismiss="offcanvas" aria-label="Close"><i class="uil uil-times fs-4"></i></button>
+            </div>
+            <div class="offcanvas-body p-4 px-md-5">
+                <div class="row">
+                    <div class="col-12">
+                        <!-- Style switcher -->
+                        <div id="style-switcher">
+                            <div>
+                                <ul class="text-center list-unstyled mb-0">
+                                    <li class="d-grid"><a href="javascript:void(0)" class="rtl-version t-rtl-light" onclick="setTheme('style-rtl')"><img src="../assets/images/layouts/landing-light-rtl.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">RTL Version</span></a></li>
+                                    <li class="d-grid"><a href="javascript:void(0)" class="ltr-version t-ltr-light" onclick="setTheme('style')"><img src="../assets/images/layouts/landing-light.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">LTR Version</span></a></li>
+                                    <li class="d-grid"><a href="javascript:void(0)" class="dark-rtl-version t-rtl-dark" onclick="setTheme('style-dark-rtl')"><img src="../assets/images/layouts/landing-dark-rtl.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">RTL Version</span></a></li>
+                                    <li class="d-grid"><a href="javascript:void(0)" class="dark-ltr-version t-ltr-dark" onclick="setTheme('style-dark')"><img src="../assets/images/layouts/landing-dark.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">LTR Version</span></a></li>
+                                    <li class="d-grid"><a href="javascript:void(0)" class="dark-version t-dark mt-4" onclick="setTheme('style-dark')"><img src="../assets/images/layouts/landing-dark.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Dark Version</span></a></li>
+                                    <li class="d-grid"><a href="javascript:void(0)" class="light-version t-light mt-4" onclick="setTheme('style')"><img src="../assets/images/layouts/landing-light.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Light Version</span></a></li>
+                                    <li class="d-grid"><a href="../admin/index.html" target="_blank" class="mt-4"><img src="../assets/images/layouts/light-dash.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Admin Dashboard</span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- end Style switcher -->
+                    </div><!--end col-->
+                </div><!--end row-->
+            </div>
+
+            <div class="offcanvas-footer p-4 border-top text-center">
+                <ul class="list-unstyled social-icon mb-0">
+                    <li class="list-inline-item mb-0"><a href="https://1.envato.market/doctris" target="_blank" class="rounded"><i class="uil uil-shopping-cart align-middle" title="Buy Now"></i></a></li>
+                    <li class="list-inline-item mb-0"><a href="https://dribbble.com/shreethemes" target="_blank" class="rounded"><i class="uil uil-dribbble align-middle" title="dribbble"></i></a></li>
+                    <li class="list-inline-item mb-0"><a href="https://www.facebook.com/shreethemes" target="_blank" class="rounded"><i class="uil uil-facebook-f align-middle" title="facebook"></i></a></li>
+                    <li class="list-inline-item mb-0"><a href="https://www.instagram.com/shreethemes/" target="_blank" class="rounded"><i class="uil uil-instagram align-middle" title="instagram"></i></a></li>
+                    <li class="list-inline-item mb-0"><a href="https://twitter.com/shreethemes" target="_blank" class="rounded"><i class="uil uil-twitter align-middle" title="twitter"></i></a></li>
+                    <li class="list-inline-item mb-0"><a href="mailto:support@shreethemes.in" class="rounded"><i class="uil uil-envelope align-middle" title="email"></i></a></li>
+                    <li class="list-inline-item mb-0"><a href="https://shreethemes.in" target="_blank" class="rounded"><i class="uil uil-globe align-middle" title="website"></i></a></li>
+                </ul><!--end icon-->
+            </div>
+        </div>
+        <!-- Offcanvas End -->
+        
+        <!-- javascript -->
+       {{>javascript}}
+
+       <script>
+
+         $(document).ready(function () {
+             //Common form request
+           
+
+
+        $("#addCF").click(function(){
+		$("#customFields").append('<tr valign="top"><th scope="row"><label for="ProfessionalExperience">Professional Experience</label></th><td><input type="text" class="code" id="ProfessionalExperience" name="ProfessionalExperience[]" value="" placeholder="ProfessionalExperience" required="" /> &nbsp;<br> <input type="text" class="code" id="HospitalExperienceName" name="HospitalExperienceName[]" value="" placeholder="Hospital Experience Name" required="" /> &nbsp;<br><input type="text" class="code" id="ExperienceDate" name="ExperienceDate[]" value=""  placeholder="Type From Date" required=""/> &nbsp;<br><input type="text" class="code" id="ExperienceTODate" name="ExperienceTODate[]" value="" placeholder=" Type TO Date" required="" /> &nbsp; <a href="javascript:void(0);" class="remCF">Remove</a></td></tr>');
+		 console.log("HLLO")
+        $(".remCF").on('click',function(){
+			$(this).parent().parent().remove();
+
+		});
+	   });
+            });
+
+    
+        function getDoctorData(did) {
+            $.ajax({
+                type: "GET",
+                url: '/api/statelist/' + did,
+                success: function (response) {
+                    var list = '';
+                    if (response.length > 0) {
+                        list += '<option value="">Select</option>';
+                        $.each(response, function (index, value) {
+                        let stateData = value.state
+                        var doctor_id_name =  stateData.name 
+                        $(".state").append(list += '<option  value="' + doctor_id_name + '">' + stateData.name + " " +  '</option >');
+                           
+                        });
+                    } else {
+                        list += '<option value="">State not Found!</option>';
+                    }
+                    $(".state").html(list);
+                }
+            });
+            } 
+
+var source = $("#entry-template").html();
+var template = Handlebars.compile(source);
+var output = template(country);
+$("body").append(output);   
+        </script>
+    </body>
+
+</html>
+

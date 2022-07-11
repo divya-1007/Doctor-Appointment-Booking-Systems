@@ -1,0 +1,925 @@
+//
+// components.scss
+//
+
+//Buttons
+@each $name, $value in $colors {
+    .btn-#{$name} {
+        background-color: #{$value} !important;
+        border: 1px solid #{$value} !important;
+        color: $white !important;
+        box-shadow: 0 3px 5px 0 rgba($value, 0.3);
+        &:hover,
+        &:focus,
+        &:active,
+        &.active,
+        &.focus {
+            background-color: darken($value, 5%) !important;
+            border-color: darken($value, 5%) !important;
+            color: $white !important;
+        }
+    }
+
+    .btn-soft-#{$name} {
+        background-color: rgba($value, 0.1) !important;
+        border: 1px solid rgba($value, 0.1) !important;
+        color: #{$value} !important;
+        box-shadow: 0 3px 5px 0 rgba($value, 0.3);
+        &:hover,
+        &:focus,
+        &:active,
+        &.active,
+        &.focus {
+            background-color: #{$value} !important;
+            border-color: #{$value} !important;
+            color: $white !important;
+        }
+    }
+
+    .btn-outline-#{$name} {
+        border: 1px solid #{$value};
+        color: #{$value};
+        background-color: transparent;
+        &:hover,
+        &:focus,
+        &:active,
+        &.active,
+        &.focus,
+        &:not(:disabled):not(.disabled):active {
+            background-color: #{$value};
+            border-color: #{$value};
+            color: $white !important;
+            box-shadow: 0 3px 5px 0 rgba($value, 0.3);
+        }
+    }
+}
+.btn {
+    padding: 8px 20px;
+    outline: none;
+    text-decoration: none;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    transition: all 0.3s;
+    border-radius: 5px;
+    &:focus {
+        box-shadow: none !important;
+    }
+    &.btn-sm {
+        padding: 7px 16px;
+        font-size: 10px;
+    }
+    &.btn-lg {
+        padding: 14px 30px;
+        font-size: 16px;
+    }
+    &.btn-pills {
+        border-radius: 30px;
+    }
+    &.btn-light {
+        color: $dark !important;
+        border: 1px solid $gray-300 !important;
+        &:hover,
+        &:focus,
+        &:active,
+        &.active,
+        &.focus {
+            background-color: lighten($light, 5%) !important;
+            color: $dark !important;
+        }
+    }
+    &.btn-soft-light {
+        color: rgba($dark, 0.5) !important;
+        border: 1px solid rgba($light, 0.1) !important;
+        background-color: rgba($light, 0.1);
+        box-shadow: 0 3px 5px 0 rgba($light, 0.2);
+        &:hover,
+        &:focus,
+        &:active,
+        &.active,
+        &.focus {
+            color: $dark !important;
+        }
+    }
+
+    &.btn-soft-light-alt {
+        background-color: rgba($light, 0.1);
+        color: $light;
+        border: 1px solid rgba($light, 0.1);
+        box-shadow: 0 3px 5px 0 rgba($light, 0.2);
+        &:hover,
+        &:focus,
+        &:active,
+        &.active,
+        &.focus {
+            background: $white;
+            color: $dark !important;
+        }
+    }
+    &.btn-outline-light {
+        border: 1px solid $gray-300 !important;
+        color: $dark !important;
+        background-color: transparent;
+        &:hover,
+        &:focus,
+        &:active,
+        &.active,
+        &.focus {
+            background-color: $light !important;
+        }
+    }
+    &.btn-outline-light-alt {
+        border: 1px solid $gray-300 !important;
+        color: $white !important;
+        background-color: transparent;
+        &:hover,
+        &:focus,
+        &:active,
+        &.active,
+        &.focus {
+            background-color: $light !important;
+            color: $dark !important;
+        }
+    }
+    &.btn-icon {
+        height: 36px;
+        width: 36px;
+        line-height: 34px;
+        padding: 0;
+        .icons {
+            height: 16px;
+            width: 16px;
+            font-size: 16px;
+        }
+        &.btn-lg {
+            height: 48px;
+            width: 48px;
+            line-height: 46px;
+            .icons {
+                height: 20px;
+                width: 20px;
+                font-size: 20px;
+            }
+        }
+        &.btn-sm {
+            height: 30px;
+            width: 30px;
+            line-height: 28px;
+        }
+    }
+}
+
+button:not(:disabled) {
+    outline: none;
+}
+
+//Shadow
+.shadow {
+    box-shadow: $shadow !important;
+}
+.shadow-lg {
+    box-shadow: $shadow-lg !important;
+}
+.shadow-md {
+    box-shadow: $shadow-md !important;
+}
+
+//Badges
+@each $name, $value in $colors {
+    .badge-#{$name} {
+        background-color: #{$value} !important;
+        color: $white !important;
+    }
+
+    .badge-outline-#{$name} {
+        background-color: transparent !important;
+        color: #{$value} !important;
+        border: 1px solid #{$value} !important;
+    }
+    .badge-soft-#{$name} {
+        background-color: rgba($value, 0.1) !important;
+        border: 1px solid rgba($value, 0.1) !important;
+        color: #{$value} !important;
+    }
+}
+
+.badge {
+    display: inline-block;
+    letter-spacing: 0.5px;
+    padding: 4px 8px;
+    font-weight: 600;
+    line-height: 1;
+    text-align: center;
+    &.badge-light {
+        color: $dark !important;
+        background-color: $light !important;
+    }
+
+    &.badge-outline-light {
+        color: $dark !important;
+        border: 1px solid lighten($light, 5%) !important;
+        background-color: transparent !important;
+    }
+    &.badge-pill {
+        border-radius: 12px;
+    }
+    &:focus,
+    &.focus {
+        box-shadow: none !important;
+    }
+}
+
+//Dropdowns
+@each $name, $value in $colors {
+    .dropdown-#{$name} {
+        .dropdown-menu {
+            .dropdown-item {
+                &:hover,
+                &.active,
+                &:active,
+                &.focus,
+                &:focus {
+                    background-color: transparent;
+                    color: #{$value} !important;
+                }
+            }
+        }
+    }
+}
+.dropdown-menu {
+    margin-top: 10px;
+    border: 0;
+    border-radius: 5px;
+    box-shadow: $shadow;
+    top: 2px !important;
+    .dropdown-item {
+        padding: 5px 20px;
+        clear: both;
+        white-space: nowrap;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        font-weight: 600;
+    }
+}
+.dropdown {
+    .dropdown-toggle {
+        &:after {
+            display: none !important;
+        }
+    }
+}
+
+//Alert
+@each $name, $value in $colors {
+    .alert-#{$name} {
+        background-color: rgba($value, 0.9);
+        color: $white;
+        border-color: $value;
+        .alert-link {
+            color: darken($value, 30%);
+        }
+    }
+    .alert-outline-#{$name} {
+        background-color: transparent;
+        color: $value;
+        border-color: $value;
+    }
+}
+.alert {
+    padding: 8px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    &.alert-light {
+        background-color: lighten($light, 3%);
+        color: $dark;
+        border-color: $gray-200;
+    }
+    &.alert-dismissible {
+        padding-right: 30px;
+        .close {
+            top: -2px;
+            right: -10px;
+            font-size: 16px !important;
+        }
+    }
+    &.alert-pills {
+        border-radius: 30px;
+        display: inline-block;
+        .content {
+            font-weight: 600;
+        }
+    }
+}
+
+.breadcrumb {
+    letter-spacing: 0.5px;
+    padding: 8px 24px;
+    display: block;
+    .breadcrumb-item {
+        text-transform: uppercase;
+        font-size: 12px;
+        font-weight: 500;
+        padding-left: 0;
+        display: inline-block;
+        a {
+            color: $dark;
+            &:hover {
+                color: $primary;
+            }
+        }
+        &.active {
+            color: $primary;
+        }
+        &:before {
+            content: "";
+        }
+        &:after {
+            content: "\F0142" !important;
+            color: $dark; 
+            font-family: 'Material Design Icons';
+            padding-left: 5px;
+        }     
+        &:last-child {
+            &:after {
+                display: none;
+            }
+        } 
+    }
+}
+
+//Pagination
+.pagination {
+    .page-item {
+        &:first-child .page-link {
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+        } 
+        &:last-child .page-link {
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+        .page-link {
+            color: $dark;
+            border: 1px solid $gray-300;
+            padding: 8px 16px;
+            font-size: 14px;
+            &:focus {
+                box-shadow: none;
+            }
+            &:hover {
+                color: $white;
+                background: rgba($primary, 0.9);
+                border-color: rgba($primary, 0.9);
+            }
+        }
+        &.active {
+            .page-link {
+                color: $white;
+                background: $primary !important;
+                border-color: $primary;
+                cursor: not-allowed;
+            }
+        }
+    }
+}
+
+//Loader
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: linear-gradient(45deg, $white, $white);
+    z-index: 9999999;
+    #status {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        .spinner {
+            width: 40px;
+            height: 40px;
+            position: relative;
+            margin: 100px auto;
+            .double-bounce1,
+            .double-bounce2 {
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                background-color: $primary;
+                opacity: 0.6;
+                position: absolute;
+                top: 0;
+                left: 0;
+                animation: sk-bounce 2s infinite ease-in-out;
+            }
+            .double-bounce2 {
+                animation-delay: -1s;
+            }
+        }
+    }
+}
+
+@keyframes sk-bounce {
+    0%,
+    100% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(1);
+    }
+}
+
+//Avatar
+.avatar {
+    &.avatar-ex-sm {
+        height: 30px;
+        width: 30px;
+    }
+    &.avatar-ex-small {
+        height: 36px;
+        width: 36px;
+    }
+    &.avatar-md-sm {
+        height: 45px;
+        width: 45px;
+    }
+    &.avatar-small {
+        height: 65px;
+        width: 65px;
+    }
+    &.avatar-md-md {
+        height: 80px;
+        width: 80px;
+    }
+    &.avatar-medium {
+        height: 110px;
+        width: 110px;
+    }
+    &.avatar-large {
+        height: 140px;
+        width: 140px;
+    }
+    &.avatar-ex-large {
+        height: 180px;
+        width: 180px;
+    }
+    &.avatar-client {
+        max-height: 25px;
+    }
+}
+
+//Accordion
+.accordion {
+    .accordion-item {
+        overflow: hidden;
+        background: transparent;
+        .accordion-button {
+            font-weight: 600;
+            text-align: left;
+            box-shadow: none;
+            padding: 1rem 2.5rem 1rem 1.25rem;
+            &:focus {
+                box-shadow: none;
+            }
+            &:before {
+                content: '\F0143';
+                display: block;
+                font-family: 'Material Design Icons';
+                font-size: 16px;
+                color: $primary;
+                position: absolute;
+                right: 20px;
+                top: 50%;
+                transform: translateY(-50%);
+                transition: all 0.5s ease;
+            }
+            &.collapsed {
+                background-color: $white;
+                color: $dark !important;
+                transition: all 0.5s;
+                &:before {
+                    top: 15px;
+                    transform: rotate(180deg);
+                    color: $dark !important;
+                }
+            }
+            &:after {
+                display: none;
+            }
+        }
+    }
+}
+
+//Nav
+.nav-pills {
+    margin-bottom: 15px;
+    background: darken($light, 1%);
+    .nav-link {
+        color: $gray-700 !important;
+        padding: 5px;
+        transition: all 0.5s ease;
+        &.nav-link-alt {
+            &.active {
+                background: $dark;
+                color: $white !important;
+            }
+        }
+        &.active {
+            background: $primary;
+            color: $white !important;
+            .tab-para {
+                color: rgba($white, 0.65) !important;
+            }
+        }
+    }
+    a {
+        .title {
+            font-size: 17px !important;
+        }
+    }
+}
+.nav-tabs {
+    .nav-item.show .nav-link,
+    .nav-link.active {
+        color: $primary !important;
+        border-color: transparent transparent $primary !important;
+    }
+    .nav-link:focus,
+    .nav-link:hover {
+        border-color: transparent;
+    }
+}
+
+//Processbar
+.progress-box {
+    .title {
+        font-size: 15px;
+    }
+    .progress {
+        height: 8px;
+        overflow: visible;
+        .progress-bar {
+            border-radius: 5px;
+            overflow: visible !important;
+        }
+        .progress-value {
+            position: absolute;
+            top: -28px;
+            right: -15px;
+            font-size: 14px;
+        }
+    }
+}
+
+//blockquote
+.blockquote {
+    border-left: 3px solid $gray-300;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+//Forms
+.form-label {
+    font-weight: 500;
+}
+
+.form-control {
+    border: 1px solid $gray-200;
+    font-size: 14px;
+    line-height: 26px;
+    background-color: $white;
+    &:focus {
+        border-color: $primary;
+        box-shadow: none;
+    }
+    &[readonly] {
+        background-color: $white;
+    }
+    &:disabled {
+        background-color: $gray-200;
+    }
+    &::placeholder{
+        color: $dark;
+    }
+}
+.form-check-input {
+    &:focus {
+        border-color: $primary;
+        box-shadow: none;
+    }
+}
+
+//Select 2
+.select2-container {
+    display: block !important;
+    width: 100% !important;
+}
+.select2-container--default {
+    .select2-selection--single {
+        background-color: $white !important;
+        border: 1px solid $gray-300 !important;
+        border-radius: 5px !important;
+        height: 40px !important;
+        text-align: left;
+        .select2-selection__rendered {
+            color: $dark !important;
+            line-height: 40px !important;
+            font-size: 13px !important;
+        }
+        .select2-selection__arrow b {
+            border-color: $dark transparent transparent transparent;
+            top: 20px;
+        }
+    }
+    &.select2-container--open {
+        .select2-selection--single {
+            .select2-selection__arrow b {
+                border-color: transparent transparent $dark transparent;
+            }
+        }
+    }
+    .select2-search--dropdown {
+        .select2-search__field {
+            border: 1px solid $gray-300;
+            border-radius: 5px;
+            &:focus {
+                outline: none;
+                border-color: $primary !important;
+            }
+        }
+    }
+    .select2-results__option--selected {
+        background-color: $primary !important;
+        color: $white !important;
+    }
+    .select2-results__option--highlighted {
+        &.select2-results__option--selectable {
+            background-color: $primary !important;
+            color: $white !important;
+        }
+    }
+}
+.select2-selection {
+    &:focus,
+    &:active {
+        outline: none;
+        border-color: $primary !important;
+    }
+}
+
+.select2-results__option {
+    color: $muted;
+}
+
+.select2-dropdown {
+    border: 1px solid $gray-300 !important;
+    border-radius: 5px !important;
+}
+
+
+//Apexcharts
+.apexcharts-tooltip {
+    background: $white !important;
+    color: $dark;
+    border-color: $gray-200 !important;
+}
+
+.apexcharts-gridlines-horizontal,
+.apexcharts-gridlines-vertical,
+.apexcharts-grid,
+.apexcharts-gridline,
+.apexcharts-xaxis-tick,
+.apexcharts-xaxis line,
+.apexcharts-gridline line,
+.apexcharts-radar-series line,
+.apexcharts-area-series .apexcharts-series-markers .apexcharts-marker.no-pointer-events, 
+.apexcharts-line-series .apexcharts-series-markers .apexcharts-marker.no-pointer-events, 
+.apexcharts-radar-series path, 
+.apexcharts-radar-series polygon {
+    pointer-events: none;
+    stroke: $gray-200;
+}
+.apexcharts-tooltip-title{
+    background: $white !important;
+    color: $dark;
+    border-color: $gray-200 !important;
+}
+
+.apexcharts-data-labels, .apexcharts-datalabels text, .apexcharts-xaxis text, .apexcharts-yaxis text {
+    fill: $dark !important;
+}
+
+.apexcharts-legend-text {
+    color: $dark !important;
+    font-family: $font-family-base !important;
+}
+
+//Map
+.map {
+    line-height: 0;
+    iframe {
+        width: 100%;
+        height: 400px;
+    }
+}
+
+//Subscribe form
+.subcribe-form {
+    .btn {
+        padding: 10px 20px;
+    }
+    input {
+        padding: 12px 20px;
+        width: 100%;
+        color: $dark !important;
+        border: none;
+        outline: none !important;
+        padding-right: 160px;
+        padding-left: 20px;
+        background-color: rgba($white, 0.8);
+    }
+    button {
+        position: absolute;
+        top: 1.5px;
+        right: 2px;
+        outline: none !important;
+    }
+    form {
+        position: relative;
+        max-width: 600px;
+        margin: 0px auto;
+    }
+}
+
+//Table
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    .table {
+        td,
+        th {
+            vertical-align: middle;
+            border-color: darken($gray-100, 2%);
+        }
+    }
+    .table-center {
+        th {
+            vertical-align: middle !important;
+            cursor: pointer;
+        }
+        &.invoice-tb {
+            th,
+            td {
+                text-align: end;
+            }
+        }
+    }
+    .table-padding {
+        tr {
+            td {
+                padding-top: 20px;
+                padding-bottom: 20px;
+            }
+        }
+    }
+}
+
+//Social icons
+.social-icon {
+    li {
+        a {
+            color: $dark;
+            border: 1px solid $dark;
+            display: inline-block;
+            height: 32px;
+            width: 32px;
+            line-height: 30px;
+            text-align: center;
+            transition: all 0.4s ease;
+            overflow: hidden;
+            position: relative;
+            .fea-social {
+                stroke-width: 2;
+            }
+            &:hover {
+                background-color: $primary !important;
+                border-color: $primary !important;
+                color: $white !important;
+                .fea-social {
+                    fill: $primary;
+                }
+            }
+        }
+    }
+    &.footer-social {
+        li {
+            a {
+                border: none;
+                color: $gray-500;
+                background-color: lighten($black, 13%);
+            }
+        }
+    }
+    &.social {
+        li {
+            a {
+                color: $gray-500;
+                border-color: $gray-500;
+            }
+        }
+    }
+}
+
+//home-shape-arrow
+.home-shape-arrow {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -24px;
+    z-index: 1;
+    text-align: center;
+}
+
+//back to top
+.back-to-top {
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    z-index: 99;
+    display: none;
+}
+
+//back-to-home
+.back-to-home {
+    position: fixed;
+    top: 4%;
+    right: 2%;
+    z-index: 1;
+}
+
+//Sticky Sidebar
+.sticky-bar {
+    position: sticky;
+    top: 80px;
+}
+
+//Feather Icon
+.fea {
+    stroke-width: 1.8;
+    &.icon-sm {
+        height: 16px;
+        width: 16px;
+    }
+    &.icon-ex-md {
+        height: 20px;
+        width: 20px;
+    }
+    &.icon-m-md {
+        height: 28px;
+        width: 28px;
+    }
+    &.icon-md {
+        height: 35px;
+        width: 35px;
+    }
+    &.icon-lg {
+        height: 42px;
+        width: 42px;
+    }
+    &.icon-ex-lg {
+        height: 52px;
+        width: 52px;
+    }
+}
+
+// Iconscote unicons
+[class^="uil-"],
+[class*=" uil-"] {
+    &:before {
+        margin: 0;
+    }
+}
+
+.uim-svg {
+    vertical-align: 0 !important;
+}
+
+@media (max-width: 768px) {
+    .display-1 {
+        font-size: 56px !important;
+    }
+    .display-2 {
+        font-size: 50px !important;
+    }
+    .display-3 {
+        font-size: 42px !important;
+    }
+    .display-4 {
+        font-size: 36px !important;
+    }
+}

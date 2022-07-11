@@ -1,0 +1,409 @@
+<html lang="en">
+
+<head>
+  {{>head}}
+</head>
+
+<body>
+  <!-- Loader -->
+  {{!-- <div id="preloader">
+      <div id="status">
+        <div class="spinner">
+          <div class="double-bounce1"></div>
+          <div class="double-bounce2"></div>
+        </div>
+      </div>
+    </div> --}}
+  <!-- Loader -->
+
+  <div class="page-wrapper doctris-theme toggled">
+    <nav id="sidebar" class="sidebar-wrapper">
+      {{>navAdmin}}
+    </nav>
+    <!-- sidebar-wrapper  -->
+
+    <!-- Start Page Content -->
+    <main class="page-content bg-light">
+       {{>sideBarAdmin data = user}}
+
+      <div class="container-fluid">
+        <div class="layout-specing">
+          <div class="d-md-flex justify-content-between">
+            <h5 class="mb-0">Patient Profile</h5>
+              <div id="form-response"></div>
+            <nav aria-label="breadcrumb" class="d-inline-block mt-4 mt-sm-0">
+              <ul class="breadcrumb bg-transparent rounded mb-0 p-0">
+                <li class="breadcrumb-item"><a href="/admin">Doctris</a></li>
+                <li class="breadcrumb-item"><a href="/AdminAppointmentList">Patients</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Profile</li>
+              </ul>
+            </nav>
+          </div>
+            
+          <div class="row">
+            <div class="col-lg-3 col-md-5 mt-4">
+              <div class="bg-white rounded shadow overflow-hidden">
+                <div class="card border-0">
+                  <img src="../assets/images/bg/bg-profile.jpg" class="img-fluid" alt="" />
+                </div>
+                     
+                <div class="text-center avatar-profile margin-nagative mt-n5 position-relative pb-4 border-bottom">
+                  <img src = "/{{Admin.profilePicture}}" class="avatar avatar-md-md rounded-pill shadow mx-auto d-block" alt=""/>
+                  <h5 class="mt-3 mb-1">{{responseData.firstName}} {{Admin.lastName}}</h5>
+                  <p class="text-muted mb-0">{{Admin.age}} Years old</p>
+                </div>
+
+                <div class="list-unstyled p-4">
+                  <div class="progress-box mb-4">
+                    <h6 class="title">Complete your profile</h6>
+                    <div class="progress">
+                      <div class="progress-bar position-relative bg-primary" style="width:89%;">
+                        <div class="progress-value d-block text-muted h6">89%</div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--end process box-->
+
+                  <div class="d-flex align-items-center mt-2">
+                    <i class="uil uil-user align-text-bottom text-primary h5 mb-0 me-2"></i>
+                    <h6 class="mb-0">Gender</h6>
+                    <p class="text-muted mb-0 ms-2">{{Admin.gender}}</p>
+                  </div>
+
+                   <div class="d-flex align-items-center mt-2">
+                    <i class="uil uil-envelope align-text-bottom text-primary h5 mb-0 me-2"></i>
+                    <h6 class="mb-0">Age</h6>
+                    <p class="text-muted mb-0 ms-2">{{Admin.age}}</p>
+                  </div>
+
+                  <div class="d-flex align-items-center mt-2">
+                    <i class="uil uil-book-open align-text-bottom text-primary h5 mb-0 me-2"></i>
+                    <h6 class="mb-0">Phone No.</h6>
+                    <p class="text-muted mb-0 ms-2">{{Admin.contactNumber}}</p>
+                  </div>
+
+                  <div class="d-flex align-items-center mt-2">
+                   <i class="uil uil-envelope align-text-bottom text-primary h5 mb-0 me-2"></i>
+                    <h6 class="mb-0">Address</h6>
+                    <p class="text-muted mb-0 ms-2">{{Admin.address}}</p>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+            <!--end col-->
+
+            <div class="col-lg-9 col-md-7 mt-4">
+              <div class="card border-0 shadow overflow-hidden">
+                <ul
+                  class="nav nav-pills nav-justified flex-column flex-sm-row rounded-0 shadow overflow-hidden bg-white mb-0"
+                  id="pills-tab" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link rounded-0 active" id="overview-tab" data-bs-toggle="pill" href="#pills-overview"
+                      role="tab" aria-controls="pills-overview" aria-selected="false">
+                      <div class="text-center pt-1 pb-1">
+                        <h4 class="title fw-normal mb-0">Profile Settings</h4>
+                      </div>
+                    </a>
+                    <!--end nav link-->
+                  </li>
+                  <!--end nav item-->
+                </ul>
+
+                <div class="tab-content p-4" id="pills-tabContent">
+                  <div class="tab-pane fade show active" id="pills-overview" role="tabpanel"
+                    aria-labelledby="overview-tab">
+                    <h5 class="mb-0">Introduction:</h5>
+
+                    <p class="text-muted mt-4 mb-0">{{Admin.bio}}</p>
+
+                    <div class="row">
+                    <h5 class="mb-0">Personal Information :</h5>
+                    <div class="row align-items-center mt-4">
+                      <div class="col-lg-2 col-md-4">
+                        <img  src = "/{{Admin.profilePicture}}"
+                          class="avatar avatar-md-md rounded-pill shadow mx-auto d-block" alt="" />
+                      </div>
+                      <!--end col-->
+
+                      <div class="col-lg-5 col-md-8 text-center text-md-start mt-4 mt-sm-0">
+                        <h6 class="">Upload your picture</h6>
+                        <p class="text-muted mb-0">For best results, use an
+                          image at least 256px by 256px in either .jpg or .png
+                          format</p>
+                      </div>
+                      <!--end col-->
+
+                      <div class="col-lg-5 col-md-12 text-lg-right text-center mt-4 mt-lg-0">
+                        <a href="#" class="btn btn-primary">Upload</a>
+                        <a href="#" class="btn btn-soft-primary ms-2">Remove</a>
+                      </div>
+                      <!--end col-->
+                    </div>
+                    <!--end row-->
+                  
+                    <form method="POST" id="delete-account-data" action="/api/admin-profile-update" enctype="multipart/form-data" class="mt-4">
+                      <input type="hidden" name="token" value="{{token}}">
+                      <div class="row">
+
+                        <div class="col-md-6">
+                          <div class="mb-3">
+                              <label  class="form-label">profile</label>
+                                <input type="file" id="myFile" name="profilePicture" required="">
+                          </div>
+                      </div><!--end col-->
+
+                        <div class="col-lg-6">
+                          <div class="mb-3">
+                            <label class="form-label">First Name<span class="text-danger">*</span></label>
+                            <input name="firstName" id="name" type="text" class="form-control" placeholder="First Name : {{Admin.firstName}}" required=""/>
+                          </div>
+                        </div>
+                        <!--end col-->
+                        <div class="col-lg-6">
+                          <div class="mb-3">
+                            <label class="form-label"> Last Name<span class="text-danger">*</span></label>
+                            <input name="lastName" id="name2" type="text" class="form-control" placeholder="First Name : {{Admin.lastName}}" required=""/>
+                          </div>
+                        </div>
+                        <!--end col-->
+
+                        <div class="col-lg-6">
+                          <div class="mb-3">
+                            <label class="form-label">Your Age<span class="text-danger">*</span></label>
+                            <input name="age" id="email3" type="text" class="form-control" placeholder="Your Age : {{Admin.age}}" required=""/>
+                          </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                          <div class="mb-3">
+                            <label class="form-label">Your Full Address<span class="text-danger">*</span></label>
+                        <input name="address" id="address" type="text" class="form-control" placeholder="Your Address : {{Admin.address}}" required=""/>
+                          </div>
+                        </div>
+
+                         <div class="col-md-6">
+                          <div class="mb-3">
+                              <label class="form-label">Gender<span class="text-danger">*</span></label>
+                                <select name="gender" class="form-control doctor-name select2input" required="">
+                                  <option >Select</option>
+                                  <option value="Male">Male</option>
+                                  <option value="Female">Female</option>
+                                  <option value="Children">Children</option>
+                              </select>
+                          </div>
+                      </div>
+                        <!--end col-->
+
+                        <div class="col-lg-6">
+                          <div class="mb-3">
+                            <label class="form-label">Phone no.<span class="text-danger">*</span></label>
+                            <input name="contactNumber" id="number" type="text" class="form-control"
+                              placeholder="Phone no. : {{Admin.contactNumber}}" required=""/>
+                          </div>
+                        </div>
+                        <!--end col-->
+
+                        <div class="col-md-12">
+                          <div class="mb-3">
+                            <label class="form-label">Your Bio Here</label>
+                            <textarea name="bio" id="comments" rows="4" class="form-control"
+                              placeholder="Bio :{{Admin.bio}}"></textarea>
+                          </div>
+                        </div>
+                      </div>
+                      <!--end row-->
+
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <input  type="hidden" type="text" name="_id" value="{{user._id}}">
+                          <input type="submit" id="submit" name="send" class="btn btn-primary" value="Save changes">
+                        </div>
+                        <!--end col-->
+                      </div>
+                      <!--end row-->
+                    </form>
+                    <!--end form-->
+
+                    <div class="mt-4 pt-2">
+                      <h5 class="mb-0">Change Password :</h5>
+
+                      <form action="/api/admin-patient-password-change" method="POST" id="change-password-form" class="mt-4">
+                      <input type="hidden" name="token" value="{{token}}">
+                        <div class="row">
+                          <div class="col-lg-12">
+                            <div class="mb-3">
+                              <label class="form-label">Old password <span class="text-danger">*</span></label>
+                              <input type="password" name="password" class="form-control" placeholder="Old password" required="" />
+                            </div>
+                          </div>
+                          <!--end col-->
+
+                          <div class="col-lg-12">
+                            <div class="mb-3">
+                              <label class="form-label">New password <span class="text-danger">*</span></label>
+                              <input type="password" name="newpassword" class="form-control" placeholder="New password" required="" />
+                            </div>
+                          </div>
+                          <!--end col-->
+
+                          <div class="col-lg-12">
+                            <div class="mb-3">
+                              <label class="form-label">Re-type New password <span class="text-danger">*</span></label>
+                              <input type="password" name="confirmpassword" class="form-control" placeholder="Re-type New password"
+                                required="" />
+                            </div>
+                          </div>
+                          <!--end col-->
+
+                          <div class="col-lg-12 mt-2 mb-0">
+                              <input type="hidden" type="text" name="_id" value="{{user._id}}">
+                           <input type="submit" id="submit" name="send" class="btn btn-primary" value="Save changes">
+                          </div>
+                          <!--end col-->
+                        </div>
+                        <!--end row-->
+                      </form>
+                    </div>
+                      
+                    </div>
+                    <!--end row-->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--end col-->
+
+          </div>
+          <!--end row-->
+        </div>
+      </div>
+      <!--end container-->
+
+      <!-- Footer Start -->
+      <footer class="bg-white shadow py-3">
+        {{>footerAdmin}}
+      </footer>
+      <!--end footer-->
+      <!-- End -->
+    </main>
+    <!--End page-content" -->
+  </div>
+  <!-- page-wrapper -->
+
+  <!-- Offcanvas Start -->
+  <div class="offcanvas offcanvas-end bg-white shadow" tabindex="-1" id="offcanvasRight"
+    aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header p-4 border-bottom">
+      <h5 id="offcanvasRightLabel" class="mb-0">
+        <img src="../assets/images/logo-dark.png" height="24" class="light-version" alt="" />
+        <img src="../assets/images/logo-light.png" height="24" class="dark-version" alt="" />
+      </h5>
+      <button type="button" class="btn-close d-flex align-items-center text-dark" data-bs-dismiss="offcanvas"
+        aria-label="Close"><i class="uil uil-times fs-4"></i></button>
+    </div>
+    <div class="offcanvas-body p-4 px-md-5">
+      <div class="row">
+        <div class="col-12">
+          <!-- Style switcher -->
+          <div id="style-switcher">
+            <div>
+              <ul class="text-center list-unstyled mb-0">
+                <li class="d-grid"><a href="javascript:void(0)" class="rtl-version t-rtl-light"
+                    onclick="setTheme('style-rtl')"><img src="../assets/images/layouts/light-dash-rtl.png"
+                      class="img-fluid rounded-md shadow-md d-block" alt="" /><span class="text-muted mt-2 d-block">RTL
+                      Version</span></a></li>
+                <li class="d-grid"><a href="javascript:void(0)" class="ltr-version t-ltr-light"
+                    onclick="setTheme('style')"><img src="../assets/images/layouts/light-dash.png"
+                      class="img-fluid rounded-md shadow-md d-block" alt="" /><span class="text-muted mt-2 d-block">LTR
+                      Version</span></a></li>
+                <li class="d-grid"><a href="javascript:void(0)" class="dark-rtl-version t-rtl-dark"
+                    onclick="setTheme('style-dark-rtl')"><img src="../assets/images/layouts/dark-dash-rtl.png"
+                      class="img-fluid rounded-md shadow-md d-block" alt="" /><span class="text-muted mt-2 d-block">RTL
+                      Version</span></a></li>
+                <li class="d-grid"><a href="javascript:void(0)" class="dark-ltr-version t-ltr-dark"
+                    onclick="setTheme('style-dark')"><img src="../assets/images/layouts/dark-dash.png"
+                      class="img-fluid rounded-md shadow-md d-block" alt="" /><span class="text-muted mt-2 d-block">LTR
+                      Version</span></a></li>
+                <li class="d-grid"><a href="javascript:void(0)" class="dark-version t-dark mt-4"
+                    onclick="setTheme('style-dark')"><img src="../assets/images/layouts/dark-dash.png"
+                      class="img-fluid rounded-md shadow-md d-block" alt="" /><span class="text-muted mt-2 d-block">Dark
+                      Version</span></a></li>
+                <li class="d-grid"><a href="javascript:void(0)" class="light-version t-light mt-4"
+                    onclick="setTheme('style')"><img src="../assets/images/layouts/light-dash.png"
+                      class="img-fluid rounded-md shadow-md d-block" alt="" /><span
+                      class="text-muted mt-2 d-block">Light Version</span></a></li>
+                <li class="d-grid"><a href="../landing/index.html" target="_blank" class="mt-4"><img
+                      src="../assets/images/layouts/landing-light.png" class="img-fluid rounded-md shadow-md d-block"
+                      alt="" /><span class="text-muted mt-2 d-block">Landing Demos</span></a></li>
+              </ul>
+            </div>
+          </div>
+          <!-- end Style switcher -->
+        </div>
+        <!--end col-->
+      </div>
+      <!--end row-->
+    </div>
+
+    <div class="offcanvas-footer p-4 border-top text-center">
+      <ul class="list-unstyled social-icon mb-0">
+        <li class="list-inline-item mb-0"><a href="https://1.envato.market/doctris" target="_blank" class="rounded"><i
+              class="uil uil-shopping-cart align-middle" title="Buy Now"></i></a></li>
+        <li class="list-inline-item mb-0"><a href="https://dribbble.com/shreethemes" target="_blank" class="rounded"><i
+              class="uil uil-dribbble align-middle" title="dribbble"></i></a></li>
+        <li class="list-inline-item mb-0"><a href="https://www.facebook.com/shreethemes" target="_blank"
+            class="rounded"><i class="uil uil-facebook-f align-middle" title="facebook"></i></a></li>
+        <li class="list-inline-item mb-0"><a href="https://www.instagram.com/shreethemes/" target="_blank"
+            class="rounded"><i class="uil uil-instagram align-middle" title="instagram"></i></a></li>
+        <li class="list-inline-item mb-0"><a href="https://twitter.com/shreethemes" target="_blank" class="rounded"><i
+              class="uil uil-twitter align-middle" title="twitter"></i></a></li>
+        <li class="list-inline-item mb-0"><a href="mailto:support@shreethemes.in" class="rounded"><i
+              class="uil uil-envelope align-middle" title="email"></i></a></li>
+        <li class="list-inline-item mb-0"><a href="https://shreethemes.in" target="_blank" class="rounded"><i
+              class="uil uil-globe align-middle" title="website"></i></a></li>
+      </ul>
+      <!--end icon-->
+    </div>
+  </div>
+  <!-- Offcanvas End -->
+
+  <!-- View Invoice Start -->
+  
+  {{>javascript}}
+  <script>
+     $(document).ready(function () {
+    $("#delete-account-data").submit(function (e) {
+         e.preventDefault();
+         var fromData = $(this).serialize();
+         var token = $(this).find("input[name=token]").val();
+         var id = $(this).find("input[name=_id]").val();
+         $.ajax({
+           type: $(this).attr('method'),
+           url: $(this).attr('action'),
+           data: fromData,
+           headers: { Authorization: 'Bearer ' + token },
+           success: function (response) {
+              if(response.status==200){
+                swal({
+                title: "Success....✔️",
+                text: response.message,
+                icon: "success",
+                button: "Ok..!",
+                })
+            }else{
+                swal(
+                'Oops...',
+                response.message,
+                'error'
+                );
+            }
+           }
+         });
+       });
+     })
+  </script>
+  
+</body>
+
+</html>

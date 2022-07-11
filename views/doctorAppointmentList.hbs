@@ -1,0 +1,442 @@
+
+<!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        {{>head}}
+    </head>
+
+    <body>
+        <!-- Loader -->
+        {{!-- <div id="preloader">
+            <div id="status">
+                <div class="spinner">
+                    <div class="double-bounce1"></div>
+                    <div class="double-bounce2"></div>
+                </div>
+            </div>
+        </div> --}}
+        <!-- Loader -->
+        
+        <!-- Navbar STart -->
+        <header id="topnav" class="defaultscroll sticky">
+           {{>navbar  data = user}}
+        </header><!--end header-->
+        <!-- Navbar End -->
+
+        <!-- Start Hero -->
+        <section class="bg-dashboard">
+            <div class="container-fluid">
+                <div class="row">
+                     {{>sidebar patient  data = user}}
+                    <div class="col-xl-9 col-lg-8 col-md-7 mt-4 pt-2 mt-sm-0 pt-sm-0">
+                        <div class="row">
+                            <div class="col-xl-9 col-lg-6 col-md-4">
+                                <h5 class="mb-0">Appointment</h5>
+                            </div><!--end col-->
+                      
+                            <div class="col-xl-3 col-lg-6 col-md-8 mt-4 mt-md-0">
+                                <div class="justify-content-md-end">
+                                    <div class="row justify-content-between align-items-center">
+                                        <div class="col-sm-12 col-md-5">
+                                        </div><!--end col-->
+                                        
+                                        <div class="col-sm-12 col-md-7 mt-4 mt-sm-0">
+                                            <div class="mb-0 position-relative">
+                                                <form>
+                                                <select name="filte_date" class="form-control time-during select2input" onchange="this.form.submit()">
+                                               <option >Select</option>
+                                                <option value="all">All</option>
+                                                <option value="{{today}}">Today</option>
+                                                <option value="{{tomorrowDate}}">Tomorrow</option>
+                                                </select>
+                                                </form>
+                                            </div>
+                                        </div><!--end col-->
+                                    </div><!--end row-->
+                                </div>
+                            </div><!--end col-->
+                        </div><!--end row-->
+                          
+                        <div class="row">
+                            <div class="col-12 mt-4">
+                                <div id="form-response"> 
+                                    
+                                </div>
+                                <div class="table-responsive bg-white shadow rounded" >
+                                    <table class="table mb-0 table-center " id="dataTableData">                            
+                                        <thead>
+                                            <tr>
+                                                <th class="border-bottom p-3" style="min-width: 50px;">S.N</th>
+                                                <th class="border-bottom p-3" style="min-width: 180px;">Name</th>
+                                                <th class="border-bottom p-3">Age</th>
+                                                <th class="border-bottom p-3">Gender</th>
+                                                <th class="border-bottom p-3">Department</th>
+                                                <th class="border-bottom p-3" style="min-width: 150px;">Date</th>
+                                                <th class="border-bottom p-3">Time</th>
+                                                <th class="border-bottom p-3">Appointment Status</th>
+                                                <th class="border-bottom p-3">Fees</th>
+                                                <th class="border-bottom p-3" style="min-width: 150px;"></th>
+                                                <th class="border-bottom p-3">Action</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                             {{#each patient}} 
+                                            <tr class="btn-outline-primary">
+                                                <th class="ms-2 ">{{@index}}</th>
+                                                 <td class="p-3">
+                                                    <a href="#" class="text-dark">
+                                                        <div class="d-flex align-items-center">
+                                                            {{#each this.PatientData}}
+                                                            <img src="/{{this.profilePicture}}" class="avatar avatar-md-sm rounded-circle shadow" alt="">
+                                                            {{/each}}
+                                                            <span  class="ms-2">{{this.patientName}} </span>
+                                                        </div>
+                                                    </a>
+                                                </td>
+                                                <td class="ms-2">{{this.age}} </td>
+                                                <td class="ms-2">{{this.gender}}</td>
+                                                <td  value="{{this._id}}" class="ms-2">{{this.departmentName}}</td>
+                                                <td class="ms-2">{{this.date}}</td>
+                                                <td class="ms-2">{{this.time}}</td>
+                                                 {{!-- <td class="p-3"></td> --}}
+                                                  {{#eq this.status '==' '1'}}
+                                                     {{else eq (this.status '==' '-1')}}
+                                                    {{else}} 
+                                                    {{/eq}}
+                                                </td>
+                                                <td class="p-3">$50/Patient  </td>
+                                                <td class="text-end ms-2">
+                            
+                                                    <a href="#" class="btn btn-icon btn-pills btn-soft-dark" data-bs-toggle="modal" data-bs-target="#viewappointment-{{this._id}}"><i class="uil uil-eye"></i></a>
+                                                    <a href="#"  class="btn btn-icon btn-pills btn-soft-success acceptappointment" data-bs-toggle="modal" data-bs-target="#acceptappointment-{{this._id}}"><i  class="uil uil-check-circle"></i></a>
+                                                    <a href="#"  class="btn btn-icon btn-pills btn-soft-danger" data-bs-toggle="modal" data-bs-target="#cancelappointment-{{this._id}}"><i class="uil uil-times-circle"></i></a>
+                                                </td>
+                                                 <td class="p-3" >
+                                                 <a class="btn btn-primary"href ="/invoiceForm/{{this.userId}}">Invoice</a>
+                                                 </td>
+                                               
+                                            </tr>
+
+                                                 <!-- View Appintment Start -->
+                                        <div class="modal fade" id="viewappointment-{{this._id}}" tabindex="-1" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header border-bottom p-3">
+                                                        <h5 class="modal-title" id="exampleModalLabel1">Appointment Detail</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body p-3 pt-4">
+                                                        <div class="d-flex align-items-center">
+                                                            <img src="../assets/images/client/01.jpg" class="avatar avatar-small rounded-pill" alt="">
+                                                            <h5 class="mb-0 ms-3">{{this.patientName}}</h5>
+                                                        </div>
+                                                        <ul class="list-unstyled mb-0 d-md-flex justify-content-between mt-4">
+                                                            <li>
+                                                                <ul class="list-unstyled mb-0">
+                                                                    <li class="d-flex">
+                                                                        <h6>Age:</h6>
+                                                                        <p class="text-muted ms-2">{{this.age}}</p>
+                                                                    </li>
+
+                                                                    <li class="d-flex">
+                                                                        <h6>Gender:</h6>
+                                                                        <p class="text-muted ms-2">{{this.gender}}</p>
+                                                                    </li>
+
+                                                                    <li class="d-flex">
+                                                                        <h6 class="mb-0">Department:</h6>
+                                                                        <p  value="{{this._id}}" class="text-muted ms-2 mb-0">{{this.departmentName}}</p>
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                            <li>
+                                                                <ul class="list-unstyled mb-0">
+                                                                    <li class="d-flex">
+                                                                        <h6>Date:</h6>
+                                                                        <p class="text-muted ms-2">{{this.date}}</p>
+                                                                    </li>
+
+                                                                    <li class="d-flex">
+                                                                        <h6>Time:</h6>
+                                                                        <p class="text-muted ms-2">{{this.time}}</p>
+                                                                    </li>
+
+                                                                    <li class="d-flex">
+                                                                        <h6 class="mb-0">Doctor:</h6>
+                                                                        <p class="text-muted ms-2 mb-0">{{this.fullName}}</p>
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- View Appintment End -->
+
+                                            <div class="modal fade" id="acceptappointment-{{this._id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                            <div class="text-center">
+                                                                <div class="icon d-flex align-items-center justify-content-center bg-soft-success rounded-circle mx-auto" style="height: 95px; width:95px;">
+                                                                <span class="mb-0"><i class="uil uil-check-circle h1"></i></span>
+                                                                </div>
+                                                                <div class="mt-4">
+                                                                <h4>Accept Appointment</h4>
+                                                                <div class="modal-body py-5">
+                                                                <p class="para-desc mx-auto text-muted mb-0">Great doctor if you need your family member to get immediate assistance, emergency treatment.</p>
+                                                                 <div class="mt-4">
+                                                                    <a href="javascript:void(0);"  data-url="/api/accept-appointment/{{this._id}}" data-token="{{../token}}" id="show_id" class="btn btn-soft-success updateStatus">Accept</a>
+                                                                </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Accept Appointment End -->
+
+                                            <!-- Cancel Appointment Start -->
+                                            <div class="modal fade" id="cancelappointment-{{this._id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                            <div class="text-center">
+                                                                <div class="icon d-flex align-items-center justify-content-center bg-soft-danger rounded-circle mx-auto" style="height: 95px; width:95px;">
+                                                                    <span class="mb-0"><i class="uil uil-times-circle h1"></i></span>
+                                                                </div>
+                                                                <div class="mt-4">
+                                                                    <h4>Cancel Appointment</h4>
+                                                                <div class="modal-body py-5">
+                                                                <p class="para-desc mx-auto text-muted mb-0">Great doctor if you need your family member to get immediate assistance, emergency treatment.</p>
+                                                                    <div class="mt-4">
+                                                                    <a href="javascript:void(0);"  data-url="/api/cancel-appointment/{{this._id}}" data-token="{{../token}}" class="btn btn-soft-danger updateStatus">Cancel</a>
+                                                                </div>
+                                                                </div>
+                                                                </div>
+                                                            </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Cancel Appointment End -->
+                                             {{/each}}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div><!--end row-->
+
+                        {{!-- <div class="row text-center">
+                            <!-- PAGINATION START -->
+                            <div class="col-12 mt-4">
+                                <div class="d-md-flex align-items-center text-center justify-content-between">
+                                    <span class="text-muted me-3">Showing 1 - 10 out of 50</span>
+                                    <ul class="pagination justify-content-center mb-0 mt-3 mt-sm-0">
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0)" aria-label="Previous">Prev</a></li>
+                                        <li class="page-item active"><a class="page-link" href="javascript:void(0)">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0)">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
+                                        <li class="page-item"><a class="page-link" href="javascript:void(0)" aria-label="Next">Next</a></li>
+                                    </ul>
+                                </div>
+                            </div><!--end col-->
+                            <!-- PAGINATION END -->
+                        </div><!--end row--> --}}
+                    </div><!--end col-->
+                </div><!--end row-->
+            </div><!--end container-->
+        </section><!--end section-->
+        <!-- End Hero -->
+
+        <!-- Modal start -->
+        <!-- Add New Appointment Start -->
+       
+        <!-- Add New Appointment End -->
+
+       
+
+        <!-- Accept Appointment Start -->
+        
+        
+        <!-- Modal end -->
+
+        <!-- Footer Start -->
+        <footer class="bg-footer py-4">
+           {{footer}}
+        </footer><!--end footer-->
+        <!-- End -->
+
+        <!-- Back to top -->
+        <a href="#" onclick="topFunction()" id="back-to-top" class="btn btn-icon btn-pills btn-primary back-to-top"><i data-feather="arrow-up" class="icons"></i></a>
+        <!-- Back to top -->
+
+        <!-- Offcanvas Start -->
+        <div class="offcanvas bg-white offcanvas-top" tabindex="-1" id="offcanvasTop">
+            <div class="offcanvas-body d-flex align-items-center align-items-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <div class="text-center">
+                                <h4>Search now.....</h4>
+                                <div class="subcribe-form mt-4">
+                                    <form>
+                                        <div class="mb-0">
+                                            <input type="text" id="help" name="name" class="border bg-white rounded-pill" required="" placeholder="Search">
+                                            <button type="submit" class="btn btn-pills btn-primary">Search</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div><!--end col-->
+                    </div><!--end row-->
+                </div><!--end container-->
+            </div>
+        </div>
+        <!-- Offcanvas End -->
+
+        <!-- Offcanvas Start -->
+        <div class="offcanvas offcanvas-end bg-white shadow" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+            <div class="offcanvas-header p-4 border-bottom">
+                <h5 id="offcanvasRightLabel" class="mb-0">
+                    <img src="../assets/images/logo-dark.png" height="24" class="light-version" alt="">
+                    <img src="../assets/images/logo-light.png" height="24" class="dark-version" alt="">
+                </h5>
+                <button type="button" class="btn-close d-flex align-items-center text-dark" data-bs-dismiss="offcanvas" aria-label="Close"><i class="uil uil-times fs-4"></i></button>
+            </div>
+            <div class="offcanvas-body p-4 px-md-5">
+                <div class="row">
+                    <div class="col-12">
+                        <!-- Style switcher -->
+                        <div id="style-switcher">
+                            <div>
+                                <ul class="text-center list-unstyled mb-0">
+                                    <li class="d-grid"><a href="javascript:void(0)" class="rtl-version t-rtl-light" onclick="setTheme('style-rtl')"><img src="../assets/images/layouts/landing-light-rtl.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">RTL Version</span></a></li>
+                                    <li class="d-grid"><a href="javascript:void(0)" class="ltr-version t-ltr-light" onclick="setTheme('style')"><img src="../assets/images/layouts/landing-light.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">LTR Version</span></a></li>
+                                    <li class="d-grid"><a href="javascript:void(0)" class="dark-rtl-version t-rtl-dark" onclick="setTheme('style-dark-rtl')"><img src="../assets/images/layouts/landing-dark-rtl.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">RTL Version</span></a></li>
+                                    <li class="d-grid"><a href="javascript:void(0)" class="dark-ltr-version t-ltr-dark" onclick="setTheme('style-dark')"><img src="../assets/images/layouts/landing-dark.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">LTR Version</span></a></li>
+                                    <li class="d-grid"><a href="javascript:void(0)" class="dark-version t-dark mt-4" onclick="setTheme('style-dark')"><img src="../assets/images/layouts/landing-dark.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Dark Version</span></a></li>
+                                    <li class="d-grid"><a href="javascript:void(0)" class="light-version t-light mt-4" onclick="setTheme('style')"><img src="../assets/images/layouts/landing-light.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Light Version</span></a></li>
+                                    <li class="d-grid"><a href="../admin/index.html" target="_blank" class="mt-4"><img src="../assets/images/layouts/light-dash.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Admin Dashboard</span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- end Style switcher -->
+                    </div><!--end col-->
+                </div><!--end row-->
+            </div>
+
+            <div class="offcanvas-footer p-4 border-top text-center">
+                <ul class="list-unstyled social-icon mb-0">
+                    <li class="list-inline-item mb-0"><a href="https://1.envato.market/doctris" target="_blank" class="rounded"><i class="uil uil-shopping-cart align-middle" title="Buy Now"></i></a></li>
+                    <li class="list-inline-item mb-0"><a href="https://dribbble.com/shreethemes" target="_blank" class="rounded"><i class="uil uil-dribbble align-middle" title="dribbble"></i></a></li>
+                    <li class="list-inline-item mb-0"><a href="https://www.facebook.com/shreethemes" target="_blank" class="rounded"><i class="uil uil-facebook-f align-middle" title="facebook"></i></a></li>
+                    <li class="list-inline-item mb-0"><a href="https://www.instagram.com/shreethemes/" target="_blank" class="rounded"><i class="uil uil-instagram align-middle" title="instagram"></i></a></li>
+                    <li class="list-inline-item mb-0"><a href="https://twitter.com/shreethemes" target="_blank" class="rounded"><i class="uil uil-twitter align-middle" title="twitter"></i></a></li>
+                    <li class="list-inline-item mb-0"><a href="mailto:support@shreethemes.in" class="rounded"><i class="uil uil-envelope align-middle" title="email"></i></a></li>
+                    <li class="list-inline-item mb-0"><a href="https://shreethemes.in" target="_blank" class="rounded"><i class="uil uil-globe align-middle" title="website"></i></a></li>
+                </ul><!--end icon-->
+            </div>
+        </div>
+        <!-- Offcanvas End -->
+        
+        <!-- javascript -->
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+       {{>javascript}}
+
+       <script>
+            $(document).ready(function () {
+             //Common form request
+            $("form[name=ajax_form]").submit(function (e) {
+                var formData = new FormData(this);
+            var token =  $(this).find("input[name=token]").val();
+            e.preventDefault();
+            $.ajax({
+                    type: 'POST',
+                    url:$(this).attr('action'),
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    headers:{ Authorization: 'Bearer '+ token},
+                    success: function (response) {
+                        if(response.status==200){
+                                swal({
+                                title: "Good job!",
+                                text: response.message,
+                                icon: "success",
+                                button: "Aww yiss!",
+                                });
+                                location.reload();
+                        //$("#form-response").html('<div  class="alert alert-success" role="alert">'+response.message+'</div>');
+                        }else{
+                            swal(
+                            'Oops...',
+                            response.message,
+                            'error'
+                            );
+                        //$("#form-response").html('<div  class="alert alert-danger" role="alert">Profile not updated, plz try again!</div>');   
+                        }
+                    }
+                });
+            });
+            //update status
+             $(".updateStatus").click(function(){
+                var url = $(this).attr('data-url');
+                var token =  $(this).attr('data-token')
+                $.ajax({
+                    type: 'GET',
+                     url:url,
+                    headers:{ Authorization: 'Bearer '+ token},
+                    success: function (response) {
+                        if(response.status==200){
+                        $(".modal").modal('hide');
+                        swal({
+                            title: "Success...!",
+                            text: response.message,
+                            icon: "success",
+                            button: "Ok...!",
+                            });
+                        location.reload();
+                        }else{
+                        swal('Oops...',
+                            response.message,
+                            'error'
+                            );   
+                        }
+                    }
+                });
+            })
+            });
+
+             function getDoctorData(did) {
+            $.ajax({
+                type: "GET",
+                url: '/api/doctorlist/' + did,
+                success: function (response) {
+                    var list = '';
+                    if (response[0].length > 0) {
+                        list += '<option value="">Select</option>';
+                        $.each(response, function (index, value) {
+                            for (let j = 0; j < value.length; j++) {
+                                console.log(value[j].firstName)
+                                var doctor_id_name = value[j]._id + '#' + value[j].firstName + ' ' + value[j].lastName;
+                                $(".doctorId").append(list += '<option  value="' + doctor_id_name + '">' + value[j].firstName + " " + value[j].lastName + '</option >');
+
+                            }
+                        });
+                    } else {
+                        list += '<option value="">No Doctor Found!</option>';
+                    }
+                    $(".doctorId").html(list);
+                }
+            });
+            }
+
+$(document).ready(function() {
+    $('#dataTableData').DataTable();
+} );
+       </script>
+    </body>
+
+</html>

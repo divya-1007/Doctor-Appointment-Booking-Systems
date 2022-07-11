@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {{>head}}
+
+</head>
+
+<body>
+    <!-- Loader -->
+    {{!-- <div id="preloader">
+        <div id="status">
+            <div class="spinner">
+                <div class="double-bounce1"></div>
+                <div class="double-bounce2"></div>
+            </div>
+        </div>
+    </div> --}}
+    <!-- Loader -->
+
+    <div class="page-wrapper doctris-theme toggled">
+        <nav id="sidebar" class="sidebar-wrapper">
+            {{>navAdmin}}
+        </nav>
+        <!-- sidebar-wrapper  -->
+
+        <!-- Start Page Content -->
+        <main class="page-content bg-light">
+            {{>sideBarAdmin data = user}}
+
+            <div class="container-fluid">
+                <div class="layout-specing">
+                    <div class="d-md-flex justify-content-between">
+                        <div>
+                            <h5 class="mb-0">FAQs</h5>
+
+                            <nav aria-label="breadcrumb" class="d-inline-block mt-1">
+                                <ul class="breadcrumb breadcrumb-muted bg-transparent rounded mb-0 p-0">
+                                    <li class="breadcrumb-item"><a href="/admin">Doctris</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">FAQs</li>
+                                </ul>
+                            </nav>
+                        </div>
+                       <div id="form-response">
+
+                            </div>
+                        <div class="mt-4 mt-sm-0">
+                            <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-faqs">Add
+                                Questions</a>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6 mt-4">
+                            <div class="card p-4 rounded shadow border-0">
+                                <h6 class="mb-0">Doctris Practice Questions</h6>
+
+                                <div class="accordion mt-4" id="buying">
+                                    {{#each dataFsq1}}
+                                    <div class="accordion-item border rounded">
+                                        <h2 class="accordion-header" id="headingOne">
+                                            <button class="accordion-button border-0 bg-light" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                                aria-expanded="true" aria-controls="collapseOne">
+                                                {{this.questions}}
+                                            </button>
+                                        </h2>
+                                        <div id="collapseOne" class="accordion-collapse border-0 collapse show"
+                                            aria-labelledby="headingOne" data-bs-parent="#buying">
+                                            <div class="accordion-body text-muted">
+                                                {{this.answer}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                     {{/each}}
+                                </div>
+                            </div>
+                        </div>
+                        <!--end col-->
+
+                        <div class="col-lg-6 mt-4">
+                            <div class="card p-4 rounded shadow border-0">
+                                <h6 class="mb-0">Text Consultations Questions</h6>
+
+                                <div class="accordion mt-4" id="general">
+                                    {{#each dataFsq2}}
+                                    <div class="accordion-item border rounded">
+                                        <h2 class="accordion-header" id="headingfive">
+                                            <button class="accordion-button border-0 bg-light" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#collapsefive"
+                                                aria-expanded="true" aria-controls="collapsefive">
+                                                {{this.questions}}
+                                            </button>
+                                        </h2>
+                                        <div id="collapsefive" class="accordion-collapse border-0 collapse show"
+                                            aria-labelledby="headingfive" data-bs-parent="#general">
+                                            <div class="accordion-body text-muted">
+                                               {{this.answer}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{/each}}
+
+                                </div>
+                            </div>
+                        </div>
+                        <!--end col-->
+
+                        <div class="col-lg-6 mt-4">
+                            <div class="card p-4 rounded shadow border-0">
+                                <h6 class="mb-0">Patient Health Data & Records Questions</h6>
+
+                                <div class="accordion mt-4" id="payments">
+                                    {{#each dataFsq3}}
+                                    <div class="accordion-item border rounded">
+                                        <h2 class="accordion-header" id="nine">
+                                            <button class="accordion-button border-0 bg-light" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#collapsenine"
+                                                aria-expanded="true" aria-controls="collapsenine">
+                                                {{this.questions}}
+                                            </button>
+                                        </h2>
+                                        <div id="collapsenine" class="accordion-collapse border-0 collapse show"
+                                            aria-labelledby="nine" data-bs-parent="#payments">
+                                            <div class="accordion-body text-muted">
+                                               {{this.answer}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{/each}}
+                                </div>
+                            </div>
+                        </div>
+                        <!--end col-->
+
+                        <div class="col-lg-6 mt-4">
+                            <div class="card p-4 rounded shadow border-0">
+                                <h6 class="mb-0">About the Doctris Practice Questions</h6>
+
+                                <div class="accordion mt-4" id="support">
+                                    {{#each dataFsq4 }}
+                                    <div class="accordion-item border rounded">
+                                        <h2 class="accordion-header" id="headingtherteen">
+                                            <button class="accordion-button border-0 bg-light" type="button"
+                                                data-bs-toggle="collapse" data-bs-target="#collapsetherteen"
+                                                aria-expanded="true" aria-controls="collapsetherteen">
+                                               {{this.questions}}
+                                            </button>
+                                        </h2>
+                                        <div id="collapsetherteen" class="accordion-collapse border-0 collapse show"
+                                            aria-labelledby="headingtherteen" data-bs-parent="#support">
+                                            <div class="accordion-body text-muted">
+                                                {{this.answer}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{/each}}
+                                </div>
+                            </div>
+                        </div>
+                        <!--end col-->
+                    </div>
+                    <!--end row-->
+                </div>
+            </div>
+            <!--end container-->
+
+            <!-- Footer Start -->
+            <footer class="bg-white shadow py-3">
+                {{>footerAdmin}}
+            </footer>
+            <!--end footer-->
+            <!-- End -->
+        </main>
+        <!--End page-content" -->
+    </div>
+    <!-- page-wrapper -->
+
+    <!-- Offcanvas Start -->
+    <div class="offcanvas offcanvas-end bg-white shadow" tabindex="-1" id="offcanvasRight"
+        aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header p-4 border-bottom">
+            <h5 id="offcanvasRightLabel" class="mb-0">
+                <img src="../assets/images/logo-dark.png" height="24" class="light-version" alt="">
+                <img src="../assets/images/logo-light.png" height="24" class="dark-version" alt="">
+            </h5>
+            <button type="button" class="btn-close d-flex align-items-center text-dark" data-bs-dismiss="offcanvas"
+                aria-label="Close"><i class="uil uil-times fs-4"></i></button>
+        </div>
+        <div class="offcanvas-body p-4 px-md-5">
+            <div class="row">
+                <div class="col-12">
+                    <!-- Style switcher -->
+                    <div id="style-switcher">
+                        <div>
+                            <ul class="text-center list-unstyled mb-0">
+                                <li class="d-grid"><a href="javascript:void(0)" class="rtl-version t-rtl-light"
+                                        onclick="setTheme('style-rtl')"><img
+                                            src="../assets/images/layouts/light-dash-rtl.png"
+                                            class="img-fluid rounded-md shadow-md d-block" alt=""><span
+                                            class="text-muted mt-2 d-block">RTL Version</span></a></li>
+                                <li class="d-grid"><a href="javascript:void(0)" class="ltr-version t-ltr-light"
+                                        onclick="setTheme('style')"><img src="../assets/images/layouts/light-dash.png"
+                                            class="img-fluid rounded-md shadow-md d-block" alt=""><span
+                                            class="text-muted mt-2 d-block">LTR Version</span></a></li>
+                                <li class="d-grid"><a href="javascript:void(0)" class="dark-rtl-version t-rtl-dark"
+                                        onclick="setTheme('style-dark-rtl')"><img
+                                            src="../assets/images/layouts/dark-dash-rtl.png"
+                                            class="img-fluid rounded-md shadow-md d-block" alt=""><span
+                                            class="text-muted mt-2 d-block">RTL Version</span></a></li>
+                                <li class="d-grid"><a href="javascript:void(0)" class="dark-ltr-version t-ltr-dark"
+                                        onclick="setTheme('style-dark')"><img
+                                            src="../assets/images/layouts/dark-dash.png"
+                                            class="img-fluid rounded-md shadow-md d-block" alt=""><span
+                                            class="text-muted mt-2 d-block">LTR Version</span></a></li>
+                                <li class="d-grid"><a href="javascript:void(0)" class="dark-version t-dark mt-4"
+                                        onclick="setTheme('style-dark')"><img
+                                            src="../assets/images/layouts/dark-dash.png"
+                                            class="img-fluid rounded-md shadow-md d-block" alt=""><span
+                                            class="text-muted mt-2 d-block">Dark Version</span></a></li>
+                                <li class="d-grid"><a href="javascript:void(0)" class="light-version t-light mt-4"
+                                        onclick="setTheme('style')"><img src="../assets/images/layouts/light-dash.png"
+                                            class="img-fluid rounded-md shadow-md d-block" alt=""><span
+                                            class="text-muted mt-2 d-block">Light Version</span></a></li>
+                                <li class="d-grid"><a href="../landing/index.html" target="_blank" class="mt-4"><img
+                                            src="../assets/images/layouts/landing-light.png"
+                                            class="img-fluid rounded-md shadow-md d-block" alt=""><span
+                                            class="text-muted mt-2 d-block">Landing Demos</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- end Style switcher -->
+                </div>
+                <!--end col-->
+            </div>
+            <!--end row-->
+        </div>
+
+        <div class="offcanvas-footer p-4 border-top text-center">
+            <ul class="list-unstyled social-icon mb-0">
+                <li class="list-inline-item mb-0"><a href="https://1.envato.market/doctris" target="_blank"
+                        class="rounded"><i class="uil uil-shopping-cart align-middle" title="Buy Now"></i></a></li>
+                <li class="list-inline-item mb-0"><a href="https://dribbble.com/shreethemes" target="_blank"
+                        class="rounded"><i class="uil uil-dribbble align-middle" title="dribbble"></i></a></li>
+                <li class="list-inline-item mb-0"><a href="https://www.facebook.com/shreethemes" target="_blank"
+                        class="rounded"><i class="uil uil-facebook-f align-middle" title="facebook"></i></a></li>
+                <li class="list-inline-item mb-0"><a href="https://www.instagram.com/shreethemes/" target="_blank"
+                        class="rounded"><i class="uil uil-instagram align-middle" title="instagram"></i></a></li>
+                <li class="list-inline-item mb-0"><a href="https://twitter.com/shreethemes" target="_blank"
+                        class="rounded"><i class="uil uil-twitter align-middle" title="twitter"></i></a></li>
+                <li class="list-inline-item mb-0"><a href="mailto:support@shreethemes.in" class="rounded"><i
+                            class="uil uil-envelope align-middle" title="email"></i></a></li>
+                <li class="list-inline-item mb-0"><a href="https://shreethemes.in" target="_blank" class="rounded"><i
+                            class="uil uil-globe align-middle" title="website"></i></a></li>
+            </ul>
+            <!--end icon-->
+        </div>
+    </div>
+    <!-- Offcanvas End -->
+
+    <!-- Start Modal -->
+    <div class="modal fade" id="add-faqs" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-bottom p-3">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Questions</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body p-3 pt-4">
+                    <form method="POST" id="change-password-form" action="/api/admin-adminAddQuestions" enctype="multipart/form-data">
+                    <input type="hidden" name="token" value="{{token}}">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="mb-3">
+                                    <label class="form-label">Select <span class="text-danger">*</span></label>
+                                    <select  name="questionsType" class="form-control doctor-name select2input">
+                                        <option value="">Select</option>
+                                        <option >Doctris Practice Questions</option>
+                                        <option >Text Consultations Questions</option>
+                                        <option >Patient Health Data & Records Questions</option>
+                                        <option >About the Doctris Practice Questions</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="mb-3">
+                                    <label class="form-label">Question <span class="text-danger">*</span></label>
+                                    <input name="questions" id="name" type="text" class="form-control"
+                                        placeholder="Question :">
+                                </div>
+                            </div>
+                            <!--end col-->
+
+                            <div class="col-lg-12">
+                                <div class="mb-3">
+                                    <label class="form-label">Answer <span class="text-danger">*</span></label>
+                                    <textarea name="answer" id="comments" rows="4" class="form-control"
+                                        placeholder="Answer :"></textarea>
+                                </div>
+                            </div>
+                            <!--end col-->
+
+                            <div class="col-lg-12 text-end">
+                                <button type="submit" class="btn btn-primary">Add Question</button>
+                            </div>
+                            <!--end col-->
+                        </div>
+                        <!--end row-->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal -->
+
+    <!-- javascript -->
+  {{>javascript}}
+
+<script>
+
+         $(document).ready(function () {
+//Change password form request
+        $("#change-password-form").submit(function (e) {
+        e.preventDefault();
+        var fromData = $(this).serialize();
+           var token =  $(this).find("input[name=token]").val(); 
+         $.ajax({
+                type: 'POST',
+               url:$(this).attr('action'),
+                data:fromData,
+                headers:{ Authorization: 'Bearer '+ token},
+                success: function (response) {
+                    if(response.status==200){
+                    $("#form-response").html('<div  class="alert alert-success" role="alert">'+response.message+'</div>');
+                    }else{
+                     $("#form-response").html('<div  class="alert alert-danger" role="alert">Password not change, plz try again!</div>');   
+                    }
+                }
+           });
+         });
+            });
+        </script>
+</body>
+
+</html>

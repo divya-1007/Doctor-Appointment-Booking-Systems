@@ -1,0 +1,469 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {{>head}}
+</head>
+
+<body>
+    <!-- Loader -->
+    <!-- <div id="preloader">
+        <div id="status">
+            <div class="spinner">
+                <div class="double-bounce1"></div>
+                <div class="double-bounce2"></div>
+            </div>
+        </div>
+    </div> -->
+    <!-- Loader -->
+    
+    <!-- Navbar STart -->
+    <header id="topnav" class="defaultscroll sticky">
+      {{>navbar  data = user}}
+ <!-- Navbar STart -->
+    
+    </header>
+    <!-- Navbar End -->
+    <!-- Start Hero -->
+    <section class="bg-dashboard">
+        <div class="container-fluid">
+            <div class="row">
+                
+               {{>sidebar data = departmen}}
+                <div class="col-xl-9 col-lg-8 col-md-7 mt-4 mt-sm-0">
+                    <h5 class="mb-0">Dashboard</h5>
+                    <div class="row">
+                        <div class="col-xl-3 col-lg-6 mt-4">
+                            <div class="card shadow border-0 p-4">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <h6 class="align-items-center mb-0">Appointment <span class="badge badge-pill badge-soft-primary ms-1">+{{AppointmentsDat}}</span></h6>
+                                    {{!-- <p class="mb-0 text-muted">220+ Week</p> --}}
+                                </div>
+                                <div id="chart-1"></div>
+                            </div>
+                        </div><!--end col-->
+                        
+                        <div class="col-xl-3 col-lg-6 mt-4">
+                            <div class="card shadow border-0 p-4">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <h6 class="align-items-center mb-0">Patients <span class="badge badge-pill badge-soft-success ms-1">+{{Patients}}</span></h6>
+                                    {{!-- <p class="mb-0 text-muted">220+ Week</p> --}}
+                                </div>
+                                <div id="chart-2"></div>
+                            </div>
+                        </div><!--end col-->
+                        
+                        <div class="col-xl-3 col-lg-6 mt-4">
+                            <div class="card shadow border-0 p-4">
+                               
+                                <div class="d-flex justify-content-between mb-3">
+                                    <h6 class="align-items-center mb-0">Approve  Appointment 
+                                        <span class="badge badge-pill badge-soft-warning ms-1">+{{AppointmentsData}} </span>
+                                        </h6>
+                                    {{!-- <p class="mb-0 text-muted">220+ Week</p> --}}
+                                </div>
+                                
+                                <div id="chart-3"></div>
+                            </div>
+                        </div><!--end col-->
+                        
+                        <div class="col-xl-3 col-lg-6 mt-4">
+                            <div class="card shadow border-0 p-4">
+                                <div class="d-flex justify-content-between mb-3">
+                                    <h6 class="align-items-center mb-0">Canceled Appointment
+                                        <span class="badge badge-pill badge-soft-danger ms-1">-{{cancelAppointment}} </span>
+                                        </h6>
+                                    {{!-- <p class="mb-0 text-muted">220+ Week</p> --}}
+                                </div>
+                                <div id="chart-4"></div>
+                            </div>
+                        </div><!--end col-->
+                    </div><!--end row-->
+
+                    <div class="row" id="entry-template">
+                        <div class="col-xl-4 col-lg-6 mt-4">
+                            <div class="card border-0 shadow rounded">
+                                <div class="d-flex justify-content-between p-4 border-bottom">
+                                    <h6 class="mb-0"><i class="uil uil-calender text-primary me-1 h5"></i> Latest Appointment</h6>
+                                    <h6 class="text-muted mb-0">{{LatestAppointments}} Patients</h6>
+                                </div>
+
+                                <ul class="list-unstyled mb-0 p-4">
+                                    {{#each LatestAppointment}}
+                                    <li>
+                                        <a href="javascript:void(0)">
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <div class="d-inline-flex">
+                                                    {{#each this.PatientData}}
+                                                    <img src="{{this.profilePicture}}" class="avatar avatar-md-sm rounded-circle shadow"
+                                                        alt="" />
+                                                    {{/each}}
+                                                    <div class="ms-3">
+                                                        <h6 class="text-dark mb-0 d-block">{{this.patientName}}</h6>
+                                                        <small class="text-muted">Booking on {{this.date}}</small>
+                                                    </div>
+                                                </div>
+                                                <i class="uil uil-arrow-right h4 text-dark"></i>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    {{/each}}
+
+                                    {{!-- <li class="mt-4">
+                                        <a href="javascript:void(0)">
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <div class="d-inline-flex">
+                                                    <img src="../assets/images/client/02.jpg" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
+                                                    <div class="ms-3">
+                                                        <h6 class="text-dark mb-0 d-block">Joya Khan</h6>
+                                                        <small class="text-muted">Booking on 27th Nov, 2020</small>
+                                                    </div>
+                                                </div>
+                                                <i class="uil uil-arrow-right h4 text-dark"></i>
+                                            </div>
+                                        </a>
+                                    </li>
+
+                                    <li class="mt-4">
+                                        <a href="javascript:void(0)">
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <div class="d-inline-flex">
+                                                    <img src="../assets/images/client/03.jpg" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
+                                                    <div class="ms-3">
+                                                        <h6 class="text-dark mb-0 d-block">Amelia Muli</h6>
+                                                        <small class="text-muted">Booking on 27th Nov, 2020</small>
+                                                    </div>
+                                                </div>
+                                                <i class="uil uil-arrow-right h4 text-dark"></i>
+                                            </div>
+                                        </a>
+                                    </li>
+
+                                    <li class="mt-4">
+                                        <a href="javascript:void(0)">
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <div class="d-inline-flex">
+                                                    <img src="../assets/images/client/04.jpg" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
+                                                    <div class="ms-3">
+                                                        <h6 class="text-dark mb-0 d-block">Nik Ronaldo</h6>
+                                                        <small class="text-muted">Booking on 27th Nov, 2020</small>
+                                                    </div>
+                                                </div>
+                                                <i class="uil uil-arrow-right h4 text-dark"></i>
+                                            </div>
+                                        </a>
+                                    </li>
+
+                                    <li class="mt-4">
+                                        <a href="javascript:void(0)">
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <div class="d-inline-flex">
+                                                    <img src="../assets/images/client/05.jpg" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
+                                                    <div class="ms-3">
+                                                        <h6 class="text-dark mb-0 d-block">Crista Joseph</h6>
+                                                        <small class="text-muted">Booking on 27th Nov, 2020</small>
+                                                    </div>
+                                                </div>
+                                                <i class="uil uil-arrow-right h4 text-dark"></i>
+                                            </div>
+                                        </a>
+                                    </li> --}}
+                                </ul>
+                            </div>
+                        </div><!--end col-->
+
+                        <div class="col-xl-4 col-lg-6 mt-4">
+                            <div class="card border-0 shadow rounded">
+                                <div class="d-flex justify-content-between p-4 border-bottom">
+                                    <h6 class="mb-0"><i class="uil uil-calendar-alt text-primary me-1 h5"></i> Upcoming Appointment</h6>
+                                    <h6 class="text-muted mb-0">{{Appointments}} Patients</h6>
+                                </div>
+
+                                <ul class="list-unstyled mb-0 p-4">
+                                     {{#each Appointment}}
+                                    <li>
+                                        <a href="javascript:void(0)">
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <div class="d-inline-flex">
+                                                    {{#each this.PatientData}}
+                                                    <img src="{{this.profilePicture}}" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
+                                                   {{/each}}
+                                                   <div class="ms-3">
+                                                        <h6 class="text-dark mb-0 d-block">{{this.patientName}}</h6>
+                                                        <small class="text-muted">Booking on {{this.date}}</small>
+                                                    </div>
+                                                </div>
+                                                <i class="uil uil-arrow-right h4 text-dark"></i>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    {{/each}}
+                                    {{!-- <li class="mt-4">
+                                        <a href="javascript:void(0)">
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <div class="d-inline-flex">
+                                                    <img src="../assets/images/client/07.jpg" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
+                                                    <div class="ms-3">
+                                                        <h6 class="text-dark mb-0 d-block">Nick Jons</h6>
+                                                        <small class="text-muted">Booking on 27th Nov, 2020</small>
+                                                    </div>
+                                                </div>
+                                                <i class="uil uil-arrow-right h4 text-dark"></i>
+                                            </div>
+                                        </a>
+                                    </li>
+
+                                    <li class="mt-4">
+                                        <a href="javascript:void(0)">
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <div class="d-inline-flex">
+                                                    <img src="../assets/images/client/08.jpg" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
+                                                    <div class="ms-3">
+                                                        <h6 class="text-dark mb-0 d-block">Alex Dirio</h6>
+                                                        <small class="text-muted">Booking on 27th Nov, 2020</small>
+                                                    </div>
+                                                </div>
+                                                <i class="uil uil-arrow-right h4 text-dark"></i>
+                                            </div>
+                                        </a>
+                                    </li>
+
+                                    <li class="mt-4">
+                                        <a href="javascript:void(0)">
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <div class="d-inline-flex">
+                                                    <img src="../assets/images/client/09.jpg" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
+                                                    <div class="ms-3">
+                                                        <h6 class="text-dark mb-0 d-block">Vrunda Koli</h6>
+                                                        <small class="text-muted">Booking on 27th Nov, 2020</small>
+                                                    </div>
+                                                </div>
+                                                <i class="uil uil-arrow-right h4 text-dark"></i>
+                                            </div>
+                                        </a>
+                                    </li>
+
+                                    <li class="mt-4">
+                                        <a href="javascript:void(0)">
+                                            <div class="d-flex align-items-center justify-content-between">
+                                                <div class="d-inline-flex">
+                                                    <img src="../assets/images/client/10.jpg" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
+                                                    <div class="ms-3">
+                                                        <h6 class="text-dark mb-0 d-block">Aisha Low</h6>
+                                                        <small class="text-muted">Booking on 27th Nov, 2020</small>
+                                                    </div>
+                                                </div>
+                                                <i class="uil uil-arrow-right h4 text-dark"></i>
+                                            </div>
+                                        </a>
+                                    </li> --}}
+                                </ul>
+                            </div>
+                        </div><!--end col-->
+
+                        <div class="col-xl-4 col-lg-12 mt-4">
+                            <div class="card border-0 shadow rounded">
+                                <div class="p-4 border-bottom">
+                                    <h6 class="mb-0">Patient's Review</h6>
+                                </div>
+
+                                <div class="p-4">
+                                    <div class="client-review-slider">
+        
+                                        {{#each patientReview}}
+                                        <div class="tiny-slide">
+                                            <p class="text-muted fst-italic">{{this.reaction}}</p>
+                                            
+                                            <div class="d-inline-flex align-items-center">
+                                              {{#each ../patientData}}
+                                                <img src="{{profilePicture}}" class="avatar avatar-md-sm rounded-circle shadow"
+                                                    alt="" />
+                                                <h6 class="text-primary">{{this.firstName}} {{this.lastName}}</h6>
+                                                {{/each}}
+                                                <div class="ms-3">
+                                                    <ul class="list-unstyled d-block mb-0">
+                                                      {{#ifElse this.review '==' '5'}}
+                                                     {{else ifElse (this.review '==' '4')}}
+                                                      {{else ifElse (this.review '==' '3')}}
+                                                       {{else ifElse (this.review '==' '2')}}
+                                                    {{else}} 
+                                                    {{/ifElse}}
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div><!--end customer testi-->
+                                        {{/each}}
+                                    </div><!--end carousel-->
+
+                                    <div class="row justify-content-center mt-3">
+                                        <div class="col-md col-6 text-center pt-3">
+                                            <img src="../assets/images/client/amazon.png" class="avatar avatar-client" alt="">
+                                        </div><!--end col-->
+                    
+                                        <div class="col-md col-6 text-center pt-3">
+                                            <img src="../assets/images/client/google.png" class="avatar avatar-client" alt="">
+                                        </div><!--end col-->
+                                        
+                                        <div class="col-md col-6 text-center pt-3">
+                                            <img src="../assets/images/client/lenovo.png" class="avatar avatar-client" alt="">
+                                        </div><!--end col-->
+                                        
+                                        <div class="col-md col-6 text-center pt-3">
+                                            <img src="../assets/images/client/paypal.png" class="avatar avatar-client" alt="">
+                                        </div><!--end col-->
+                                    </div><!--end row-->
+                                </div>
+                            </div>
+                        </div><!--end col-->
+                    </div><!--end row-->
+
+                    {{!-- <div class="row">
+                        <div class="col-xl-3 col-md-6 mt-4">
+                            <div class="card features feature-primary text-center border-0 p-4 rounded shadow">
+                                <div class="icon text-center rounded-lg mx-auto">
+                                    <i class="uil uil-message align-middle h3 mb-0"></i>
+                                </div>
+                                <div class="card-body p-0 mt-3">
+                                    <a href="javascript:void(0)" class="title text-dark h5">New Messages</a>
+                                    <p class="text-muted my-2">Due to its wide spread use as filler text</p>
+                                    <a href="javascript:void(0)" class="link">Read more <i class="ri-arrow-right-line align-middle"></i></a>
+                                </div>
+                            </div>
+                        </div><!--end col-->
+                        
+                        <div class="col-xl-3 col-md-6 mt-4">
+                            <div class="card features feature-primary text-center border-0 p-4 rounded shadow">
+                                <div class="icon text-center rounded-lg mx-auto">
+                                    <i class="uil uil-envelope-star align-middle h3 mb-0"></i>
+                                </div>
+                                <div class="card-body p-0 mt-3">
+                                    <a href="javascript:void(0)" class="title text-dark h5">Latest Proposals</a>
+                                    <p class="text-muted my-2">Due to its wide spread use as filler text</p>
+                                    <a href="javascript:void(0)" class="link">View more <i class="ri-arrow-right-line align-middle"></i></a>
+                                </div>
+                            </div>
+                        </div><!--end col-->
+                        
+                        <div class="col-xl-3 col-md-6 mt-4">
+                            <div class="card features feature-primary text-center border-0 p-4 rounded shadow">
+                                <div class="icon text-center rounded-lg mx-auto">
+                                    <i class="uil uil-hourglass align-middle h3 mb-0"></i>
+                                </div>
+                                <div class="card-body p-0 mt-3">
+                                    <a href="javascript:void(0)" class="title text-dark h5">Package Expiry</a>
+                                    <p class="text-muted my-2">Due to its wide spread use as filler text</p>
+                                    <a href="javascript:void(0)" class="link">Check here <i class="ri-arrow-right-line align-middle"></i></a>
+                                </div>
+                            </div>
+                        </div><!--end col-->
+                        
+                        <div class="col-xl-3 col-md-6 mt-4">
+                            <div class="card features feature-primary text-center border-0 p-4 rounded shadow">
+                                <div class="icon text-center rounded-lg mx-auto">
+                                    <i class="uil uil-heart align-middle h3 mb-0"></i>
+                                </div>
+                                <div class="card-body p-0 mt-3">
+                                    <a href="javascript:void(0)" class="title text-dark h5">Saved Items</a>
+                                    <p class="text-muted my-2">Due to its wide spread use as filler text</p>
+                                    <a href="javascript:void(0)" class="link">View items <i class="ri-arrow-right-line align-middle"></i></a>
+                                </div>
+                            </div>
+                        </div><!--end col-->
+                    </div><!--end row--> --}}
+                </div><!--end col-->
+            </div><!--end row-->
+        </div><!--end container-->
+    </section>
+    <!-- End Hero -->
+
+    <!-- Footer Start -->
+    <footer class="bg-footer py-4">
+     {{>footer}}
+    </footer>
+    <!-- End -->
+
+    <!-- Back to top -->
+    <a href="#" onclick="topFunction()" id="back-to-top" class="btn btn-icon btn-pills btn-primary back-to-top"><i data-feather="arrow-up" class="icons"></i></a>
+    <!-- Back to top -->
+
+    <!-- Offcanvas Start -->
+    <div class="offcanvas bg-white offcanvas-top" tabindex="-1" id="offcanvasTop">
+        <div class="offcanvas-body d-flex align-items-center align-items-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="text-center">
+                            <h4>Search now.....</h4>
+                            <div class="subcribe-form mt-4">
+                                <form>
+                                    <div class="mb-0">
+                                        <input type="text" id="help" name="name" class="border bg-white rounded-pill" required="" placeholder="Search">
+                                        <button type="submit" class="btn btn-pills btn-primary">Search</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div><!--end col-->
+                </div><!--end row-->
+            </div><!--end container-->
+        </div>
+    </div>
+    <!-- Offcanvas End -->
+
+    <!-- Offcanvas Start -->
+    <div class="offcanvas offcanvas-end bg-white shadow" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header p-4 border-bottom">
+            <h5 id="offcanvasRightLabel" class="mb-0">
+                <img src="../assets/images/logo-dark.png" height="24" class="light-version" alt="">
+                <img src="../assets/images/logo-light.png" height="24" class="dark-version" alt="">
+            </h5>
+            <button type="button" class="btn-close d-flex align-items-center text-dark" data-bs-dismiss="offcanvas" aria-label="Close"><i class="uil uil-times fs-4"></i></button>
+        </div>
+        <div class="offcanvas-body p-4 px-md-5">
+            <div class="row">
+                <div class="col-12">
+                    <!-- Style switcher -->
+                    <div id="style-switcher">
+                        <div>
+                            <ul class="text-center list-unstyled mb-0">
+                                <li class="d-grid"><a href="javascript:void(0)" class="rtl-version t-rtl-light" onclick="setTheme('style-rtl')"><img src="../assets/images/layouts/landing-light-rtl.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">RTL Version</span></a></li>
+                                <li class="d-grid"><a href="javascript:void(0)" class="ltr-version t-ltr-light" onclick="setTheme('style')"><img src="../assets/images/layouts/landing-light.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">LTR Version</span></a></li>
+                                <li class="d-grid"><a href="javascript:void(0)" class="dark-rtl-version t-rtl-dark" onclick="setTheme('style-dark-rtl')"><img src="../assets/images/layouts/landing-dark-rtl.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">RTL Version</span></a></li>
+                                <li class="d-grid"><a href="javascript:void(0)" class="dark-ltr-version t-ltr-dark" onclick="setTheme('style-dark')"><img src="../assets/images/layouts/landing-dark.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">LTR Version</span></a></li>
+                                <li class="d-grid"><a href="javascript:void(0)" class="dark-version t-dark mt-4" onclick="setTheme('style-dark')"><img src="../assets/images/layouts/landing-dark.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Dark Version</span></a></li>
+                                <li class="d-grid"><a href="javascript:void(0)" class="light-version t-light mt-4" onclick="setTheme('style')"><img src="../assets/images/layouts/landing-light.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Light Version</span></a></li>
+                                <li class="d-grid"><a href="../admin/index.html" target="_blank" class="mt-4"><img src="../assets/images/layouts/light-dash.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Admin Dashboard</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- end Style switcher -->
+                </div><!--end col-->
+            </div><!--end row-->
+        </div>
+
+        <div class="offcanvas-footer p-4 border-top text-center">
+            <ul class="list-unstyled social-icon mb-0">
+                <li class="list-inline-item mb-0"><a href="https://1.envato.market/doctris" target="_blank" class="rounded"><i class="uil uil-shopping-cart align-middle" title="Buy Now"></i></a></li>
+                <li class="list-inline-item mb-0"><a href="https://dribbble.com/shreethemes" target="_blank" class="rounded"><i class="uil uil-dribbble align-middle" title="dribbble"></i></a></li>
+                <li class="list-inline-item mb-0"><a href="https://www.facebook.com/shreethemes" target="_blank" class="rounded"><i class="uil uil-facebook-f align-middle" title="facebook"></i></a></li>
+                <li class="list-inline-item mb-0"><a href="https://www.instagram.com/shreethemes/" target="_blank" class="rounded"><i class="uil uil-instagram align-middle" title="instagram"></i></a></li>
+                <li class="list-inline-item mb-0"><a href="https://twitter.com/shreethemes" target="_blank" class="rounded"><i class="uil uil-twitter align-middle" title="twitter"></i></a></li>
+                <li class="list-inline-item mb-0"><a href="mailto:support@shreethemes.in" class="rounded"><i class="uil uil-envelope align-middle" title="email"></i></a></li>
+                <li class="list-inline-item mb-0"><a href="https://shreethemes.in" target="_blank" class="rounded"><i class="uil uil-globe align-middle" title="website"></i></a></li>
+            </ul><!--end icon-->
+        </div>
+    </div>
+    <!-- Offcanvas End -->
+    {{>javascript}}
+    <script>
+        
+var source = $("#entry-template").html();
+var template = Handlebars.compile(source);
+var output = template(patientData);
+$("body").append(output);
+    </script>
+    
+</body>
+
+</html>

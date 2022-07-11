@@ -1,0 +1,511 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {{>head}}
+</head>
+
+<body>
+    <!-- Loader -->
+    <!-- <div id="preloader">
+        <div id="status">
+            <div class="spinner">
+                <div class="double-bounce1"></div>
+                <div class="double-bounce2"></div>
+            </div>
+        </div>
+    </div> -->
+    <!-- Loader -->
+    
+    <!-- Navbar STart -->
+    <header id="topnav" class="defaultscroll sticky">
+     <div class="container-fluid ">
+        <!-- Logo container-->
+        <a class="logo" href="/">
+            <img src="../assets/images/logo-dark.png" height="24" class="logo-light-mode" alt="">
+            <img src="../assets/images/logo-light.png" height="24" class="logo-dark-mode" alt="">
+        </a>                
+        <!-- Logo End -->
+
+        <!-- Start Mobile Toggle -->
+        <div class="menu-extras">
+            <div class="menu-item">
+                <!-- Mobile menu toggle-->
+                <a class="navbar-toggle" id="isToggle" onclick="toggleMenu()">
+                    <div class="lines">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </a>
+                <!-- End mobile menu toggle-->
+            </div>
+        </div>
+        <!-- End Mobile Toggle -->
+
+        <!-- Start Dropdown -->
+        <ul class="dropdowns list-inline mb-0">
+            <li class="list-inline-item mb-0">
+                <a href="javascript:void(0)" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                    <div class="btn btn-icon btn-pills btn-primary"><i data-feather="settings" class="fea icon-sm"></i></div>
+                </a>
+            </li>
+
+            <li class="list-inline-item mb-0 ms-1">
+                <a href="javascript:void(0)" class="btn btn-icon btn-pills btn-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasTop" aria-controls="offcanvasTop">
+                    <i class="uil uil-search"></i>
+                </a>
+            </li>
+            
+            <li class="list-inline-item mb-0 ms-1">
+                <div class="dropdown dropdown-primary">
+                    <button type="button" class="btn btn-pills btn-soft-primary dropdown-toggle p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{user.profilePicture}}" class="avatar avatar-ex-small rounded-circle" alt=""></button>
+                    <div class="dropdown-menu dd-menu dropdown-menu-end bg-white shadow border-0 mt-3 py-3" style="min-width: 200px;">
+                        <a class="dropdown-item d-flex align-items-center text-dark" href="/api/profile">
+                            <img src="{{patientDetail.profilePicture}}" class="avatar avatar-md-sm rounded-circle border shadow" alt="">
+                            <div class="flex-1 ms-2">
+                                <span class="d-block mb-1">{{patientDetail.firstName}} {{patientDetail.lastName}}</span>
+                                <small class="text-muted">{{patientDetail.departmen}}</small>
+                            </div>
+                        </a>
+                        <a class="dropdown-item text-dark" href="/patientDashboard"><span class="mb-0 d-inline-block me-1"><i class="uil uil-dashboard align-middle h6"></i></span> Dashboard</a>
+                        <a class="dropdown-item text-dark" href="/patientProfile"><span class="mb-0 d-inline-block me-1"><i class="uil uil-setting align-middle h6"></i></span> Profile Settings</a>
+                        <div class="dropdown-divider border-top"></div>
+                        <a class="dropdown-item text-dark" href="/logout"><span class="mb-0 d-inline-block me-1"><i class="uil uil-sign-out-alt align-middle h6"></i></span> Logout</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <!-- Start Dropdown -->
+
+        <div id="navigation">
+            <!-- Navigation Menu-->   
+            <ul class="navigation-menu nav-left nav-light">
+                <li class="has-submenu parent-menu-item">
+                        <li><a href="/" class="sub-menu-item">Home</a></li>
+                </li>
+
+                <li class="has-submenu parent-parent-menu-item">
+                    
+                <a href="/aboutus" class="sub-menu-item"> AboutUs</a>
+                            
+                </li>
+                <li class="has-submenu parent-menu-item"> 
+                        <a href="/contact" class="sub-menu-item">Contact</a>
+                </li>
+                <li class="has-submenu parent-menu-item">
+                
+                    <li><a href="/depertments" class="sub-menu-item">Departments</a></li>
+                
+                </li>
+                <li class="has-submenu parent-menu-item">
+                        <a href="/appointmentBook" class="sub-menu-item">AppointmentBook</a>
+                </li>
+
+            </ul><!--end navigation menu-->
+        </div><!--end navigation-->
+    </div><!--end container-->
+ <!-- Navbar STart -->
+    
+    </header>
+    <!-- Navbar End -->
+    <!-- Start Hero -->
+    <section class="bg-dashboard">
+        <div class="container-fluid">
+            <div class="row">
+               
+            <div class="col-xl-3 col-lg-4 col-md-5 col-12">
+              <div class="rounded shadow overflow-hidden sticky-bar">
+               <div class="bg-white rounded shadow overflow-hidden">
+                <div class="card border-0">
+                  <img src="../assets/images/bg/bg-profile.jpg" class="img-fluid" alt="" />
+                </div>
+                     
+                <div class="text-center avatar-profile margin-nagative mt-n5 position-relative pb-4 border-bottom">
+                  <img src = "{{patientDetail.profilePicture}}" class="avatar avatar-md-md rounded-pill shadow mx-auto d-block" alt=""/>
+                  <h5 class="mt-3 mb-1">{{patientDetail.firstName}} {{patientDetail.lastName}}</h5>
+                  {{!-- <p class="text-muted mb-0">{{user.age}} Years old</p> --}}
+                </div>
+
+                <div class="list-unstyled p-4">
+                  <div class="progress-box mb-4">
+                    <h6 class="title">Complete your profile</h6>
+                    <div class="progress">
+                      <div class="progress-bar position-relative bg-primary" style="width:89%;">
+                        <div class="progress-value d-block text-muted h6">89%</div>
+                      </div>
+                    </div>
+                  </div>
+                  <!--end process box-->
+
+                  <div class="d-flex align-items-center mt-2">
+                    <i class="uil uil-user align-text-bottom text-primary h5 mb-0 me-2"></i>
+                    <h6 class="mb-0 text-muted">Gender</h6>
+                    <p class="text-muted mb-0 ms-2">{{patientDetail.gender}}</p>
+                  </div>
+
+                  <div class="d-flex align-items-center mt-2">
+                    <i class="uil uil-envelope align-text-bottom text-primary h5 mb-0 me-2"></i>
+                    <h6 class="mb-0 text-muted">Birthday</h6>
+                    <p class="text-muted mb-0 ms-2">{{patientDetail.age}}</p>
+                  </div>
+
+                  <div class="d-flex align-items-center mt-2">
+                    <i class="uil uil-book-open align-text-bottom text-primary h5 mb-0 me-2"></i>
+                    <h6 class="mb-0 text-muted">Phone No.</h6>
+                    <p class="text-muted mb-0 ms-2">{{patientDetail.contactNumber}}</p>
+                  </div>
+
+                  <div class="d-flex align-items-center mt-2">
+                    <i class="uil uil-italic align-text-bottom text-primary h5 mb-0 me-2"></i>
+                    <h6 class="mb-0 text-muted">Address</h6>
+                    <p class="text-muted mb-0 ms-2">{{patientDetail.address}}</p>
+                  </div>
+
+                  <div class="d-flex align-items-center mt-2">
+                    <i class="uil uil-medical-drip align-text-bottom text-primary h5 mb-0 me-2"></i>
+                    <h6 class="mb-0 text-muted">Blood Group</h6>
+                    <p class="text-muted mb-0 ms-2">{{patientDetail.bloodGroup}}</p>
+                  </div>
+                </div>
+              </div>
+
+                <div
+                  class="text-center avatar-profile margin-nagative mt-n5 position-relative pb-4 border-bottom"
+                >
+                </div>
+
+                <ul class="list-unstyled sidebar-nav mb-0">
+                  <li class="navbar-item"><a
+                      href="/patientDashboard"
+                      class="navbar-link"
+                    ><i class="ri-calendar-check-line align-middle navbar-icon"></i>
+                      Our Appointment</a></li>
+                  <li class="navbar-item"><a href="/patientPyt" class="navbar-link"><i
+                        class="ri-user-line align-middle navbar-icon"
+                      ></i>
+                      Payments</a></li>
+                  <li class="navbar-item"><a
+                      href="/patientProfile"
+                      class="navbar-link"
+                    ><i class="ri-user-settings-line align-middle navbar-icon"></i>
+                      Profile Settings</a></li>
+                </ul>
+              </div>
+            </div><!--end col-->
+
+                <div class="col-xl-9 col-lg-8 col-md-7 mt-4 mt-sm-0">
+                    <h5 class="mb-0"> Paitents Dashboard</h5>
+                      <div class="row">
+                            {{!-- <div class="tab-content p-4" id="pills-tabContent"> --}}
+                            
+                              {{!-- <div class="tab-pane fade" id="pills-experience" role="tabpanel" aria-labelledby="experience-tab"> --}}
+                                <div class="col-xl-12 col-lg-6 col-12 mt-4 pt-2">
+                                <h5 class="mb-0">Personal Information :</h5>
+                                <div id="form-response">
+                                </div>
+                                <div class="row align-items-center mt-4">
+                                  <div class="col-lg-2 col-md-4">
+                                    <img src="{{patientDetail.profilePicture}}" class="avatar avatar-md-md rounded-pill shadow mx-auto d-block"
+                                      alt="" />
+                                  </div>
+                                  <!--end col-->
+
+                                  <div class="col-lg-5 col-md-8 text-center text-md-start mt-4 mt-sm-0">
+                                    <h6 class="">Upload your picture</h6>
+                                    <p class="text-muted mb-0">For best results, use an image
+                                      at least 256px by 256px in either .jpg or .png format</p>
+                                  </div>
+                                  <!--end col-->
+
+                                  <div class="col-lg-5 col-md-12 text-lg-right text-center mt-4 mt-lg-0">
+                                    <a href="#" class="btn btn-primary">Upload</a>
+                                    <a href="#" class="btn btn-soft-primary ms-2">Remove</a>
+                                  </div>
+                                  <!--end col-->
+                                </div>
+                                <!--end row-->
+
+                                <form method="post" name="ajax_form" action="/api/patient-profile-update" enctype="multipart/form-data"
+                                  class="mt-4 ajax_form">
+                                  <input type="hidden" name="token" value="{{token}}">
+                                  <div class="row">
+                                    <div class="col-md-6">
+                                      <div class="mb-3">
+                                        <input type="file" id="myFile" name="profilePicture">
+                                      </div>
+                                    </div>
+                                    <!--end col-->
+
+                                    <div class="col-lg-6">
+                                      <div class="mb-3">
+                                        <label class="form-label">First Name <span class="text-danger">*</label>
+                                        <input name="firstName" id="name" type="text" class="form-control" placeholder="First Name : {{patientDetail.firstName}}" required=""/>
+                                      </div>
+                                    </div>
+                                    <!--end col-->
+
+                                    <div class="col-lg-6">
+                                      <div class="mb-3">
+                                        <label class="form-label">Last Name <span class="text-danger">*</label>
+                                        <input name="lastName" id="name2" type="text" class="form-control" placeholder="Last Name : {{patientDetail.lastName}}" required=""/>
+                                      </div>
+                                    </div>
+                                    <!--end col-->
+
+                                    <div class="col-lg-6">
+                                      <div class="mb-3">
+                                        <label class="form-label">Your Age <span class="text-danger">*</label>
+                                        <input name="age" id="age" type="text" class="form-control" placeholder="Your age: {{patientDetail.age}}" required=""/>
+                                      </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                      <div class="mb-3">
+                                        <label class="form-label">Your Birthday <span class="text-danger">*</label>
+                                        <input name="birthday" id="email" type="date" class="form-control"
+                                          placeholder="Your Birthday : {{patientDetail.birthday}}" required=""/>
+                                      </div>
+                                    </div>
+                                    <!--end col-->
+
+                                    <div class="col-lg-6">
+                                      <div class="mb-3">
+                                        <label class="form-label">Your Address <span class="text-danger">*</label>
+                                        <input name="address" id="address" type="text" class="form-control"
+                                          placeholder="Your Address : {{patientDetail.address}}" required=""/>
+                                      </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Gender <span class="text-danger">*</span></label>
+                                                 <select name="gender" class="form-control doctor-name select2input" required="">
+                                                    <option value="">Select</option>
+                                                    <option>Male</option>
+                                                    <option>Female</option>
+                                                    <option>Children</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    <!--end col-->
+
+                                    <div class="col-lg-6">
+                                      <div class="mb-3">
+                                        <label class="form-label">Your Blood Group <span class="text-danger">*</label>
+                                        <input name="bloodGroup" id="bloodGroup" type="text" class="form-control"
+                                          placeholder="Your Blood Group : {{patientDetail.bloodGroup}}" required=""/>
+                                      </div>
+                                    </div>
+                                    <!--end col-->
+
+                                    <div class="col-lg-6">
+                                      <div class="mb-3">
+                                        <label class="form-label">Phone no.<span class="text-danger">*</label>
+                                        <input name="contactNumber" id="number" type="text" class="form-control"
+                                          placeholder="Phone no. : {{patientDetail.contactNumber}}"  required=""/>
+                                      </div>
+                                    </div>
+                                    <!--end col-->
+
+                                    <div class="col-md-12">
+                                      <div class="mb-3">
+                                        <label class="form-label">Your Bio Here<span class="text-danger">*</label>
+                                        <textarea name="bio" id="comments" rows="4" class="form-control" placeholder="Bio : {{patientDetail.bio}}"required=""></textarea>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <!--end row-->
+
+                                  <div class="row">
+                                    <div class="col-sm-12">
+                                      <input type="submit" id="submits" name="send" class="btn btn-primary" value="Save changes" />
+                                    </div>
+                                    <!--end col-->
+                                  </div>
+                                  <!--end row-->
+                                </form>
+                                <!--end form-->
+
+                                <div class="mt-4 pt-2">
+                                  <h5 class="mb-0">Change Password<span class="text-danger">*</h5>
+
+                                  <form method="POST" action="/api/patient-change-password" id="change-password-form" class="mt-4">
+                                    <input type="hidden" name="token" value="{{token}}">
+                                    <div class="row">
+                                      <div class="col-lg-12">
+                                        <div class="mb-3">
+                                          <label class="form-label">Old password<span class="text-danger">*</label>
+                                          <input type="password" name="password" class="form-control" placeholder="Old password"
+                                            required="" />
+                                        </div>
+                                      </div>
+                                      <!--end col-->
+
+                                      <div class="col-lg-12">
+                                        <div class="mb-3">
+                                          <label class="form-label">New password<span class="text-danger">*</label>
+                                          <input type="password" name="newpassword" class="form-control" placeholder="New password"
+                                            required="" />
+                                        </div>
+                                      </div>
+                                      <!--end col-->
+
+                                      <div class="col-lg-12">
+                                        <div class="mb-3">
+                                          <label class="form-label">Re-type New password<span class="text-danger">*</label>
+                                          <input type="password" name="confirmpassword" class="form-control"
+                                            placeholder="Re-type New password" required="" />
+                                        </div>
+                                      </div>
+                                      <!--end col-->
+
+                                      <div class="col-lg-12 mt-2 mb-0">
+                                        <input type="submit" id="submit" name="send" class="btn btn-primary" value="Save changes">
+                                      </div>
+                                      <!--end col-->
+                                    </div>
+                                    <!--end row-->
+                                  </form>
+                                </div>
+
+                                <div class="mt-4 pt-2">
+                                  <h5 class="mb-0 text-danger">Delete Account :</h5>
+
+                                  <p class="mb-0 mt-4">Do you want to delete the account?
+                                    Please press below "Delete" button</p>
+                                  <div class="mt-4">
+                                    <form id="delete-account" action='/api/Patient-delete-account/{{user._id}}' method="GET">
+                                      <input type="hidden" name="token" value="{{token}}">
+                                      <input type="hidden" type="text" name="_id" value="{{user._id}}">
+                                      <button type="submit" class="btn btn-danger">Delete Account</button>
+                                    </form>
+                                  </div>
+                                  <!--end col-->
+                                </div>
+                              {{!-- </div> --}}
+                          {{!-- </div> --}}
+                       </div>
+                    </div><!--end row-->
+                </div><!--end col-->
+            </div><!--end row-->
+        </div><!--end container-->
+    </section>
+    <!-- End Hero -->
+
+    <!-- Footer Start -->
+    <footer class="bg-footer py-4">
+     {{>footer}}
+    </footer>
+    <!-- End -->
+
+    <!-- Back to top -->
+    <a href="#" onclick="topFunction()" id="back-to-top" class="btn btn-icon btn-pills btn-primary back-to-top"><i data-feather="arrow-up" class="icons"></i></a>
+    <!-- Back to top -->
+
+    <!-- Offcanvas Start -->
+    <div class="offcanvas bg-white offcanvas-top" tabindex="-1" id="offcanvasTop">
+        <div class="offcanvas-body d-flex align-items-center align-items-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="text-center">
+                            <h4>Search now.....</h4>
+                            <div class="subcribe-form mt-4">
+                                <form>
+                                    <div class="mb-0">
+                                        <input type="text" id="help" name="name" class="border bg-white rounded-pill" required="" placeholder="Search">
+                                        <button type="submit" class="btn btn-pills btn-primary">Search</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div><!--end col-->
+                </div><!--end row-->
+            </div><!--end container-->
+        </div>
+    </div>
+    <!-- Offcanvas End -->
+
+    <!-- Offcanvas Start -->
+    <div class="offcanvas offcanvas-end bg-white shadow" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header p-4 border-bottom">
+            <h5 id="offcanvasRightLabel" class="mb-0">
+                <img src="../assets/images/logo-dark.png" height="24" class="light-version" alt="">
+                <img src="../assets/images/logo-light.png" height="24" class="dark-version" alt="">
+            </h5>
+            <button type="button" class="btn-close d-flex align-items-center text-dark" data-bs-dismiss="offcanvas" aria-label="Close"><i class="uil uil-times fs-4"></i></button>
+        </div>
+        <div class="offcanvas-body p-4 px-md-5">
+            <div class="row">
+                <div class="col-12">
+                    <!-- Style switcher -->
+                    <div id="style-switcher">
+                        <div>
+                            <ul class="text-center list-unstyled mb-0">
+                                <li class="d-grid"><a href="javascript:void(0)" class="rtl-version t-rtl-light" onclick="setTheme('style-rtl')"><img src="../assets/images/layouts/landing-light-rtl.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">RTL Version</span></a></li>
+                                <li class="d-grid"><a href="javascript:void(0)" class="ltr-version t-ltr-light" onclick="setTheme('style')"><img src="../assets/images/layouts/landing-light.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">LTR Version</span></a></li>
+                                <li class="d-grid"><a href="javascript:void(0)" class="dark-rtl-version t-rtl-dark" onclick="setTheme('style-dark-rtl')"><img src="../assets/images/layouts/landing-dark-rtl.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">RTL Version</span></a></li>
+                                <li class="d-grid"><a href="javascript:void(0)" class="dark-ltr-version t-ltr-dark" onclick="setTheme('style-dark')"><img src="../assets/images/layouts/landing-dark.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">LTR Version</span></a></li>
+                                <li class="d-grid"><a href="javascript:void(0)" class="dark-version t-dark mt-4" onclick="setTheme('style-dark')"><img src="../assets/images/layouts/landing-dark.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Dark Version</span></a></li>
+                                <li class="d-grid"><a href="javascript:void(0)" class="light-version t-light mt-4" onclick="setTheme('style')"><img src="../assets/images/layouts/landing-light.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Light Version</span></a></li>
+                                <li class="d-grid"><a href="../admin/index.html" target="_blank" class="mt-4"><img src="../assets/images/layouts/light-dash.png" class="img-fluid rounded-md shadow-md d-block" alt=""><span class="text-muted mt-2 d-block">Admin Dashboard</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- end Style switcher -->
+                </div><!--end col-->
+            </div><!--end row-->
+        </div>
+
+        <div class="offcanvas-footer p-4 border-top text-center">
+            <ul class="list-unstyled social-icon mb-0">
+                <li class="list-inline-item mb-0"><a href="https://1.envato.market/doctris" target="_blank" class="rounded"><i class="uil uil-shopping-cart align-middle" title="Buy Now"></i></a></li>
+                <li class="list-inline-item mb-0"><a href="https://dribbble.com/shreethemes" target="_blank" class="rounded"><i class="uil uil-dribbble align-middle" title="dribbble"></i></a></li>
+                <li class="list-inline-item mb-0"><a href="https://www.facebook.com/shreethemes" target="_blank" class="rounded"><i class="uil uil-facebook-f align-middle" title="facebook"></i></a></li>
+                <li class="list-inline-item mb-0"><a href="https://www.instagram.com/shreethemes/" target="_blank" class="rounded"><i class="uil uil-instagram align-middle" title="instagram"></i></a></li>
+                <li class="list-inline-item mb-0"><a href="https://twitter.com/shreethemes" target="_blank" class="rounded"><i class="uil uil-twitter align-middle" title="twitter"></i></a></li>
+                <li class="list-inline-item mb-0"><a href="mailto:support@shreethemes.in" class="rounded"><i class="uil uil-envelope align-middle" title="email"></i></a></li>
+                <li class="list-inline-item mb-0"><a href="https://shreethemes.in" target="_blank" class="rounded"><i class="uil uil-globe align-middle" title="website"></i></a></li>
+            </ul><!--end icon-->
+        </div>
+    </div>
+    <!-- Offcanvas End -->
+    <script>
+        
+        {{!-- document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('btnFetch').addEventListener('click', sendReq);
+            //pretend to get a token after logging in
+            sessionStorage.setItem('MyUniqueUserToken',
+                JSON.stringify(
+                    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MWZiNzk0ZDU2YWEyMmFiYWY3M2RiNGIiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDM4Nzk2OTAsImV4cCI6MTY0Mzg4MzI5MH0.zh6hprx40M6vTtKYRMWa6sC3y4cwX0_T-MFQBrpf2bQ'
+                    )
+            );
+        });
+
+        let sendReq = (ev) => {
+            let url = 'http://localhost:8001/api/signin';
+            let token = JSON.parse(sessionStorage.getItem('MyUniqueUserToken'));
+
+            let h = new Headers();
+            h.append('Authorization', `Bearer ${token}`);
+
+            let req = new Request(url, {
+                method: 'GET',
+                mode: 'cors',
+                headers: h
+            });
+            fetch(req)
+                .then(resp => resp.json())
+                .then(data => {
+                    console.log(data[0]);
+                })
+                .catch(err => {
+                    console.error(err.message);
+                })
+        } --}}
+    </script>
+    {{>javascript}}
+</body>
+
+</html>
