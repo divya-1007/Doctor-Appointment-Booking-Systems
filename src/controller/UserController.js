@@ -124,7 +124,7 @@ exports.UserSignin = async (req, res) => {
         return res.send( {status: 500,message: "Invalid Password...! Please enter valid Password"});
       }
       
-      const token = jwt.sign({_id: user._id, role: user.role}, process.env.JWT_SECRET,{expiresIn: "7h"});
+      const token = jwt.sign({_id: user._id, role: user.role}, 'MERNSECRET',{expiresIn: "7h"});
       const {_id, firstName, lastName, email, role, fullName} = user;
       req.session.token = token;
       req.session.user = user;

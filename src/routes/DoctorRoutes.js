@@ -601,7 +601,7 @@ router.get("/google/callback", function(req, res, next) {
           } else {
             // if user is not preset in our database save user data to database.
              const user = await User.create(newUser);
-              const token = jwt.sign({_id: user._id, role: user.role}, process.env.JWT_SECRET,{expiresIn: "7h"});
+              const token = jwt.sign({_id: user._id, role: user.role}, 'MERNSECRET',{expiresIn: "7h"});
               const {_id, firstName, lastName, email, role, fullName,} = user;
               req.session.token = token;
               req.session.user = user;
@@ -642,7 +642,7 @@ router.get("/google/callback", function(req, res, next) {
         
             // if user is not preset in our database save user data to database.
           const user = await User.create(newUsers);
-          const token = jwt.sign({_id: user._id, role: user.role}, process.env.JWT_SECRET,{expiresIn: "7h"});
+          const token = jwt.sign({_id: user._id, role: user.role}, 'MERNSECRET',{expiresIn: "7h"});
               const {_id, firstName, lastName, email, role, fullName,} = user;
               req.session.token = token;
               req.session.user = user;

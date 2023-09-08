@@ -31,7 +31,7 @@ const facebookStrategy = require('passport-facebook').Strategy
 /*Call environment variables or contants */
 
 /*Database connection */
-mongoose.connect( process.env.MONGO_DB_DATABASE_CONNECTION, {
+mongoose.connect('mongodb+srv://divyaChourasiya:7FerseixchRlYwN3@pbmc.y3bez7u.mongodb.net/Doctor-Appointment-Booking-Systems?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

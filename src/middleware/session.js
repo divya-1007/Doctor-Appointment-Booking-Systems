@@ -9,7 +9,7 @@ module.exports = function (req,res,next) {
             return res.redirect('/SignIn');
         }
         else {
-            jwt.verify(token, process.env.JWT_SECRET, function (err, decoded) {
+            jwt.verify(token, 'MERNSECRET', function (err, decoded) {
                 if (err) {
                     res.redirect('/SignIn');
                 } 

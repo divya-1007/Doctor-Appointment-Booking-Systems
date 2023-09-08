@@ -12,7 +12,7 @@ exports.authsJwt = async function (req, res, next) {
               });
           }
           try {
-              const verified = jwt.verify(token, process.env.JWT_SECRET);
+              const verified = jwt.verify(token, 'MERNSECRET');
               req.user = verified;
               next();
           }
