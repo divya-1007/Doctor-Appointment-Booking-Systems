@@ -162,8 +162,10 @@
             success: function (response) {
              if(response.status ==200){   
             setTimeout(() => {
-            swal("Good job!", ''+response.message+'', "success");
-            //$("#form-response").html('<div  class="alert alert-success" role="alert"> '+response.message+'</div>'); 
+            {{!-- swal("Good job!", ''+response.message+'', "success"); --}}
+            $("#form-response").html('<div  class="alert alert-success" role="alert"> '+response.message+'</div>'); 
+
+            window.location.href = '/'
             }, 1000);
             }else{
             swal('Oops...',

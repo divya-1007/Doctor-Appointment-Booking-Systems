@@ -68,6 +68,7 @@ router.post("/department", upload.single("icon"), department);
 router.post("/departmentEdit",upload.single("icon"), departmentEdit);
 router.post("/department-delete", departmentDelete);
 router.post('/role', dataRole );
+// router.post.('/countryInsert')
 
 module.exports = router;
 // Synetal@123

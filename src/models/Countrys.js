@@ -1,45 +1,21 @@
 const mogoose = require('mongoose');
 const userSchema = new mogoose.Schema({
-country:[{
-    isoCode: {
+  isoCode: {
     type: String,
   },
-   name: {
+  countryName: {
     type: String,
   },
-   phonecode: {
+  stateName:[{
     type: String,
-  },
+  }],
    flag: {
     type: String,
   },
    currency: {
     type: String,
   },
-   latitude: {
-    type: String,
-  },
-   longitude: {
-    type: String,
-  },
-   timezones: [{
-     zoneName: {
-        type: String,
-      },
-       gmtOffset: {
-        type: String,
-      },
-       gmtOffsetName: {
-        type: String,
-      },
-       abbreviation: {
-        type: String,
-      },
-       tzName: {
-        type: String,
-      },
-   }],
-}]
+   
 }, { timestamps: true });
 
 

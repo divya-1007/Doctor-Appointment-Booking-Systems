@@ -306,7 +306,8 @@
             success: function (response) {
              if(response.status ==200){   
             setTimeout(() => {
-            swal("Good job!", ''+response.message+'', "success");
+             swal("Good job!", ''+response.message+'', "success");
+            location.reload();
             }, 1000);
             }else{
             swal('Oops...',
@@ -330,10 +331,12 @@
             contentType: false,
             processData: false,
             success: function (response) {
-             if(response.status ==200){   
+             if(response.status ==200){  
             setTimeout(() => {
-            swal("Success ...!", ''+response.message+'', "success");
+                swal("Success ...!", ''+response.message+'', "success"); 
+                location.reload();
             }, 1000);
+             
             }else{
             swal('Oops...',
                 response.message,

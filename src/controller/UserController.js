@@ -10,14 +10,9 @@ const PatientReview = require("../models/patientReview");
 var async = require("async");
 var crypto = require("crypto");
 const bcrypt = require("bcrypt");
-var nodemailer = require("nodemailer");
-const { body } = require("express-validator");
-var SibApiV3Sdk = require('sib-api-v3-sdk');
+const { Email, AVAILABLETEMPLATES } = require("../utils/emailService")
 const {use}=require('chai');
-var apiData = process.env.EMAIL_API_KEY
-var defaultClient = SibApiV3Sdk.ApiClient.instance;
-var apiKey = defaultClient.authentications['api-key'];
-apiKey.apiKey = apiData
+
  
 
 
@@ -46,42 +41,38 @@ exports.UserSignup = async (req, res) => {
     var saltRound = 10;
     bcrypt.hashSync(req.body.password, saltRound)
     const users = new User({ firstName,lastName,email,contactNumber,password,username: Math.random().toString()});
-    users.save(function (err,user) {
-  var apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
-  var sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail(); 
-  sendSmtpEmail = {
-    sender: { email: "noreply@easeaccount.in" },
-    to: [
-      {
-        email: user.email,
-        name: user.firstName +user.lastName,
-      },
-    ],
-    subject: "Please Verify Your Account",
-    htmlContent:'<div style="max-width:640px;margin:0 auto;box-shadow:0px 1px 5px rgba(0,0,0,0.1);border-radius:4px;overflow:hidden"><table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;background:#396cf0 url(https://cdn.discordapp.com/email_assets/f0a4cc6d7aaa7bdf2a3c15a193c6d224.png) top center / cover no-repeat;" align="center" border="0" background="https://cdn.discordapp.com/email_assets/f0a4cc6d7aaa7bdf2a3c15a193c6d224.png"><tbody><tr>'+
-              '<td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:57px;"> <div style="cursor:auto;color:white;font-family:Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;font-size:36px;font-weight:600;line-height:36px;text-align:center;">Welcome Doctor Appointment Booking System</div></td></tr></tbody></table><table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;background:#ffffff;" align="center" border="0"> <tbody>'+
-              '<tr><td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:40px 70px;"><div aria-labelledby="mj-column-per-100" class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;"><table role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0"><tbody> <tr> <td style="word-break:break-word;font-size:0px;padding:0px 0px 20px;" align="left"><div style="cursor:auto;color:#737F8D;font-family:Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;font-size:16px;line-height:24px;text-align:left;"><h2 style="font-family: Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;font-weight: 500;font-size: 20px;color: #4F545C;letter-spacing: 0.27px;">'+user.firstName+' '+user.lastName+',</h2><p>Wowwee! Thanks for registering an account with Doctor Appointment Booking System! You are the coolest person in all the land (and I have met a lot of really cool people).</p> <p>Before we get started, well need to verify your email.</p></div></td> </tr>'+
-              '<tr><td style="word-break:break-word;font-size:0px;padding:10px 25px;" align="center"><table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse:separate;" align="center" border="0"><tbody><tr><td style="border:none;border-radius:3px;color:white;cursor:auto;padding:15px 19px;" align="center" valign="middle" bgcolor="#396cf0">'+
-              '<a href="http://easeaccount.in'+
-              "/AccountActivate/"+
-              user._id+
-              '"style="text-decoration:none;line-height:100%;background:#396cf0;color:white;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:15px;font-weight:normal;text-transform:none;margin:0px;">Verify Email</a></td></tr></tbody></table> </td></tr></tbody></table></div></td> </tr></tbody></table></div>'
-  }
-// #396cf0 
-  apiInstance.sendTransacEmail(sendSmtpEmail).then(
-    function (data) {
-      console.log("API called successfully. Returned data: " + data);
-    },
-    function (error) {
-      console.error(error);
-    });
-   res.send({status: 200, message: "Your Account is created Successfully...!!! Please check your email and Verify your Account."});
+    users.save( async(err,user)=> {
+      const template = AVAILABLETEMPLATES.CONTACT_INFORMATION;
+        const ccEmails = ['divya12@yopmail.com','contact@flexi-hub.com','ajayshuklak@gmail.com','vipin.infograins@gmail.com'];
+        const templateEmail = user.email;
+        // Prepare the data you want to pass to the email template
+        const emailData = {
+          id:user._id,
+          fullName: user.firstName+" "+user.lastName,
+        };
+      
+        try {
+          // Send the email using the Email class
+          const emailResult = await Email.sendEmail(template, emailData,templateEmail);
+      
+          // Check if the email was sent successfully
+          if (emailResult.accepted.length > 0) {
+
+            console.log(`Email sent successfully to ${templateEmail}`);
+            return res.send({status: 200, message: "Your Account is created Successfully...!!! Please check your email and Verify your Account."});
+          } else {
+            console.error(`Failed to send email to ${ccEmails}`);
+          }
+        } catch (error) {
+          console.error(`Error sending email: ${error.message}`);
+        }
     });
   } else{
     console.log("hello");
     return res.send({status:200 ,message: "This email is registered previously!\n you need to login"});
   }
   });
+
 } catch (error) {
   res.status(500).json({msg: error});
 }
@@ -89,8 +80,8 @@ exports.UserSignup = async (req, res) => {
 
 exports.signupVarification = async (req, res, next) => {
   try {
-  var statusData = { status: 1};
   var idData = req.body._id
+  console.log(idData);
    await User.findByIdAndUpdate(idData, {status: 1} ,{
       useFindAndModify: false,
     }).exec((error, data) => {

@@ -34,6 +34,7 @@ let country = Country.getAllCountries()
 // console.log(Country.getAllCountries() ,"country")
 // console.log(State.getAllStates(),"state")
 // console.log(City.getCitiesOfCountry('In'),"city")
+// const users = new User({ firstName,lastName,email,contactNumber,password,username: Math.random().toString()});
 
 /* Patient Dashboard Contains */
 router.get("/patientDashboard",sessionAuth, async (req, res) => {

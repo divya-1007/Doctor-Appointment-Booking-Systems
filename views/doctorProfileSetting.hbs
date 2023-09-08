@@ -133,10 +133,8 @@
                                                <label class="form-label"> Country<span class="text-danger">*</label><br>
                                                 <select  name="country" class="form-control doctor-name select2input" onchange="getDoctorData(this.value)" required="">
                                                     <option value="">Select</option>
-                                                    {{#each countryData}}
-                                                    {{#each this.country}}
-                                                    <option value="{{this.isoCode}}#{{this.name}}">{{this.name}}</option>
-                                                    {{/each}}
+                                                 {{#each countryData}}
+                                                    <option value="{{this.isoCode}}#{{this.countryName}}">{{this.countryName}}</option>
                                                 {{/each}}
                                                 </select>
                                             </div>

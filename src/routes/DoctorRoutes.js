@@ -15,6 +15,23 @@ const Countrys = require('../models/Countrys')
 var passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth2').Strategy;
 const bcrypt = require("bcrypt");
+let Country = require('country-state-city').Country;
+let State = require('country-state-city').State;
+let City = require('country-state-city').City;
+
+
+const countryDatas = async(user )=>{
+  
+  for(let i =0;i<user.length;i++){
+    const countryUpdate = await Countrys.findOne({isoCode:user[i].countryCode})
+    
+    if(user[i].countryCode == countryUpdate.isoCode){
+     return await Countrys.findOneAndUpdate({_id:countryUpdate._id},{ $set: {stateName:user[i].name} },{ new: true }) 
+    }else{
+    return true 
+    }
+  }
+}
 
 
 // CLIENT
@@ -67,7 +84,7 @@ router.get("/", async(req, res) => {
          var fromsplitData = fromloopData.split('-')
          let d1 = new Date(tosplitData[0],tosplitData[1],tosplitData[2]).getTime()
          let d2 = new Date(fromsplitData[0],fromsplitData[1],fromsplitData[2]).getTime()
-
+         countries
         let date1 = new Date(d1);
         let date2 = new Date(d2);
         var yearsDiff =  date2.getFullYear() - date1.getFullYear();
@@ -235,6 +252,8 @@ router.get("/resertPassword/:id", async (req, res) => {
   });
 });
 router.get("/doctorProfileSetting",sessiontokentverify, async (req, res) => {
+  // console.log(await countryDatas(State.getAllStates()));
+  //  console.log(await countryDatas(State.getAllStates()));
 var sessionifo = req.session.user
 var UserData = await User.findById({_id:sessionifo._id,role: "doctor"});
     var departments = await Department.find();
