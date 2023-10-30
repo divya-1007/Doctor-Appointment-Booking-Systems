@@ -1,4 +1,14 @@
 const mogoose = require('mongoose');
+
+const stateSchema = new mogoose.Schema({
+  name: String,
+  isoCode: String,
+  countryCode: String,
+  population: Number,
+  // Other state-specific fields
+});
+
+
 const userSchema = new mogoose.Schema({
   isoCode: {
     type: String,
@@ -6,15 +16,7 @@ const userSchema = new mogoose.Schema({
   countryName: {
     type: String,
   },
-  stateName:[{
-    type: String,
-  }],
-   flag: {
-    type: String,
-  },
-   currency: {
-    type: String,
-  },
+  states: [stateSchema],
    
 }, { timestamps: true });
 

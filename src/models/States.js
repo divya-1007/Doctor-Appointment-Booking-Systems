@@ -10,12 +10,7 @@ state: [{
     countryCode: {
     type: String,
     },
-    latitude: {
-    type: String,
-    },
-    longitude: {
-    type: String,
-    },
+
 }],
 countryId: {
      type: mogoose.Schema.Types.ObjectId,

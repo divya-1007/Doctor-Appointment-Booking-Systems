@@ -94,7 +94,7 @@
                                         {{#if error_data}}
                                         <div class="has_error">{{error_data}}</div>
                                         {{/if}}
-                                        <form action="/api/clinic-appointment" method="post" id="appoimentDataOnline">
+                                        <form action="/api/clinic-appointment" method="post" id="appoimentData">
                                             <div class="row">
                                                 <div class="col-lg-12">
                                                     <div class="mb-3">
@@ -307,11 +307,11 @@
                                                 <select  name="country" class="form-control doctor-name select2input" required="">
                                                     <option value="">Select</option>
                                                     {{#each countryData}}
-                                                    {{#each this.country}}
-                                                    {{#each this.timezones}}
-                                                    <option value="{{../this.name}}#{{this.zoneName}}#{{this.gmtOffsetName}}">{{../this.name}}</option>
-                                                    {{/each}}
-                                                    {{/each}}
+                                                    {{!-- {{#each this.country}} --}}
+                                                    {{!-- {{#each this.timezones}} --}}
+                                                    <option value="{{this.countryName}}#{{this.isoCode}}#">{{this.countryName}}</option>
+                                                    {{!-- {{/each}} --}}
+                                                    {{!-- {{/each}} --}}
                                                 {{/each}}
                                                 </select>
                                             </div>
@@ -493,6 +493,7 @@
                 icon: "success",
                 button: "Ok..!",
                 });
+              location.reload();   
             }else{
             swal('Oops...',
                 response.message,
@@ -520,6 +521,7 @@
                 icon: "success",
                 button: "Ok..!",
                 });
+             location.reload();
             }else{
             swal('Oops...',
                 response.message,

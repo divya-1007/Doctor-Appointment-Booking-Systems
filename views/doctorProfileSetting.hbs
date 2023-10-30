@@ -20,7 +20,7 @@
         
         <!-- Navbar STart -->
         <header id="topnav" class="defaultscroll sticky">
-          {{>navbar  data = user}}
+          {{>navbar  data = UserData}}
         </header><!--end header-->
         <!-- Navbar End -->
 
@@ -479,7 +479,7 @@
                     if (response.length > 0) {
                         list += '<option value="">Select</option>';
                         $.each(response, function (index, value) {
-                        let stateData = value.state
+                        let stateData = value
                         var doctor_id_name =  stateData.name 
                         $(".state").append(list += '<option  value="' + doctor_id_name + '">' + stateData.name + " " +  '</option >');
                            

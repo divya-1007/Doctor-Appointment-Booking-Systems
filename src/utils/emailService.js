@@ -5,14 +5,15 @@ const nodemailer = require("nodemailer");
 // qxdujecsoudvqznj
 const AVAILABLETEMPLATES = {
   CONTACT_INFORMATION: "singUp",
-  ENQUIRE_FLEXI: "enquire-flexi"
+  APP_CLINIC:"appoimentClinic",
+  FORGET_PASSWORD:"forgrtPassword",
 };
 
 class Email {
   constructor(template = "") {
     this.body = "";
     this.subject = "";
-    this.cc = [];
+    // this.cc = [];
     if (template) {
       this.setTemplate(template);
     }
@@ -28,8 +29,11 @@ class Email {
       case AVAILABLETEMPLATES.CONTACT_INFORMATION:
         this.subject = "Contact Us Successfully ";
         break;
-      case AVAILABLETEMPLATES.ENQUIRE_FLEXI:
-        this.subject = "Enquire Flexi Successfully ";
+      case AVAILABLETEMPLATES.APP_CLINIC:
+        this.subject = "Clinic Appointment Booking ";
+        break;
+      case AVAILABLETEMPLATES.APP_CLINIC:
+        this.subject = "Forgrt Password ";
         break;
 
       default:
@@ -67,12 +71,12 @@ class Email {
     this.subject = subject;
   }
 
-  setCC(email) {
-    this.cc = email;
-  }
+  // setCC(email) {
+  //   this.cc = email;
+  // }
 
   async send(email) {
- 
+ console.log(email);
     if (!email) {
       throw new Error("Email not set");
     }
@@ -92,7 +96,7 @@ class Email {
     });
 
     const info = await transporter.sendMail({
-      from: `"flexi-hub" <divyachourasiya.infograins@gmail.com>`,
+      from: `"Doctors Appointment" <divyachourasiya.infograins@gmail.com>`,
       to: email,
       subject:this.subject,
       html: this.body,
@@ -101,7 +105,7 @@ class Email {
     return info;
   }
 
-  static sendEmail(template, data, email, cc = []) {
+  static sendEmail(template, data, email) {
     const emailClient = new Email(template);
     emailClient.setBody(data);
     emailClient.setSubject(template)

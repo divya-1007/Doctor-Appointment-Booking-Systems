@@ -17,21 +17,48 @@ const GoogleStrategy = require('passport-google-oauth2').Strategy;
 const bcrypt = require("bcrypt");
 let Country = require('country-state-city').Country;
 let State = require('country-state-city').State;
-let City = require('country-state-city').City;
 
 
-const countryDatas = async(user )=>{
+// const countryDatas = async(user )=>{
   
-  for(let i =0;i<user.length;i++){
-    const countryUpdate = await Countrys.findOne({isoCode:user[i].countryCode})
-    
-    if(user[i].countryCode == countryUpdate.isoCode){
-     return await Countrys.findOneAndUpdate({_id:countryUpdate._id},{ $set: {stateName:user[i].name} },{ new: true }) 
-    }else{
-    return true 
+//   for (let i = 0; i < user.length; i++) {
+//     const canada = new Countrys({
+//       countryName:user[i].name,
+//       isoCode:user[i].isoCode,
+//     });
+//     canada.save((err, canada) => {
+//   if (err) {
+//     console.error(err);
+//   } else {
+//     console.log('Saved Canada:', canada);
+//   }
+// });
+//   }
+  
+// }
+
+const countryDatas = async (user) => {
+  for (let i = 0; i < user.length; i++) {
+    const findData = await Countrys.findOne({ isoCode: user[i].countryCode });
+    if (findData.isoCode == 'EH') {
+      const stateData = {
+        name: user[i].name,
+        isoCode: user[i].isoCode,
+        countryCode: user[i].countryCode,
+      };
+      findData.states.push(stateData); // Add the state data to the 'states' array
+console.log(findData);
+
+      // try {
+      //   const savedCountry = await findData.save(); // Save the updated country document
+      //   console.log('Saved Country:', savedCountry);
+      // } catch (err) {
+      //   console.error(err);
+      // }
     }
   }
 }
+
 
 
 // CLIENT
@@ -39,7 +66,7 @@ const countryDatas = async(user )=>{
 
 router.get("/", async(req, res) => {
 
-  const departmen = await Department.find().limit(4).sort({departmentName:1})
+  const departmen = await Department.find().limit(8).sort({departmentName:1})
   const Doctor = await User.find({role:"doctor"}).limit(4)
    const MondayDoctor = await User.find({role:"doctor" }).limit(4)
   var patientreviews  = await PatientReview.aggregate(
@@ -84,7 +111,7 @@ router.get("/", async(req, res) => {
          var fromsplitData = fromloopData.split('-')
          let d1 = new Date(tosplitData[0],tosplitData[1],tosplitData[2]).getTime()
          let d2 = new Date(fromsplitData[0],fromsplitData[1],fromsplitData[2]).getTime()
-         countries
+         
         let date1 = new Date(d1);
         let date2 = new Date(d2);
         var yearsDiff =  date2.getFullYear() - date1.getFullYear();
@@ -251,8 +278,14 @@ router.get("/resertPassword/:id", async (req, res) => {
     id: req.params.id,
   });
 });
-router.get("/doctorProfileSetting",sessiontokentverify, async (req, res) => {
-  // console.log(await countryDatas(State.getAllStates()));
+router.get("/doctorProfileSetting", async (req, res) => {
+  // countryDatas(State.getAllStates())
+  // .then(() => {
+  //   console.log('Processing completed.');
+  // })
+  // .catch((err) => {
+  //   console.error('Error:', err);
+  // });
   //  console.log(await countryDatas(State.getAllStates()));
 var sessionifo = req.session.user
 var UserData = await User.findById({_id:sessionifo._id,role: "doctor"});
@@ -312,6 +345,7 @@ router.get("/patientList",sessiontokentverify, async (req, res) => {
      patientList: patientList,
     user: req.session.user,
     departments: departments,
+     UserData:DoctorData,
     token: req.session.token,
   });
 });

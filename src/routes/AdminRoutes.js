@@ -81,12 +81,12 @@ var respData = req.session.user
 /* Admin Appoiments List Contains */
 router.get("/AdminAppointmentList",sessionData, async (req, res) => {
 const departments = await Department.find();
-
+let  datas = '';
 if(req.query.filte_date && req.query.filte_date != "all" ){
 var referers = req.query.filte_date;
-var datas = await Patient.find({date:referers ,status:"0"});
+ datas = await Patient.find({date:referers ,status:"0"});
 }else {
- var datas =  await Patient.aggregate(
+  datas =  await Patient.aggregate(
   [
      {
       $lookup:{
@@ -98,6 +98,7 @@ var datas = await Patient.find({date:referers ,status:"0"});
     },
   ])
 }
+console.log(datas ,"Aya");
  
 var today = new Date().toISOString().slice(0, 10)
 var tomorrow = new Date(today)

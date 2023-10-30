@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha --timeout 10000 test/testCaseAPI.js",
-    "start": "node app.js"
+    "start": "node app.js",
+    "dev":"nodemon app.js"
   },
   "author": "",
   "license": "ISC",

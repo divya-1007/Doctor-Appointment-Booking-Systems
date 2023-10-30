@@ -340,43 +340,27 @@ exports.forgot_password = function (req, res, next) {
         });
       },
       function (token, user, done) {
-        var apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
-        var sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail(); 
-        sendSmtpEmail = {
-          sender: { email: "noreply@easeaccount.in" },
-          to: [
-            {
-              email: user.email,
-              name: user.firstName +user.lastName,
-            },
-          ],
-          subject: "Reset Your Password",
-          htmlContent:'<div style="max-width:640px;margin:0 auto;box-shadow:0px 1px 5px rgba(0,0,0,0.1);border-radius:4px;overflow:hidden"><table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;background:#396cf0 url(https://cdn.discordapp.com/email_assets/f0a4cc6d7aaa7bdf2a3c15a193c6d224.png) top center / cover no-repeat;" align="center" border="0" background="https://cdn.discordapp.com/email_assets/f0a4cc6d7aaa7bdf2a3c15a193c6d224.png"><tbody><tr>'+
-              '<td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:57px;"> <div style="cursor:auto;color:white;font-family:Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;font-size:36px;font-weight:600;line-height:36px;text-align:center;">Welcome Doctor Appointment Booking System</div></td></tr></tbody></table><table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;background:#ffffff;" align="center" border="0"> <tbody>'+
-              '<tr><td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:40px 70px;"><div aria-labelledby="mj-column-per-100" class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;"><table role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0"><tbody> <tr> <td style="word-break:break-word;font-size:0px;padding:0px 0px 20px;" align="left"><div style="cursor:auto;color:#737F8D;font-family:Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;font-size:16px;line-height:24px;text-align:left;"><h2 style="font-family: Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;font-weight: 500;font-size: 20px;color: #4F545C;letter-spacing: 0.27px;">'+user.firstName+' '+user.lastName+',</h2><p>You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
-              'Please click on the following link, or paste this into your browser to complete the process</p></div></td> </tr>'+
-              '<tr><td style="word-break:break-word;font-size:0px;padding:10px 25px;" align="center"><table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse:separate;" align="center" border="0"><tbody><tr><td style="border:none;border-radius:3px;color:white;cursor:auto;padding:15px 19px;" align="center" valign="middle" bgcolor="#396cf0">'+
-              '<a href="http://easeaccount.in'+
-              "/resertPassword/"+
-              user._id+
-              '"style="text-decoration:none;line-height:100%;background:#396cf0;color:white;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:15px;font-weight:normal;text-transform:none;margin:0px;">Verify Email</a></td></tr></tbody></table> </td></tr></tbody></table></div></td> </tr></tbody></table></div>'
-
-
-          // '<p>'+user.firstName+' '+user.lastName+'You are receiving this because you (or someone else) have requested the reset of the password for your account <a href="http://' +
-          //         req.headers.host +
-          //         "/resertPassword/"+
-          //         user._id+
-          //         '\n\n">Reset Password</a> Thanks to regarding Doctor Appointment Booking System</p>',
+        const template = AVAILABLETEMPLATES.FORGET_PASSWORD;
+        const templateEmail = user.email;
+        // Prepare the data you want to pass to the email template
+        const emailData = {
+          id:user._id,
+          fullName: user.firstName+" "+user.lastName,
         };
-        apiInstance.sendTransacEmail(sendSmtpEmail).then(
-          function (data) {
-            console.log("API called successfully. Returned data: " + data);
-            console.log(JSON.stringify(data));
-          },
-          function (error) {
-             done(error, "done");
-            console.error(error);
-          });
+        try {
+          // Send the email using the Email class
+          const emailResult =  Email.sendEmail(template, emailData,templateEmail);
+          // Check if the email was sent successfully
+          if (emailResult ) {
+
+            console.log(`Email sent successfully to ${emailResult}`);
+            return res.send({status: 200, message: "Your Account is created Successfully...!!! Please check your email and Forgot  your Password."});
+          } else {
+            console.error(`Failed to send email to ${ccEmails}`);
+          }
+        } catch (error) {
+          console.error(`Error sending email: ${error.message}`);
+        }
       },
     ],
     function (err) {
@@ -527,36 +511,64 @@ exports.doctorAppointmenBook = async(req,res)=>{
       departmentName:departmentName.charAt(0).toUpperCase() + departmentName.slice(1),
       userId:userData,
     });
-    users.save((error, user) => {
+    users.save(async(error, user) => {
       if (error) {
         return res.send({status: 500, message:error });
       } else {
-        var apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
-        var sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail(); 
-        sendSmtpEmail = {
-          sender: { email: "noreply@easeaccount.in" },
-          to: [
-            {
-              email: user.email,
-              name: user.firstName +user.lastName,
-            },
-          ],
-          subject: " Your Appointment is Book ![Clinic Appointment]",
-          textContent: '<div style="max-width:640px;margin:0 auto;box-shadow:0px 1px 5px rgba(0,0,0,0.1);border-radius:4px;overflow:hidden"><table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;background:#396cf0 url(https://cdn.discordapp.com/email_assets/f0a4cc6d7aaa7bdf2a3c15a193c6d224.png) top center / cover no-repeat;" align="center" border="0" background="https://cdn.discordapp.com/email_assets/f0a4cc6d7aaa7bdf2a3c15a193c6d224.png"><tbody><tr>'+
-                        '<td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:57px;"> <div style="cursor:auto;color:white;font-family:Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;font-size:36px;font-weight:600;line-height:36px;text-align:center;">Welcome Doctor Appointment Booking System</div></td></tr></tbody></table><table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;background:#ffffff;" align="center" border="0"> <tbody>'+
-                        '<tr><td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:40px 70px;"><div aria-labelledby="mj-column-per-100" class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;"><table role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0"><tbody> <tr> <td style="word-break:break-word;font-size:0px;padding:0px 0px 20px;" align="left"><div style="cursor:auto;color:#737F8D;font-family:Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;font-size:16px;line-height:24px;text-align:left;"><h2 style="font-family: Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;font-weight: 500;font-size: 20px;color: #4F545C;letter-spacing: 0.27px;">'+user.patientName+',</h2><h3>Patient Name = '+user.patientName+'</h3><h3> Date = '+user.date+'</h3><h3> Doctor Name = '+user.fullNameDoctor+'</h3><h3> Department Name = '+user.departmentName+'</h3></div></td></tr>'+
-                        '<tr><td style="word-break:break-word;font-size:0px;padding:10px 25px;" align="center"><table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse:separate;" align="center" border="0"><tbody><tr><td style="border:none;border-radius:3px;color:white;cursor:auto;padding:15px 19px;" align="center" valign="middle" bgcolor="#396cf0">'+
-                        '<h2 style="text-decoration:none;line-height:100%;background:#396cf0;color:white;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:15px;font-weight:normal;text-transform:none;margin:0px;"> Congratulations Your Appointment is Book</h2></td></tr></tbody></table> </td></tr></tbody></table></div></td> </tr></tbody></table></div>',
+        // var apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
+        // var sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail(); 
+        // sendSmtpEmail = {
+        //   sender: { email: "noreply@easeaccount.in" },
+        //   to: [
+        //     {
+        //       email: user.email,
+        //       name: user.firstName +user.lastName,
+        //     },
+        //   ],
+        //   subject: " Your Appointment is Book ![Clinic Appointment]",
+        //   textContent: '<div style="max-width:640px;margin:0 auto;box-shadow:0px 1px 5px rgba(0,0,0,0.1);border-radius:4px;overflow:hidden"><table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;background:#396cf0 url(https://cdn.discordapp.com/email_assets/f0a4cc6d7aaa7bdf2a3c15a193c6d224.png) top center / cover no-repeat;" align="center" border="0" background="https://cdn.discordapp.com/email_assets/f0a4cc6d7aaa7bdf2a3c15a193c6d224.png"><tbody><tr>'+
+        //                 '<td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:57px;"> <div style="cursor:auto;color:white;font-family:Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;font-size:36px;font-weight:600;line-height:36px;text-align:center;">Welcome Doctor Appointment Booking System</div></td></tr></tbody></table><table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;background:#ffffff;" align="center" border="0"> <tbody>'+
+        //                 '<tr><td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:40px 70px;"><div aria-labelledby="mj-column-per-100" class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;"><table role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0"><tbody> <tr> <td style="word-break:break-word;font-size:0px;padding:0px 0px 20px;" align="left"><div style="cursor:auto;color:#737F8D;font-family:Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;font-size:16px;line-height:24px;text-align:left;"><h2 style="font-family: Whitney, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;font-weight: 500;font-size: 20px;color: #4F545C;letter-spacing: 0.27px;">'+user.patientName+',</h2><h3>Patient Name = '+user.patientName+'</h3><h3> Date = '+user.date+'</h3><h3> Doctor Name = '+user.fullNameDoctor+'</h3><h3> Department Name = '+user.departmentName+'</h3></div></td></tr>'+
+        //                 '<tr><td style="word-break:break-word;font-size:0px;padding:10px 25px;" align="center"><table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse:separate;" align="center" border="0"><tbody><tr><td style="border:none;border-radius:3px;color:white;cursor:auto;padding:15px 19px;" align="center" valign="middle" bgcolor="#396cf0">'+
+        //                 '<h2 style="text-decoration:none;line-height:100%;background:#396cf0;color:white;font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:15px;font-weight:normal;text-transform:none;margin:0px;"> Congratulations Your Appointment is Book</h2></td></tr></tbody></table> </td></tr></tbody></table></div></td> </tr></tbody></table></div>',
+        // };
+        // apiInstance.sendTransacEmail(sendSmtpEmail).then(
+        //   function (data) {
+        //     console.log("API called successfully. Returned data: " + data);
+        //     console.log(JSON.stringify(data));
+        //   },
+        //   function (error) {
+        //     console.error(error);
+        //   });
+        // return res.send({status: 200, message: "Your Appointment Book ...........!"});
+
+
+        const template = AVAILABLETEMPLATES.APP_CLINIC;
+       
+        const templateEmail = user.email;
+        // Prepare the data you want to pass to the email template
+        const emailData = {
+          patientName:user.patientName,
+          date:user.date,
+          fullNameDoctor: user.firstName+" "+user.lastName,
+          departmentName:user.departmentName
         };
-        apiInstance.sendTransacEmail(sendSmtpEmail).then(
-          function (data) {
-            console.log("API called successfully. Returned data: " + data);
-            console.log(JSON.stringify(data));
-          },
-          function (error) {
-            console.error(error);
-          });
-        return res.send({status: 200, message: "Your Appointment Book ...........!"});
+      
+        try {
+          // Send the email using the Email class
+          const emailResult = await Email.sendEmail(template, emailData,templateEmail);
+      
+          // Check if the email was sent successfully
+          if (emailResult.accepted.length > 0) {
+
+            console.log(`Email sent successfully to ${templateEmail}`);
+            return res.send({status: 200, message: " Your Appointment is Book ![Clinic Appointment]"});
+          } else {
+            console.error(`Failed to send email to ${ccEmails}`);
+          }
+        } catch (error) {
+          console.error(`Error sending email: ${error.message}`);
+        }
         }
     });
   } catch (error) {
@@ -722,22 +734,11 @@ exports.doctorlist = async (req, res) => {
 exports.statelist = async (req, res) => {
   try {
     let dataDep = req.params.did;
-    States.find({countryCode:dataDep,}, function (error, doc) {
+    Countrys.findOne({isoCode:dataDep,}, function (error, doc) {
       if (error) {
         console.log(error);
       } else {
-        var tempArray =[]
-        for (let j = 0; j < doc.length; j++) {
-            let dataState = doc[j].state
-             for (let k = 0; k < dataState.length; k++) {
-               if(dataState[k].countryCode === dataDep){
-                 var tempData ={}
-                tempData["state"] =dataState[k];
-                 tempArray.push(tempData)
-               }
-             }
-        }
-        res.send(tempArray);
+        res.send(doc.states);
       }
     });
   } catch (error) {

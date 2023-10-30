@@ -29,7 +29,7 @@
             <div class="container-fluid">
                 <div class="row">
                      {{>sidebar patient  data = user}}
-                    <div class="col-xl-9 col-lg-8 col-md-7 mt-4 pt-2 mt-sm-0 pt-sm-0">
+                    <div class="col-xl-9 col-lg-8 col-md-7 mt-4 pt-2 mt-sm-0 pt-sm-0 content_set_Fix">
                         <div class="row">
                             <div class="col-xl-9 col-lg-6 col-md-4">
                                 <h5 class="mb-0">Appointment</h5>
@@ -89,7 +89,8 @@
                                                     <a href="#" class="text-dark">
                                                         <div class="d-flex align-items-center">
                                                             {{#each this.PatientData}}
-                                                            <img src="/{{this.profilePicture}}" class="avatar avatar-md-sm rounded-circle shadow" alt="">
+                                                            <img src="../assets/images/doctors/Person.png" class="avatar avatar-md-sm rounded-circle shadow" alt="">
+                                                            {{!-- <img src="/{{this.profilePicture}}" class="avatar avatar-md-sm rounded-circle shadow" alt=""> --}}
                                                             {{/each}}
                                                             <span  class="ms-2">{{this.patientName}} </span>
                                                         </div>
@@ -262,9 +263,10 @@
         <!-- Modal end -->
 
         <!-- Footer Start -->
-        <footer class="bg-footer py-4">
-           {{footer}}
-        </footer><!--end footer-->
+          <footer class="bg-footer sticky">
+         {{>footer}}
+        </footer>
+        <!--end footer-->
         <!-- End -->
 
         <!-- Back to top -->
